@@ -15,7 +15,7 @@ class CreateExtrasTable extends Migration
     {
         Schema::create('extras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('meals_id')->constrained('meals')->cascadeOnDelete();
+            $table->foreignId('meals_id')->nullable()->constrained('meals')->cascadeOnDelete();
             $table->string('name');
             $table->enum('type',['bread','sweet','suggested']);
             $table->float('price');

@@ -41,10 +41,13 @@ class ExtrasController extends Controller
         $data=$request->except('_token','image');
         $extras=Extras::create($data);
 
+
         if($request->image){
+            $attachment['name']=$service->upload($request->image,'images');
+
+            $extras->attachment()->create($attachment);
 
         }
-        $extras->attachment()->create($extras);
 
 
     }
