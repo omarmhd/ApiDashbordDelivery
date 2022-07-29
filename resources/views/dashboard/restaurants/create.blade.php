@@ -127,14 +127,7 @@
 
                                     </div>
                                 </div>
-
-
                             </div>
-                            <select class="form-control" multiple="multiple">
-                                <option selected="selected">orange</option>
-                                <option>white</option>
-                                <option selected="selected">purple</option>
-                            </select>
 
                             <!--/span-->
 

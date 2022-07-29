@@ -7,7 +7,12 @@
  */
 ;(function($, window, document, undefined)
 {
-    var hasTouch = 'ontouchstart' in window;
+    if (navigator.appVersion.indexOf("Win")!=-1){
+        var hasTouch = false;
+    } else {
+        var hasTouch = 'ontouchstart' in window;
+    }
+
 	var movingWidth=600;
     /**
      * Detect CSS pointer-events property

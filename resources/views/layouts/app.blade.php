@@ -19,6 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 @include('layouts.inc._head')
+@stack('css')
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
