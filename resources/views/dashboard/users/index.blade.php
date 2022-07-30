@@ -24,9 +24,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn green">
+                                    <a id="sample_editable_1_new" href="{{route('user.create')}}" class="btn green">
                                        مستخدم  جديد <i class="fa fa-plus"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -71,6 +71,11 @@
                             <th>
                                 البريد الإلكتروني
                             </th>
+
+                            <th>
+
+                            </th>
+
 
                         </tr>
                         </thead>
