@@ -22,15 +22,15 @@
                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
                 <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
                 <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-                <form class="sidebar-search " action="extra_search.html" method="POST">
+                <form class="sidebar-search" action="extra_search.html" method="POST">
                     <a href="javascript:;" class="remove">
                         <i class="icon-close"></i>
                     </a>
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
-							<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
-							</span>
+                            <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                        </span>
                     </div>
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
@@ -41,23 +41,23 @@
                     <span class="title">الرئيسية</span>
                     <span class="arrow "></span>
                 </a>
-                {{--					<ul class="sub-menu">--}}
-                {{--						<li>--}}
-                {{--							<a href="index.html">--}}
-                {{--							<i class="icon-bar-chart"></i>--}}
-                {{--							Default Dashboard</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_2.html">--}}
-                {{--							<i class="icon-bulb"></i>--}}
-                {{--							New Dashboard #1</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_3.html">--}}
-                {{--							<i class="icon-graph"></i>--}}
-                {{--							New Dashboard #2</a>--}}
-                {{--						</li>--}}
-                {{--					</ul>--}}
+                {{-- <ul class="sub-menu"> --}}
+                {{-- <li> --}}
+                {{-- <a href="index.html"> --}}
+                {{-- <i class="icon-bar-chart"></i> --}}
+                {{-- Default Dashboard</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_2.html"> --}}
+                {{-- <i class="icon-bulb"></i> --}}
+                {{-- New Dashboard #1</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_3.html"> --}}
+                {{-- <i class="icon-graph"></i> --}}
+                {{-- New Dashboard #2</a> --}}
+                {{-- </li> --}}
+                {{-- </ul> --}}
             </li>
             <li class="start ">
                 <a href="javascript:;">
@@ -79,7 +79,7 @@
                     <li>
                         <a href="index_2.html">
                             <i class="icon-bulb"></i>
-                                السائقين</a>
+                            السائقين</a>
                     </li>
 
                 </ul>
@@ -87,26 +87,26 @@
             <li class="start ">
                 <a href="javascript:;">
                     <i class="fa fa-hamburger"></i>
-                    <span class="title">   إدارة الوجبات</span>
+                    <span class="title"> إدارة الوجبات</span>
                     <span class="arrow "></span>
                 </a>
-                {{--					<ul class="sub-menu">--}}
-                {{--						<li>--}}
-                {{--							<a href="index.html">--}}
-                {{--							<i class="icon-bar-chart"></i>--}}
-                {{--							Default Dashboard</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_2.html">--}}
-                {{--							<i class="icon-bulb"></i>--}}
-                {{--							New Dashboard #1</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_3.html">--}}
-                {{--							<i class="icon-graph"></i>--}}
-                {{--							New Dashboard #2</a>--}}
-                {{--						</li>--}}
-                {{--					</ul>--}}
+                {{-- <ul class="sub-menu"> --}}
+                {{-- <li> --}}
+                {{-- <a href="index.html"> --}}
+                {{-- <i class="icon-bar-chart"></i> --}}
+                {{-- Default Dashboard</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_2.html"> --}}
+                {{-- <i class="icon-bulb"></i> --}}
+                {{-- New Dashboard #1</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_3.html"> --}}
+                {{-- <i class="icon-graph"></i> --}}
+                {{-- New Dashboard #2</a> --}}
+                {{-- </li> --}}
+                {{-- </ul> --}}
             </li>
             <li class="start ">
                 <a href="javascript:;">
@@ -114,71 +114,61 @@
                     <span class="title"> إدارة المطاعم</span>
                     <span class="arrow "></span>
                 </a>
-                {{--					<ul class="sub-menu">--}}
-                {{--						<li>--}}
-                {{--							<a href="index.html">--}}
-                {{--							<i class="icon-bar-chart"></i>--}}
-                {{--							Default Dashboard</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_2.html">--}}
-                {{--							<i class="icon-bulb"></i>--}}
-                {{--							New Dashboard #1</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_3.html">--}}
-                {{--							<i class="icon-graph"></i>--}}
-                {{--							New Dashboard #2</a>--}}
-                {{--						</li>--}}
-                {{--					</ul>--}}
+                {{-- <ul class="sub-menu"> --}}
+                {{-- <li> --}}
+                {{-- <a href="index.html"> --}}
+                {{-- <i class="icon-bar-chart"></i> --}}
+                {{-- Default Dashboard</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_2.html"> --}}
+                {{-- <i class="icon-bulb"></i> --}}
+                {{-- New Dashboard #1</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_3.html"> --}}
+                {{-- <i class="icon-graph"></i> --}}
+                {{-- New Dashboard #2</a> --}}
+                {{-- </li> --}}
+                {{-- </ul> --}}
             </li>
-            <li class="start ">
-                <a href="javascript:;">
+            <li class="start">
+                <a href="{{ route('order.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">إدارة الطلبات</span>
                     <span class="arrow "></span>
                 </a>
-                {{--					<ul class="sub-menu">--}}
-                {{--						<li>--}}
-                {{--							<a href="index.html">--}}
-                {{--							<i class="icon-bar-chart"></i>--}}
-                {{--							Default Dashboard</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_2.html">--}}
-                {{--							<i class="icon-bulb"></i>--}}
-                {{--							New Dashboard #1</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_3.html">--}}
-                {{--							<i class="icon-graph"></i>--}}
-                {{--							New Dashboard #2</a>--}}
-                {{--						</li>--}}
-                {{--					</ul>--}}
+                {{-- <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('order.index') }}">
+                            <i class="icon-bar-chart"></i>
+                            All orders</a>
+                    </li>
+                </ul> --}}
             </li>
-            <li class="start ">
-                <a href="javascript:;">
+            <li class="start">
+                <a href="{{ route('coupon.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">القسائم الشرائية</span>
-                    <span class="arrow "></span>
+                    {{-- <span class="arrow "></span> --}}
                 </a>
-                {{--					<ul class="sub-menu">--}}
-                {{--						<li>--}}
-                {{--							<a href="index.html">--}}
-                {{--							<i class="icon-bar-chart"></i>--}}
-                {{--							Default Dashboard</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_2.html">--}}
-                {{--							<i class="icon-bulb"></i>--}}
-                {{--							New Dashboard #1</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_3.html">--}}
-                {{--							<i class="icon-graph"></i>--}}
-                {{--							New Dashboard #2</a>--}}
-                {{--						</li>--}}
-                {{--					</ul>--}}
+                {{-- <ul class="sub-menu"> --}}
+                {{-- <li> --}}
+                {{-- <a href="index.html"> --}}
+                {{-- <i class="icon-bar-chart"></i> --}}
+                {{-- Default Dashboard</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_2.html"> --}}
+                {{-- <i class="icon-bulb"></i> --}}
+                {{-- New Dashboard #1</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_3.html"> --}}
+                {{-- <i class="icon-graph"></i> --}}
+                {{-- New Dashboard #2</a> --}}
+                {{-- </li> --}}
+                {{-- </ul> --}}
             </li>
             <li class="start ">
                 <a href="javascript:;">
@@ -186,23 +176,23 @@
                     <span class="title">إعدادات التطبيق</span>
                     <span class="arrow "></span>
                 </a>
-                {{--					<ul class="sub-menu">--}}
-                {{--						<li>--}}
-                {{--							<a href="index.html">--}}
-                {{--							<i class="icon-bar-chart"></i>--}}
-                {{--							Default Dashboard</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_2.html">--}}
-                {{--							<i class="icon-bulb"></i>--}}
-                {{--							New Dashboard #1</a>--}}
-                {{--						</li>--}}
-                {{--						<li>--}}
-                {{--							<a href="index_3.html">--}}
-                {{--							<i class="icon-graph"></i>--}}
-                {{--							New Dashboard #2</a>--}}
-                {{--						</li>--}}
-                {{--					</ul>--}}
+                {{-- <ul class="sub-menu"> --}}
+                {{-- <li> --}}
+                {{-- <a href="index.html"> --}}
+                {{-- <i class="icon-bar-chart"></i> --}}
+                {{-- Default Dashboard</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_2.html"> --}}
+                {{-- <i class="icon-bulb"></i> --}}
+                {{-- New Dashboard #1</a> --}}
+                {{-- </li> --}}
+                {{-- <li> --}}
+                {{-- <a href="index_3.html"> --}}
+                {{-- <i class="icon-graph"></i> --}}
+                {{-- New Dashboard #2</a> --}}
+                {{-- </li> --}}
+                {{-- </ul> --}}
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->
