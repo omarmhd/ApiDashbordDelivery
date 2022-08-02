@@ -12,4 +12,8 @@ class Restaurant extends Model
         '_token',
 
     ];
+    public function attachment()
+    {
+        return $this->morphOne(Attachment::class, 'attachmentable')->withDefault();
+    }
 }

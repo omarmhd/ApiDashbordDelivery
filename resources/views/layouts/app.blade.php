@@ -33,7 +33,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
 
 <body class="page-header-fixed page-quick-sidebar-over-content ">
-    <!-- BEGIN HEADER -->
+@include('modals.showMessage')
+
+<!-- BEGIN HEADER -->
     <div class="page-header navbar navbar-fixed-top">
         <!-- BEGIN HEADER INNER -->
         <div class="page-header-inner">

@@ -5,15 +5,15 @@
         var table = $('#table_id').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('restaurant.index') }}",
+            ajax: "{{ route('message.index') }}",
             columns: [
-                {data: 'name', name: 'name'},
-                {data: 'last_name', name: 'last_name'},
-
-                {data: 'phone', name: 'phone'},
-                {data: 'gender', name: 'gender'},
+                {data: 'user_name'},
                 {data: 'email', name: 'email'},
-
+                {data: 'phone', name: 'phone'},
+                {data: 'content', name: 'content'},
+                {data: 'time', name: 'time'},
+                {data: 'attachment', name: 'attachment'},
+                {data: 'action', name: 'action'},
             ]
         });
 
