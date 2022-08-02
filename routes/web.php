@@ -33,5 +33,6 @@ Route::resource('/meal', \App\Http\Controllers\MealController::class);
 Route::resource('/extra', \App\Http\Controllers\ExtrasController::class);
 Route::resource('/order', OrderController::class);
 Route::resource('/coupon', CouponController::class);
+Route::resource('/message', \App\Http\Controllers\MessageController::class);
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');

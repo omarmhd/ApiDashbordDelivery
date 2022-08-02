@@ -31,18 +31,26 @@ class MessageController extends Controller
                     return $data->user->phone;
                 })
                 ->addColumn('content', function($data){
-                    $contentTag = "<a class='img-thumbnail'   href=".asset("images")."/".$data->id."> <i class='fa fa-eye'></i> <a> " ;
+                    $time=$data->created_at->diffForHumans();
+                    $contentTag = "<a   href=''  data-toggle='modal'   data-target='#showMessage'
+                    
+                    data-time='$time'
+                    data-attachment='asset('images').'/'.$data->id.'
+                    data-content='$data->content'
+                    data-send-name='$data->user->name'
+                    
+                    > <i class='fa fa-eye'></i> <a> " ;
                     return $contentTag;
                 })
                 ->addColumn('time', function($data){
                     return $data->created_at->diffForHumans();
                 })
                 ->addColumn('attachment', function($data){
-                    $attachmentTag = "<a class='img-thumbnail'   href=".asset("images")."/".$data->id.">";
+                    $attachmentTag = "<a class='img-thumbnail'   href=".asset("images")."/".$data->id."></a>";
                     return $attachmentTag;
                 })
                 ->addColumn('action', function($data){
-                    $actionBtn = ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['user_name','email','phone','content','time','attachment','action'])
@@ -53,26 +61,7 @@ class MessageController extends Controller
         return  view('dashboard.messages.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -82,7 +71,8 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        $nameAttach=$message->attachment->name;
+        return  view('dashboard.messages.show',['nameAttach'=>$nameAttach,'message'=>$message]);
     }
 
     /**

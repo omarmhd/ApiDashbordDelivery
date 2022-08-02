@@ -14,4 +14,8 @@ class Message extends Model
 
          return $this->belongsTo(User::class);
      }
+    public function attachment()
+    {
+        return $this->morphOne(Attachment::class, 'attachmentable')->withDefault();
+    }
 }

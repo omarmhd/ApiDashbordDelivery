@@ -67,4 +67,24 @@
 @endsection
 @push('js')
     @include('dashboard.messages._dataTable')
+
+    <script>
+        $('#showMessage').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var attachment =  button.data('attachment')
+            var content =  button.data('content')
+            var time =  button.data('time')
+            var send_name=button.data('send-name')
+
+
+
+            $('.attachment').prop('src',attachment)
+            $('.content').text(content)
+            $('.time').text(time)
+            $('.send_name').text(send_name)
+
+
+        });
+
+    </script>
 @endpush
