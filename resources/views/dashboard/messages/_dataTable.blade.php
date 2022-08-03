@@ -7,11 +7,15 @@
             serverSide: true,
             ajax: "{{ route('message.index') }}",
             columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+
+
                 {data: 'user_name'},
                 {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
-                {data: 'content', name: 'content'},
+
                 {data: 'time', name: 'time'},
+                {data: 'content', name: 'content'},
                 {data: 'attachment', name: 'attachment'},
                 {data: 'action', name: 'action'},
             ]
