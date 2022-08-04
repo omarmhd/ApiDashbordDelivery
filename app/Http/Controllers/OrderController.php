@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreorderRequest;
 use App\Http\Requests\UpdateorderRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -27,9 +28,42 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
+        // $data = Order::latest()->get();
+
+        // dd($data);
+        if ($request->ajax()) {
+            $data = Order::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('id', function ($data) {
+                    return $data->id;
+                })
+                ->addColumn('total_price', function ($data) {
+                    return $data->total_price;
+                })
+                ->addColumn('status', function ($data) {
+                    return $data->status;
+                })
+                ->addColumn('total_arrive_time', function ($data) {
+                    return $data->total_arrive_time;
+                })
+                ->addColumn('payment_way', function ($data) {
+                    return $data->payment_way;
+                })
+                // ->addColumn('attachment', function ($data) {
+                // $attachmentTag = "<a class='img-thumbnail'   href=" . asset("images") . "/" . $data->id . "></a>";
+                //     return $attachmentTag;
+                // })
+                ->addColumn('show_meal_details', function ($data) {
+                    $actionBtn = " <a href='/order/" . $data->id . "/meal-details' class='info btn btn-info btn-sm'><i class='fa fa-eye'></i></a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['id', 'total_price', 'status', 'total_arrive_time', 'payment_way', 'show_meal_details'])
+                ->make(true);
+        }
 
         // $orders = Order::query();
 

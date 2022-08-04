@@ -35,52 +35,41 @@ class MealController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,UploadService $service )
+    public function store(Request $request, UploadService $service)
     {
 
-
-        $data=$request->except('bread_name','bread_price','sweet_name','sweet_price','extras','_token','extras','images');
-        $data['extras']=json_encode($request->extras);
-        $meal=Meal::create($data);
-
-
+        $data = $request->except('bread_name', 'bread_price', 'sweet_name', 'sweet_price', 'extras', '_token', 'extras', 'images');
+        $data['extras'] = json_encode($request->extras);
+        $meal = Meal::create($data);
 
         $breads = [];
         foreach ($request->bread_name  as $key => $value) {
-            $breads[$key]['name'] = $request->bread_name[$key];;
-            $breads[$key]['price'] = $request->bread_price[$key];;
-            $breads[$key]['type'] = "bread";;
-
+            $breads[$key]['name'] = $request->bread_name[$key];
+            $breads[$key]['price'] = $request->bread_price[$key];
+            $breads[$key]['type'] = "bread";
         }
 
 
         $sweets = [];
         foreach ($request->sweet_name  as $key => $value) {
-            $sweets[$key]['name'] = $request->sweet_name[$key];;
-            $sweets[$key]['price'] = $request->sweet_price[$key];;
-            $sweets[$key]['type'] = "sweet";;
-
+            $sweets[$key]['name'] = $request->sweet_name[$key];
+            $sweets[$key]['price'] = $request->sweet_price[$key];
+            $sweets[$key]['type'] = "sweet";
         }
 
 
-        $extras=array_merge( $sweets, $breads);
+        $extras = array_merge($sweets, $breads);
         $meal->extras()->createMany($extras);
 
-        $images=[];
+        $images = [];
 
-        foreach($request->image as  $key =>$value){
+        foreach ($request->image as  $key => $value) {
 
+            $images[$key]['name'] = $service->upload($value, 'images');
 
-
-                $images[$key]['name'] = $service->upload($value, 'images');
-
-                $images[$key]['order'] = $key;
-
+            $images[$key]['order'] = $key;
         }
         $meal->attachments()->createMany($images);
-
-
-
     }
 
     /**

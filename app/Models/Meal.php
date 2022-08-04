@@ -10,8 +10,9 @@ class Meal extends Model
     use HasFactory;
     public $guarded = ['_token'];
 
-    public  function extras(){
-       return $this->hasMany(Extras::class,'meals_id');
+    public  function extras()
+    {
+        return $this->hasMany(Extras::class, 'meals_id');
     }
 
     public function attachments()

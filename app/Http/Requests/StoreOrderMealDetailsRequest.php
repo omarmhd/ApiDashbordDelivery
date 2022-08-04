@@ -13,7 +13,7 @@ class StoreOrderMealDetailsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class StoreOrderMealDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'order_id' => ['nullable'],
+            'meal_id' => ['nullable'],
+            'number_of_meals' => ['nullable'],
+            'extras' => ['nullable'],
+            'categories' => ['nullable'],
+            'total_price' => ['nullable'],
         ];
     }
 }

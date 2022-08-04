@@ -100,11 +100,6 @@ return [
     */
 
     'custom' => [
-<<<<<<< HEAD
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-=======
         'factor.*' => [
             'required' => 'حقل العامل فارغ',
 
@@ -143,7 +138,6 @@ return [
              'required' => 'حقل  العامل   فارغ ',
 
 ]
->>>>>>> 7a8aa8e6717e17696508a1889ee6c233fb2d7ab0
     ],
 
     /*
@@ -151,15 +145,6 @@ return [
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |
-<<<<<<< HEAD
-    | The following language lines are used to swap our attribute placeholder
-    | with something more reader friendly such as "E-Mail Address" instead
-    | of "email". This simply helps us make our message more expressive.
-    |
-    */
-
-    'attributes' => [],
-=======
     | The following language lines are used to swap attribute place-holders
     | with something more reader friendly such as E-Mail Address instead
     | of "email". This simply helps us make messages a little cleaner.
@@ -215,6 +200,5 @@ return [
 
 
     ],
->>>>>>> 7a8aa8e6717e17696508a1889ee6c233fb2d7ab0
 
 ];

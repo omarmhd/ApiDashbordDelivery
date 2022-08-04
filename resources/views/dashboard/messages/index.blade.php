@@ -38,53 +38,46 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table_id">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                        id="table_id">
                         <thead>
-                        <tr>
+                            <tr>
 
-                            <th> اسم الزبون</th>
-                            <th>البريد الإلكتروني</th>
-                            <th> رقم الجوال </th>
-                            <th> الرسالة </th>
-                            <th> وقت الارسال </th>
-                            <th>المرفق</th>
-                            <th>الاجراءات</th>
+                                <th> اسم الزبون</th>
+                                <th>البريد الإلكتروني</th>
+                                <th> رقم الجوال </th>
+                                <th> الرسالة </th>
+                                <th> وقت الارسال </th>
+                                <th>المرفق</th>
+                                <th>الاجراءات</th>
 
-
-                        </tr>
+                            </tr>
                         </thead>
-                        <tbody>
-
-
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
-
 @endsection
 @push('js')
     @include('dashboard.messages._dataTable')
 
     <script>
-        $('#showMessage').on('show.bs.modal', function (event) {
+        $('#showMessage').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
-            var attachment =  button.data('attachment')
-            var content =  button.data('content')
-            var time =  button.data('time')
-            var send_name=button.data('send-name')
+            var attachment = button.data('attachment')
+            var content = button.data('content')
+            var time = button.data('time')
+            var send_name = button.data('send-name')
 
-
-
-            $('.attachment').prop('src',attachment)
+            $('.attachment').prop('src', attachment)
             $('.content').text(content)
             $('.time').text(time)
             $('.send_name').text(send_name)
 
 
         });
-
     </script>
 @endpush

@@ -4,7 +4,7 @@
         var table = $('#table_id').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('coupon.all') }}",
+            ajax: "{{ route('coupon.index') }}",
             columns: [{
                     data: 'id',
                     name: 'id'

@@ -21,7 +21,7 @@ class CreateOrderMealDetailsTable extends Migration
             $table->integer('number_of_meals')->default(1);
             $table->json('extras')->nullable();
             //Extras details
-            $table->json('categories')->nullable();// category_id, category_ammount
+            // $table->json('categories')->nullable();// category_id, category_ammount
             $table->double('total_price');
             $table->timestamps();
         });

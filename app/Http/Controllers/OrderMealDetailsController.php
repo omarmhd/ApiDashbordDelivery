@@ -5,17 +5,58 @@ namespace App\Http\Controllers;
 use App\Models\OrderMealDetails;
 use App\Http\Requests\StoreOrderMealDetailsRequest;
 use App\Http\Requests\UpdateOrderMealDetailsRequest;
+use App\Models\Meal;
+use App\Models\Order;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OrderMealDetailsController extends Controller
 {
+
+    protected $public_content;
+
+    public function __construct()
+    {
+        $this->public_content = collect([
+            'name' => 'وجبات الطلب',
+            'singular_name' => 'وجبة الطلب'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($order_id, Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $data = OrderMealDetails::where('order_id', $order_id)->latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('id', function ($data) {
+                    return $data->id;
+                })
+                ->addColumn('order_id', function ($data) {
+                    return $data->order_id;
+                })
+                ->addColumn('meal_id', function ($data) {
+                    return $data->meal_id;
+                })
+                ->addColumn('number_of_meals', function ($data) {
+                    return $data->number_of_meals;
+                })
+                ->addColumn('extras', function ($data) {
+                    return $data->extras;
+                })
+                ->addColumn('total_price', function ($data) {
+                    return $data->total_price;
+                })
+                ->rawColumns(['id', 'order_id', 'meal_id', 'number_of_meals', 'extras', 'total_price'])
+                ->make(true);
+        }
+
+        return view('dashboard.orderMealDetails.index', compact('order_id'))->with('public_content', $this->public_content);
     }
 
     /**
@@ -23,9 +64,9 @@ class OrderMealDetailsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($order_id)
     {
-        //
+        return view('dashboard.orderMealDetails.create', compact('order_id'));
     }
 
     /**
@@ -34,9 +75,21 @@ class OrderMealDetailsController extends Controller
      * @param  \App\Http\Requests\StoreOrderMealDetailsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderMealDetailsRequest $request)
+    public function store(StoreOrderMealDetailsRequest $request, $order_id)
     {
-        //
+        $extars = collect([
+            'extra_id' => '1',
+            'number_of_extras' => 3
+        ])->toJson();
+        OrderMealDetails::create([
+            'order_id' => Order::first()->id,
+            'meal_id' => Meal::first()->id,
+            'number_of_meals' => 2,
+            'extras' => $extars,
+            'total_price' => 20,
+        ]);
+
+        return redirect()->route('order.meal_details.index', compact('order_id'));
     }
 
     /**
