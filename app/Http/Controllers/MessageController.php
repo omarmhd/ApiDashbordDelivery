@@ -30,27 +30,27 @@ class MessageController extends Controller
                 ->addColumn('phone', function ($data) {
                     return $data->user->phone;
                 })
-                ->addColumn('content', function ($data) {
-                    $time = $data->created_at->diffForHumans();
-                    $contentTag = "<a   href=''  data-toggle='modal'   data-target='#showMessage'
+                ->addColumn('content', function($data){
+                    $time=$data->created_at->diffForHumans();
+                    $contentTag = "<a   class='btn btn-primary' style='width:100%' data-toggle='modal'   data-target='#showMessage'
 
                     data-time='$time'
-                    data-attachment='asset('images').'/'.$data->id.'
+                    data-attachment=asset('images')/$data->id
                     data-content='$data->content'
-                    data-send-name='$data->user->name'
+                    data-send-name='{$data->user->name}'
 
-                    > <i class='fa fa-eye'></i> <a> ";
+                    > <i class='fa fa-envelope'></i> <a> " ;
                     return $contentTag;
                 })
                 ->addColumn('time', function ($data) {
                     return $data->created_at->diffForHumans();
                 })
-                ->addColumn('attachment', function ($data) {
-                    $attachmentTag = "<a class='img-thumbnail'   href=" . asset("images") . "/" . $data->id . "></a>";
+                ->addColumn('attachment', function($data){
+                    $attachmentTag = "<a class=' btn btn-success ' style='width:100%'  download  href=".asset("images")."/".$data->id."> <i class='fa fa-arrow-down'></i> </a>";
                     return $attachmentTag;
                 })
-                ->addColumn('action', function ($data) {
-                    $actionBtn = ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                ->addColumn('action', function($data){
+                    $actionBtn = ' <a  data-id='.$data->id.' style="width:100%" class="delete btn btn-danger btn-bg"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['user_name', 'email', 'phone', 'content', 'time', 'attachment', 'action'])
@@ -106,6 +106,8 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+      $message->delete();
+      return  response()->json(['status'=>'success']);
+
     }
 }

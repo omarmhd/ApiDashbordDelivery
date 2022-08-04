@@ -23,7 +23,8 @@
 <script src="{{asset('assets')}}/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="{{asset('assets')}}/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <script src="{{asset('assets')}}/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+"></script>
 <script src="/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script src="{{asset('assets')}}/global/scripts/app.min.js" type="text/javascript"></script>
@@ -55,3 +56,5 @@
 
 
 </script>
+
+

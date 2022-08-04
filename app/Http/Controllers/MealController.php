@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateMealRequest;
 use App\Models\Meal;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Service\UploadService;
+use Yajra\DataTables\DataTables;
 
 class MealController extends Controller
 {
@@ -14,9 +17,25 @@ class MealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $data = Meal::latest()->get();
+            return DataTables::of($data)
+
+                ->addColumn('action', function($data){
+                    $actionBtn = ' <a  data-id='.$data->id.' class="delete btn btn-danger btn-bg"><i class="fa fa-trash"></i></a>
+ <a href='.route('meal.edit',$data).'  class="btn btn-primary btn-bg"><i class="fa fa-pencil"></i></a>
+
+ ';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+
+        return  view('dashboard.meals.index');
     }
 
     /**
@@ -35,7 +54,7 @@ class MealController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, UploadService $service)
+    public function store(CreateMealRequest $request,UploadService $service )
     {
 
         $data = $request->except('bread_name', 'bread_price', 'sweet_name', 'sweet_price', 'extras', '_token', 'extras', 'images');
@@ -70,6 +89,12 @@ class MealController extends Controller
             $images[$key]['order'] = $key;
         }
         $meal->attachments()->createMany($images);
+
+        session()->flash('success',"تم إضافة وجبة جديدة بنجاح");
+        return redirect()->route('meal.index');
+
+
+
     }
 
     /**
@@ -91,7 +116,14 @@ class MealController extends Controller
      */
     public function edit(Meal $meal)
     {
-        //
+
+       $sweets=$meal->extrasReL->where('type','sweet');
+       $breads=$meal->extrasReL->where('type','bread');
+
+
+       return view('');
+
+
     }
 
     /**

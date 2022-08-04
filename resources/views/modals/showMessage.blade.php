@@ -18,23 +18,24 @@
                                         <ol>
                                             <li class="selected" data-date="16/01/2014">
 
-                                                <div class="mt-title">
-                                                    <h2 class="mt-content-title send-name"> محتوى الرسالة</h2>
+                                            <div class="mt-author" >
+                                                <div class="mt-avatar">
+                                                    <img class="attachment" src="https://1.bp.blogspot.com/-35BEaffVE5g/V5573Gw1-6I/AAAAAAAAXOw/yr-iFUfBT2AcpkHXRgGTBhJl2MXT1ggwwCLcB/s320/%25D8%25A7%25D8%25AC%25D9%2585%25D9%2584%2B%25D8%25B5%25D9%2588%25D8%25B1_1.jpg">
+                                                </div>
+                                                <div class="mt-author-name">
+                                                    <a href="javascript:;" class="font-blue-madison send-name"> </a>
+                                                </div>
+{{--                                                <h2 class="mt-content-title"> محتوى الرسالة</h2>--}}
 
-                                                </div>
-                                                <div class="mt-author">
-                                                    <div class="mt-avatar">
-                                                        <img class="attachment"
-                                                            src="../assets/pages/media/users/avatar80_3.jpg">
-                                                    </div>
-                                                    <div class="mt-author-name">
-                                                        <a href="javascript:;" class="font-blue-madison "> </a>
-                                                    </div>
-                                                    <div class="time"></div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <div class="mt-content border-grey-steel">
-                                                    <p class="attachment"></p>
+                                            </div>
+                                            <div class="mt-title">
+
+
+                                                <div class="time"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="mt-content border-grey-steel">
+                                                <p class="content"></p>
 
                                                 </div>
                                             </li>
