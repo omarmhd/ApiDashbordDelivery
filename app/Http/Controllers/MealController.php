@@ -124,7 +124,14 @@ class MealController extends Controller
      */
     public function edit(Meal $meal)
     {
-        //
+
+       $sweets=$meal->extrasReL->where('type','sweet');
+       $breads=$meal->extrasReL->where('type','bread');
+
+
+       return view('');
+
+
     }
 
     /**

@@ -249,6 +249,29 @@
 
 
             </div>
+            @php $arr=old('sweet_name'); @endphp
+            @if($arr)
+
+                @foreach( $arr as $key=>$value)
+                    <div class="form-group group-duplicate">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" name="sweet_name[]" placeholder="نوع الحلويات"   >
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control"  multiple name="sweet_price[]" value="{{old('sweet_price')[$key]}}" placeholder="السعر" >
+
+
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary btn-add"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-danger btn-remove"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                    @endforeach
+
+            @endif
             <div class="form-group group-duplicate">
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="sweet_name[]" placeholder="نوع الحلويات"   >
@@ -265,6 +288,8 @@
                     <button class="btn btn-danger btn-remove"><i class="fa fa-trash"></i></button>
                 </div>
             </div>
+
+
 
         </div>
 
