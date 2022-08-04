@@ -38,7 +38,8 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table_id">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                        id="table_id">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -52,20 +53,15 @@
                             <th>المرفقات</th>
                             <th>الاجراءات</th>
 
-
-                        </tr>
+                            </tr>
                         </thead>
-                        <tbody>
-
-
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
-
 @endsection
 @push('js')
     @include('dashboard.messages._dataTable')

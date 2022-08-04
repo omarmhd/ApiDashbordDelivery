@@ -22,32 +22,31 @@ class UserController extends Controller
             $data = User::latest()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="'.route('user.index').'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="' . route('user.index') . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return  view('dashboard.users.index');
+        return view('dashboard.users.index');
     }
 
 
     public function dataTable()
     {
 
-            $data = User::latest()->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="'.route('index.user').'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-
+        $data = User::latest()->get();
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $actionBtn = '<a href="' . route('index.user') . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
 
 
     /**
@@ -57,9 +56,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles=Role::all();
-        $user=new User();
-       return  view('dashboard.users.create',['roles'=>$roles,'user'=>$user]);
+        $roles = Role::all();
+        $user = new User();
+        return  view('dashboard.users.create', ['roles' => $roles, 'user' => $user]);
     }
 
     /**
@@ -70,15 +69,14 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $createUserRequest)
     {
-       $data= $createUserRequest->except(['password','role']);
-       $data['password']=bcrypt($createUserRequest->getPassword());
-        $user=User::create($data);
+        $data = $createUserRequest->except(['password', 'role']);
+        $data['password'] = bcrypt($createUserRequest->getPassword());
+        $user = User::create($data);
         $user->attachRole($createUserRequest->role);
 
-        Session::flash('success','تم الإضافة بنجاح');
+        Session::flash('success', 'تم الإضافة بنجاح');
 
         return redirect()->route('user.index');
-
     }
 
     /**

@@ -1,6 +1,5 @@
-
 <script type="text/javascript">
-    $(function () {
+    $(function() {
 
         var table = $('#table_id').DataTable({
             processing: true,

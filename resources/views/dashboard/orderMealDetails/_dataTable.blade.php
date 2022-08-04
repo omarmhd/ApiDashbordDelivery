@@ -4,30 +4,30 @@
         var table = $('#table_id').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('order.index') }}",
+            ajax: "{{ route('order.meal_details.index', $order_id) }}",
             columns: [{
                     data: 'id',
                     name: 'id'
                 },
                 {
+                    data: 'order_id',
+                    name: 'order_id'
+                },
+                {
+                    data: 'meal_id',
+                    name: 'meal_id'
+                },
+                {
+                    data: 'number_of_meals',
+                    name: 'number_of_meals'
+                },
+                {
+                    data: 'extras',
+                    name: 'extras'
+                },
+                {
                     data: 'total_price',
                     name: 'total_price'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'total_arrive_time',
-                    name: 'total_arrive_time'
-                },
-                {
-                    data: 'payment_way',
-                    name: 'payment_way'
-                },
-                {
-                    data: 'show_meal_details',
-                    name: 'show_meal_details'
                 },
             ]
         });

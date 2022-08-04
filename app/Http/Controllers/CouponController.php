@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coupon;
 use App\Http\Requests\StoreCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class CouponController extends Controller
@@ -24,8 +25,37 @@ class CouponController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->ajax()) {
+            $data = Coupon::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('id', function ($data) {
+                    return $data->id;
+                })
+                ->addColumn('code', function ($data) {
+                    return $data->code;
+                })
+                ->addColumn('ammount', function ($data) {
+                    return $data->ammount;
+                })
+                ->addColumn('uses', function ($data) {
+                    return $data->uses;
+                })
+                ->addColumn('status', function ($data) {
+                    return $data->extras;
+                })
+                ->addColumn('start_avilable_at', function ($data) {
+                    return $data->start_avilable_at;
+                })
+                ->addColumn('end_avilable_at', function ($data) {
+                    return $data->end_avilable_at;
+                })
+                ->rawColumns(['id', 'code', 'ammount', 'uses', 'status', 'start_avilable_at', 'end_avilable_at'])
+                ->make(true);
+        }
 
         return view('dashboard.coupons.index')->with('public_content', $this->public_content);
     }

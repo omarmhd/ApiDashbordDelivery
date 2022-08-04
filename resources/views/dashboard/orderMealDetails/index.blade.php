@@ -9,7 +9,7 @@
                 <i class="fa fa-home"></i>
                 <a href="{{ route('user.index') }}">الرئيسية</a>
                 <i class="fa fa-angle-left"></i>
-                <a href="{{ route('order.index') }}">{{ $public_content['name'] }}</a>
+                <a href="{{ route('order.meal_details.index', $order_id) }}">{{ $public_content['name'] }}</a>
             </li>
         </ul>
     </div>
@@ -37,7 +37,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a id="sample_editable_1_new" class="btn green" href="{{ route('order.create') }}">
+                                    <a id="sample_editable_1_new" class="btn green"
+                                        href="{{ route('order.meal_details.create', $order_id) }}">
                                         {{ $public_content['singular_name'] }} جديد <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -69,22 +70,22 @@
                         <thead>
                             <tr>
                                 <th>
+                                    #
+                                </th>
+                                <th>
                                     رقم الطلب
                                 </th>
                                 <th>
+                                    رقم الوجبة
+                                </th>
+                                <th>
+                                    عدد الوجبات
+                                </th>
+                                <th>
+                                    الإضافات
+                                </th>
+                                <th>
                                     السعر الكلي
-                                </th>
-                                <th>
-                                    حالة الطلب
-                                </th>
-                                <th>
-                                    وقت الاستلام
-                                </th>
-                                <th>
-                                    طريقة الدفع
-                                </th>
-                                <th>
-                                    تفاصيل الوجبة
                                 </th>
                             </tr>
                         </thead>
@@ -98,7 +99,7 @@
     </div>
 @endsection
 @push('js')
-    @include('dashboard.orders._dataTable')
+    @include('dashboard.orderMealDetails._dataTable')
 
     {{-- <script>
         $('#showMessage').on('show.bs.modal', function(event) {

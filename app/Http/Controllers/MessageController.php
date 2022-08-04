@@ -20,29 +20,29 @@ class MessageController extends Controller
             $data = Message::latest()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('user_name', function($data){
+                ->addColumn('user_name', function ($data) {
                     return $data->user->name;
                 })
 
-                ->addColumn('email', function($data){
+                ->addColumn('email', function ($data) {
                     return $data->user->email;
                 })
-                ->addColumn('phone', function($data){
+                ->addColumn('phone', function ($data) {
                     return $data->user->phone;
                 })
                 ->addColumn('content', function($data){
                     $time=$data->created_at->diffForHumans();
                     $contentTag = "<a   class='btn btn-primary' style='width:100%' data-toggle='modal'   data-target='#showMessage'
-                    
+
                     data-time='$time'
                     data-attachment=asset('images')/$data->id
                     data-content='$data->content'
                     data-send-name='{$data->user->name}'
-                    
+
                     > <i class='fa fa-envelope'></i> <a> " ;
                     return $contentTag;
                 })
-                ->addColumn('time', function($data){
+                ->addColumn('time', function ($data) {
                     return $data->created_at->diffForHumans();
                 })
                 ->addColumn('attachment', function($data){
@@ -53,7 +53,7 @@ class MessageController extends Controller
                     $actionBtn = ' <a  data-id='.$data->id.' style="width:100%" class="delete btn btn-danger btn-bg"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['user_name','email','phone','content','time','attachment','action'])
+                ->rawColumns(['user_name', 'email', 'phone', 'content', 'time', 'attachment', 'action'])
                 ->make(true);
         }
 
@@ -71,8 +71,8 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        $nameAttach=$message->attachment->name;
-        return  view('dashboard.messages.show',['nameAttach'=>$nameAttach,'message'=>$message]);
+        $nameAttach = $message->attachment->name;
+        return  view('dashboard.messages.show', ['nameAttach' => $nameAttach, 'message' => $message]);
     }
 
     /**
