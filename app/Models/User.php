@@ -43,5 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function usedCoupon()
+    {
+        return $this->belongsToMany(UsedCoupon::class);
+    }
 
+    public function selectedUserCoupon()
+    {
+        return $this->belongsToMany(SelectedUserCoupon::class);
+    }
 }

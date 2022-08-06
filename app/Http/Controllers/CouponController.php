@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Coupon;
 use App\Http\Requests\StoreCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
+use App\Models\SelectedUsersCoupon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -47,6 +49,9 @@ class CouponController extends Controller
                 ->addColumn('status', function ($data) {
                     return $data->extras;
                 })
+                ->addColumn('is_selected', function ($data) {
+                    return $data->is_selected;
+                })
                 ->addColumn('start_avilable_at', function ($data) {
                     return $data->start_avilable_at;
                 })
@@ -74,7 +79,8 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('dashboard.coupons.create')->with('public_content', $this->public_content);
+        $users = User::all();
+        return view('dashboard.coupons.create', compact('users'))->with('public_content', $this->public_content);
     }
 
     /**
@@ -85,14 +91,15 @@ class CouponController extends Controller
      */
     public function store(StoreCouponRequest $request)
     {
-        // [
-        //     'code' => '123456666',
-        //     'ammount' => '200',
-        //     'uses' => '2',
-        //     'start_avilable_at' => date('Y-m-d H:i:s'),
-        //     'end_avilable_at' => date('Y-m-d H:i:s'),
-        // ]
-        Coupon::firstOrCreate($request->validated());
+
+        $coupon = Coupon::firstOrCreate($request->validated());
+        if ($request->is_selected) {
+            $users = collect();
+            foreach ($request->selected as $user) {
+                $users->add(['user_id' => $user, 'coupon_id' => $coupon->id]);
+            }
+            SelectedUsersCoupon::insert($users->toArray());
+        }
         return redirect()->route('coupon.index');
     }
 

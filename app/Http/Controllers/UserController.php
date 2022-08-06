@@ -33,7 +33,6 @@ class UserController extends Controller
         return view('dashboard.users.index');
     }
 
-
     public function dataTable()
     {
 

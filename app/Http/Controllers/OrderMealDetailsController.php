@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderMealDetails;
-use App\Http\Requests\StoreOrderMealDetailsRequest;
-use App\Http\Requests\UpdateOrderMealDetailsRequest;
-use App\Models\Meal;
-use App\Models\Order;
+use App\Models\{OrderMealDetails, Meal};
+use App\Http\Requests\{StoreOrderMealDetailsRequest, UpdateOrderMealDetailsRequest};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -82,7 +79,7 @@ class OrderMealDetailsController extends Controller
             'number_of_extras' => 3
         ])->toJson();
         OrderMealDetails::create([
-            'order_id' => Order::first()->id,
+            'order_id' => $request->order_id,
             'meal_id' => Meal::first()->id,
             'number_of_meals' => 2,
             'extras' => $extars,

@@ -1,11 +1,11 @@
 <script>
-    $(document).on('click','.delete',function (e){
+    $(document).on('click', '.delete', function(e) {
 
         e.preventDefault();
 
-        var id=$(this).data('id')
-        var url="{{$route}}";
-        url=url.replace(':id',id)
+        var id = $(this).data('id')
+        var url = "{{ $route }}";
+        url = url.replace(':id', id)
 
         Swal.fire({
             title: 'هل أنت متأكد?',
@@ -19,7 +19,7 @@
             if (result.isConfirmed) {
                 $.ajaxSetup({
                     headers: {
-                        'X-CSRF-TOKEN':"{{ csrf_token() }}"
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     }
                 });
                 $.ajax({
@@ -30,13 +30,15 @@
 
                     },
                     success: function(result) {
-                        if(result.status=="success"){
+                        if (result.status == "success") {
 
-                        Swal.fire(
-                            'تم الحذف!',
-                            'تم حذف هذا الصف.',
-                            'success'
-                        )}
+                            Swal.fire(
+                                'تم الحذف!',
+                                'تم حذف هذا الصف.',
+                                'success'
+                            )
+                        };
+                        table.ajax.reload();
                     },
                     error: function(result) {
                         alert('error');

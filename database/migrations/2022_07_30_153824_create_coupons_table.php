@@ -19,6 +19,7 @@ class CreateCouponsTable extends Migration
             $table->integer('ammount');
             $table->integer('uses')->default(0);
             $table->enum('status', ['ACTIVE', 'NOT_ACTIVE'])->default('ACTIVE');
+            $table->boolean('is_selected')->default(0); // 1: For coupon that is private for selected group of people, 0: For public use coupon
             $table->dateTime('start_avilable_at');
             $table->dateTime('end_avilable_at');
             $table->timestamps();

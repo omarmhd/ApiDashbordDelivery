@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(function() {
 
-        var table = $('#table_id').DataTable({
+        globalThis.table = $('#table_id').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('order.index') }}",
@@ -26,8 +26,12 @@
                     name: 'payment_way'
                 },
                 {
-                    data: 'show_meal_details',
-                    name: 'show_meal_details'
+                    data: 'driver',
+                    name: 'driver'
+                },
+                {
+                    data: 'action',
+                    name: 'action'
                 },
             ]
         });

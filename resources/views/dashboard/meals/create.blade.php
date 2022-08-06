@@ -348,18 +348,18 @@
             </div>
             <div class="alert alert-danger">
                 <ul>
-                    @if($errors->any())
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
                         @endforeach
-
                     @endif
                 </ul>
             </div>
             <div class="portlet-body form">
                 <!-- BEGIN FORM-->
 
-                <form action="{{route('meal.store')}}" method="post"class="form-horizontal"   enctype="multipart/form-data">
+                <form action="{{ route('meal.store') }}" method="post"class="form-horizontal"
+                    enctype="multipart/form-data">
                     @csrf
 
                     @include('dashboard.meals._fields')
@@ -370,6 +370,6 @@
 
                 <!-- END FORM-->
 
-        </div>
+            </div>
 
-    @endsection
+        @endsection
