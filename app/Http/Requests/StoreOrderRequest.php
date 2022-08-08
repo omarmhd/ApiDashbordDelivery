@@ -25,15 +25,15 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'exists:App\Models\User,id',
-            'total_price' => 'double',
-            'status' => Rule::in(['GET_ORDER', 'IN_WAY', 'IN_LOCATION']),
+            'user_id' => 'required|exists:App\Models\User,id',
+            'total_price' => 'required|double',
+            'status' => ['required', Rule::in(['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'])],
             'total_arrive_time' => 'date_format:Y-m-d H:i:s',
-            'payment_way' => Rule::in(['VISA', 'MASTER', 'BY_HAND']),
+            'payment_way' => ['required', Rule::in(['VISA', 'MASTER', 'BY_HAND'])],
             'delivery_time' => 'date_format:Y-m-d H:i:s',
             'time_of_receipt' => 'date_format:Y-m-d H:i:s',
-            'notes' => 'string',
-            'rate' =>  Rule::in([1, 2, 3, 4, 5]),
+            'notes' => 'string|nullable',
+            'rate' =>  ['nullable', Rule::in([1, 2, 3, 4, 5])],
             'driver_id' => 'exists:App\Models\User,id',
         ];
     }

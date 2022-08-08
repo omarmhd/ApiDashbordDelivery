@@ -29,7 +29,7 @@
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('code') has-error @enderror">
                                         <label class="control-label col-md-3">الكود</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder=""
@@ -47,12 +47,55 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group @error('is_selected') has-error @enderror">
+                                        <label class="control-label col-md-3">نوع القسيمة</label>
+                                        <div class="col-md-9">
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio">
+                                                    <input type="radio" name="is_selected" value="0"
+                                                        {{ old('is_selected') == 0 ? 'checked' : '' }}> عام
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio">
+                                                    <input type="radio" name="is_selected" value="1"
+                                                        id="show-is-selected"
+                                                        {{ old('is_selected') == 1 ? 'checked' : '' }}> مخصص
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group @error('status') has-error @enderror">
+                                        <label class="control-label col-md-3">هل الكوبون فعال؟</label>
+                                        <div class="col-md-9">
+                                            <div class="mt-radio-inline">
+                                                <label class="mt-radio">
+                                                    <input type="radio" name="status" value="0" checked> نعم
+                                                    <span></span>
+                                                </label>
+                                                <label class="mt-radio">
+                                                    <input type="radio" name="status" value="1"
+                                                        {{ old('status') == 1 ? 'checked' : '' }}> لا
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--/span-->
                             </div>
                             <!--/row-->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group  @error('start_avilable_at') has-error @enderror">
                                         <label class="control-label col-md-3">يبدأ العمل في</label>
                                         <div class="col-md-9">
                                             <input type="datetime-local" class="form-control" placeholder=""
@@ -62,7 +105,7 @@
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group  @error('end_avilable_at') has-error @enderror">
                                         <label class="control-label col-md-3">ينتهي عمله في</label>
                                         <div class="col-md-9">
                                             <input type="datetime-local" class="form-control" placeholder=""
@@ -73,6 +116,49 @@
                                 <!--/span-->
                             </div>
                             <!--/row-->
+                            <div id="users_list" style="display: none">
+                                <h3 class="form-section">المستخدمين</h3>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table
+                                            class="table table-striped table-bordered table-hover table-checkable order-column"
+                                            id="table_id">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                            <input type="checkbox" class="group-checkable"
+                                                                data-set="#sample_1 .checkboxes" />
+                                                            <span></span>
+                                                        </label>
+                                                    </th>
+                                                    <th> Username </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($users as $user)
+                                                    <tr class="odd gradeX">
+                                                        <td>
+                                                            <label
+                                                                class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                                <input type="checkbox" class="checkboxes"
+                                                                    value="{{ $user->id }}" name="selected[]"
+                                                                    @if (old('selected') !== null) @foreach (old('selected') as $selected)
+                                                                    @if ($selected == $user->id) checked @endif
+                                                                    @endforeach
+                                                                />
+                                                                <span></span>
+                                                            </label>
+                                                        </td>
+                                                        <td> {{ $user->first_name }} </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-actions">
                             <div class="row">
@@ -96,3 +182,12 @@
     </div>
 
 @endsection
+@push('js')
+    <script>
+        $(function() {
+            $('input[name=is_selected]').on('click init-post-format', function() {
+                $('#users_list').toggle($('#show-is-selected').prop('checked'));
+            }).trigger('init-post-format');
+        });
+    </script>
+@endpush

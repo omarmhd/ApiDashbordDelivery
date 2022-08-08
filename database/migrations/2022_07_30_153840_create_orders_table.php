@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->double('total_price', 4, 2);
-            $table->enum('status', ['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION']);
+            $table->enum('status', ['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'])->default('NOT_GET_YET');
             $table->dateTime('total_arrive_time');
             $table->enum('payment_way', ['VISA', 'MASTER', 'BY_HAND']);
             $table->dateTime('delivery_time')->nullable();

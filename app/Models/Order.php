@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_price',
-        'status',
+        'status', //'NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'
         'total_arrive_time',
         'payment_way',
         'delivery_time',
@@ -21,4 +21,14 @@ class Order extends Model
         'rate',
         'driver_id',
     ];
+
+    public function customer()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function driver()
+    {
+        return $this->hasOne(User::class, 'id', 'driver_id');
+    }
 }

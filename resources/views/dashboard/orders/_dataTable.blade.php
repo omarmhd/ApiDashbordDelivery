@@ -26,8 +26,12 @@
                     name: 'payment_way'
                 },
                 {
-                    data: 'show_meal_details',
-                    name: 'show_meal_details'
+                    data: 'driver',
+                    name: 'driver'
+                },
+                {
+                    data: 'action',
+                    name: 'action'
                 },
             ]
         });

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCouponRequest extends FormRequest
+class UpdateUsedCouponRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreCouponRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,13 +24,7 @@ class StoreCouponRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required'],
-            'ammount' => ['required', 'integer'],
-            'uses' => ['nullable'],
-            'status' => ['nullable'],
-            'start_avilable_at' => ['date'],
-            'end_avilable_at' => ['date'],
-            'selected_users' => ['nullable'],
+            //
         ];
     }
 }

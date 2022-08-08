@@ -20,9 +20,14 @@
                 {
                     data: 'uses',
                     name: 'uses'
-                }, {
+                },
+                {
                     data: 'status',
                     name: 'status'
+                },
+                {
+                    data: 'is_selected',
+                    name: 'is_selected'
                 },
                 {
                     data: 'start_avilable_at',

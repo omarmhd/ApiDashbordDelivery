@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Http\Requests\StoreorderRequest;
-use App\Http\Requests\UpdateorderRequest;
-use App\Models\User;
+use App\Models\{Order, User};
+use App\Http\Requests\{StoreOrderRequest, UpdateOrderRequest};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,7 +20,6 @@ class OrderController extends Controller
         ]);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -30,10 +27,6 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-
-        // $data = Order::latest()->get();
-
-        // dd($data);
         if ($request->ajax()) {
             $data = Order::latest()->get();
             return DataTables::of($data)
@@ -53,15 +46,16 @@ class OrderController extends Controller
                 ->addColumn('payment_way', function ($data) {
                     return $data->payment_way;
                 })
-                // ->addColumn('attachment', function ($data) {
-                // $attachmentTag = "<a class='img-thumbnail'   href=" . asset("images") . "/" . $data->id . "></a>";
-                //     return $attachmentTag;
-                // })
-                ->addColumn('show_meal_details', function ($data) {
-                    $actionBtn = " <a href='/order/" . $data->id . "/meal-details' class='info btn btn-info btn-sm'><i class='fa fa-eye'></i></a>";
+                ->addColumn('driver', function ($data) {
+                    return $data->driver->first_name;
+                })
+                ->addColumn('action', function ($data) {
+                    $actionBtn = "<a href='/order/" . $data->id . "/meal-details' class='info btn btn-info btn-sm'><i class='fa fa-eye'></i></a>
+                                  <a href='/order/" . $data->id . "/edit' class='btn btn-warning btn-sm'><i class='fa fa-pencil-square-o'></i></a>
+                                  <a data-id='$data->id' class='delete btn btn-danger btn-sm'><i class='fa fa-trash'></i></a>";
                     return $actionBtn;
                 })
-                ->rawColumns(['id', 'total_price', 'status', 'total_arrive_time', 'payment_way', 'show_meal_details'])
+                ->rawColumns(['id', 'total_price', 'status', 'total_arrive_time', 'payment_way', 'action'])
                 ->make(true);
         }
 
@@ -86,7 +80,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-
+        //
         return view('dashboard.orders.create')->with('public_content', $this->public_content);
     }
 
@@ -96,10 +90,8 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreorderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreorderRequest $order)
+    public function store(StoreOrderRequest $order)
     {
-        // dd($order->all());
-        // dd(User::first()->id);
         // $order->validated();
         // dd(
         // $order->validate([
@@ -127,7 +119,7 @@ class OrderController extends Controller
                 'time_of_receipt' => date('Y-m-d H:i:s'),
                 'notes' => 'Hello World',
                 'rate' => 1,
-                'driver_id' => User::first()->id,
+                'driver_id' => 2,
             ]
         );
         return redirect()->route('order.index');
@@ -152,7 +144,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $users = User::all();
+        return view('dashboard.orders.edit', compact('order', 'users'))->with('public_content', $this->public_content);
     }
 
     /**
@@ -162,9 +155,10 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateorderRequest $request, order $order)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $order->update($request->validated());
+        return redirect()->route('order.index');
     }
 
     /**
@@ -175,6 +169,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return response()->json(['status' => 'success']);
     }
 }

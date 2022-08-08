@@ -84,6 +84,9 @@
                                     طريقة الدفع
                                 </th>
                                 <th>
+                                    السائق
+                                </th>
+                                <th>
                                     تفاصيل الوجبة
                                 </th>
                             </tr>
@@ -99,6 +102,7 @@
 @endsection
 @push('js')
     @include('dashboard.orders._dataTable')
+    @include('part.sweetDelete', ['route' => route('order.destroy', ['order' => ':id'])])
 
     {{-- <script>
         $('#showMessage').on('show.bs.modal', function(event) {
