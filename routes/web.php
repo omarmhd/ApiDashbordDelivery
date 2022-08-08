@@ -44,3 +44,7 @@ Route::post('/order/{order_id}/meal-details', [OrderMealDetailsController::class
 
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

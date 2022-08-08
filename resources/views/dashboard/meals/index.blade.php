@@ -55,9 +55,10 @@
                         <thead>
                         <tr>
 
-
+                            <th>#</th>
                             <th> الاسم  </th>
-                            <th>  </th>
+                            <th> السعر </th>
+                            <th> الحالة </th>
                             <th> الاجراءات </th>
                         </tr>
                         </thead>

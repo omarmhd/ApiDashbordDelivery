@@ -2,7 +2,7 @@
 <script type="text/javascript">
     $(function () {
 
-        var table = $('#table_id').DataTable({
+        globalThis.table = $('#table_id').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('user.index') }}",

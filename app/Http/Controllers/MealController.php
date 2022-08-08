@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMealRequest;
 use App\Http\Requests\UpdateMealRequest;
+use App\Models\Extras;
 use App\Models\Meal;
 use App\Models\Message;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Service\UploadService;
@@ -23,15 +25,17 @@ class MealController extends Controller
         if ($request->ajax()) {
             $data = Meal::latest()->get();
             return DataTables::of($data)
-
+                ->addIndexColumn()
                 ->addColumn('action', function($data){
                     $actionBtn = ' <a  data-id='.$data->id.' class="delete btn btn-danger btn-bg"><i class="fa fa-trash"></i></a>
  <a href='.route('meal.edit',$data).'  class="btn btn-primary btn-bg"><i class="fa fa-pencil"></i></a>
-
+ 
  ';
                     return $actionBtn;
-                })
-                ->rawColumns(['action'])
+                })->addColumn('active',function($data){
+                    if ($data->active==1){return "فَعَّال";}
+                    return "مُعَطَّلٌ";
+            }) ->rawColumns(['active','action'])
                 ->make(true);
         }
 
@@ -46,7 +50,12 @@ class MealController extends Controller
      */
     public function create()
     {
-        return view('dashboard.meals.create');
+
+        $meal=new Meal();
+        $restaurants=Restaurant::select(['id','name'])->get();
+
+
+        return view('dashboard.meals.create',['meal'=>$meal,'restaurants'=>$restaurants]);
     }
 
     /**
@@ -126,11 +135,23 @@ class MealController extends Controller
     public function edit(Meal $meal)
     {
 
-       $sweets=$meal->extrasReL->where('type','sweet');
-       $breads=$meal->extrasReL->where('type','bread');
+        $sweets=$meal->extrasReL->where('type','sweet');
+        $breads=$meal->extrasReL->where('type','bread');
+        $extras=json_decode($meal->extras);
+        $restaurants=Restaurant::select(['id','name'])->get();
+        $images=$meal->attachments->pluck('name','order')->toArray();
 
 
-       return view('dashboard.meals.edit',['sweets'=>$sweets,'breads'=>$breads,'meal'=>$meal]);
+
+
+       return view('dashboard.meals.edit',
+           ['sweets'=>$sweets,
+               'breads'=>$breads,
+               'meal'=>$meal,
+               'extras'=>$extras,
+               'restaurants'=>$restaurants,
+               'images'=>$images
+               ]);
 
 
     }
@@ -142,9 +163,60 @@ class MealController extends Controller
      * @param  \App\Models\Meal  $meal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meal $meal)
+    public function update(UpdateMealRequest $request, Meal $meal,UploadService $service)
     {
-        //
+
+
+        $data=$request->except('bread_name','bread_price','sweet_name','sweet_price','extras','_token','extras','images');
+        $data['extras']=json_encode($request->extras);
+        $meal->update($data);
+
+
+
+        $breads = [];
+        foreach ($request->bread_name  as $key => $value) {
+            $breads[$key]['name'] = $request->bread_name[$key];;
+            $breads[$key]['price'] = $request->bread_price[$key];;
+            $breads[$key]['type'] = "bread";;
+
+        }
+
+
+        $sweets = [];
+        foreach ($request->sweet_name  as $key => $value) {
+            $sweets[$key]['name'] = $request->sweet_name[$key];;
+            $sweets[$key]['price'] = $request->sweet_price[$key];;
+            $sweets[$key]['type'] = "sweet";;
+
+        }
+
+
+        $extras=array_merge( $sweets, $breads);
+        $meal->extrasReL()->delete();
+        $meal->attachments()->createMany($extras);
+
+        $images=[];
+        if($request->image) {
+            foreach ($request->image as $key => $value) {
+
+
+                $name = $service->upload($value, 'images');
+
+                $meal->attachments()->updateOrCreate(['name'=>$name,'order'=>$key]);
+
+
+            }
+
+
+
+        }
+            session()->flash('success', "تم تحديث   معلومات الوجبة  بنجاح");
+
+            return redirect()->route('meal.index');
+
+
+
+
     }
 
     /**
@@ -155,6 +227,6 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        //
+            $meal->delete();
     }
 }

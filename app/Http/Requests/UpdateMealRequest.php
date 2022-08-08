@@ -32,7 +32,8 @@ class UpdateMealRequest extends FormRequest
             'bread_name.*'=>'sometimes|required',
             'bread_price.*'=>'sometimes|required|numeric',
             'sweet_name.*'=>'sometimes|required',
-            'sweet_price.*'=>'sometimes|required|numeric'
+            'sweet_price.*'=>'sometimes|required|numeric',
+            'image.*'=>'sometimes|required|image'
         ];
     }
 }
