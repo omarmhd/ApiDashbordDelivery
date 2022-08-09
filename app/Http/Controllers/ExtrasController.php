@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateExtraRequest;
+use App\Http\Requests\UpdateExtraRequest;
 use App\Models\Extras;
 use App\Service\UploadService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Yajra\DataTables\DataTables;
 
 class ExtrasController extends Controller
 {
@@ -13,9 +17,23 @@ class ExtrasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('etras.index');
+        if ($request->ajax()) {
+            $data = Extras::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('image', function ($data) {
+                    $img = '<img src="'.asset('images')."/".$data->attachment->name.'" alt="" class="img-fluid img-thumbnail" style="width:40%">';
+                    return $img;
+                })->addColumn('action', function ($data) {
+                    $actionBtn = '<a href="' . route('extra.edit',$data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="'.$data->id.'"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    return $actionBtn;
+                })->rawColumns(['image','action'])
+                ->make(true);
+        }
+
+        return  view('dashboard.extras.index');
     }
 
     /**
@@ -24,8 +42,10 @@ class ExtrasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+
     {
-        return view('dashboard.extras.create');
+        $extra=new Extras();
+        return view('dashboard.extras.create',['extra'=>$extra]);
 
     }
 
@@ -35,7 +55,7 @@ class ExtrasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,UploadService $service)
+    public function store(CreateExtraRequest $request,UploadService $service)
     {
 
         $data=$request->except('_token','image');
@@ -44,10 +64,11 @@ class ExtrasController extends Controller
 
         if($request->image){
             $attachment['name']=$service->upload($request->image,'images');
-
             $extras->attachment()->create($attachment);
 
         }
+        Session::flash('success','لم');
+        return  redirect()->route('extra.index');
 
 
     }
@@ -69,9 +90,9 @@ class ExtrasController extends Controller
      * @param  \App\Models\Extras  $extras
      * @return \Illuminate\Http\Response
      */
-    public function edit(Extras $extras)
+    public function edit(Extras $extra)
     {
-        //
+        return view('dashboard.extras.edit',['extra'=>$extra]);
     }
 
     /**
@@ -81,9 +102,22 @@ class ExtrasController extends Controller
      * @param  \App\Models\Extras  $extras
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Extras $extras)
+    public function update(UpdateExtraRequest $request,Extras $extra,UploadService $service )
     {
-        //
+
+        $data=$request->except('_token','image');
+
+
+
+        if($request->image){
+            $attachment['name']=$service->upload($request->image,'images');
+            $extra->attachment->update($attachment);
+
+        }
+       $extra->update($data);
+
+        Session::flash('success','لم');
+        return  redirect()->route('extra.index');
     }
 
     /**

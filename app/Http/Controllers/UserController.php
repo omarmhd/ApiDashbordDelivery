@@ -25,12 +25,14 @@ class UserController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('user.index') . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="'.$data->id.'"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    $actionBtn = '<a href="' . route('user.edit',$data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="'.$data->id.'"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+
+        return  view('dashboard.users.index');
 
     }
 
@@ -79,9 +81,9 @@ class UserController extends Controller
             $user->attachment()->create($attachment);
         }
 
-        Session::flash('success', 'تم الإضافة بنجاح');
 
-        return redirect()->route('user.index');
+
+        return redirect()->route('user.index')->with('success','jlll');
     }
 
     /**
@@ -115,19 +117,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, UploadService $service)
+    public function update(UpdateUserRequest $request,User $user, UploadService $service)
     {
         $data = $request->except(['password','image']);
+
+        if ($request->getPassword()){
         $data['password'] = bcrypt($request->getPassword());
-        $user = User::create($data);
-        $user->update(['role'=>$request->role]);
+    }else{
+            unset($data['password']);
+
+    }
+        $user->update(['name'=>$request->role]);
+        $user->update($data);
 
         if($request->image){
-            $attachment['name']=$service->upload($request->image,'images');
-            $user->attachment()->UpdateOrCreate($attachment);
+            $name=$service->upload($request->image,'images');
+            $user->attachment()->UpdateOrCreate(['name'=>$name]);
         }
 
         Session::flash('success', 'تم الإضافة بنجاح');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -139,5 +148,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        return response()->json(['status'=>'success']);
     }
 }

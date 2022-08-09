@@ -30,7 +30,7 @@
 
                     },
                     success: function(result) {
-                        if (result.status == "success") {
+                        if (result.status =="success") {
 
                             Swal.fire(
                                 'تم الحذف!',

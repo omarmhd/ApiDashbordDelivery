@@ -18,9 +18,7 @@ use App\Http\Controllers\OrderMealDetailsController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.users.index');
-});
+
 Route::get('/saas', function () {
     return view('test');
 });

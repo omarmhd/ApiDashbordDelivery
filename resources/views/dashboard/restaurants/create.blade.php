@@ -13,16 +13,17 @@
                 </div>
 
             </div>
-            <div class="alert alert-danger">
-                <ul>
+
                     @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
                         @foreach($errors->all() as $error)
                             <li>{{$error}}</li>
                         @endforeach
-
+                            </ul>
+                        </div>
                     @endif
-                </ul>
-            </div>
+
             <div class="portlet-body form">
                 <!-- BEGIN FORM-->
                 <form action="{{route('restaurant.store')}}" method="post" class="form-horizontal"  enctype="multipart/form-data">

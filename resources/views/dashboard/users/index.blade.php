@@ -27,6 +27,7 @@
                     <table class="table table-striped table-bordered table-hover" id="table_id">
                         <thead>
                         <tr>
+                            <th>#</th>
 
                             <th>
                               الاسم
