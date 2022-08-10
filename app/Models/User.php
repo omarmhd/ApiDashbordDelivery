@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(SelectedUserCoupon::class);
     }
+
+    public function customers()
+    {
+
+    }
 }

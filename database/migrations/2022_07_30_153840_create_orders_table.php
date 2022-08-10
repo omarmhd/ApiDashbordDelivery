@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->dateTime('time_of_receipt')->nullable();
             $table->string('notes')->nullable();
             $table->enum('rate', [1, 2, 3, 4, 5])->default(5);
-            $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

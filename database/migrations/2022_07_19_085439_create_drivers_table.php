@@ -20,6 +20,7 @@ class CreateDriversTable extends Migration
             $table->integer('total_orders')->unsigned()->default(0);
             $table->double('earning', 9, 2)->default(0);
             $table->boolean('available')->default(0);
+            $table->unique('user_id');
             $table->timestamps();
         });
     }

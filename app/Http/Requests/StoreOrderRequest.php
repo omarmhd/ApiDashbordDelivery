@@ -34,7 +34,7 @@ class StoreOrderRequest extends FormRequest
             'time_of_receipt' => 'date_format:Y-m-d H:i:s',
             'notes' => 'string|nullable',
             'rate' =>  ['nullable', Rule::in([1, 2, 3, 4, 5])],
-            'driver_id' => 'exists:App\Models\User,id',
+            // 'driver_id' => 'exists:App\Models\User,id',
         ];
     }
 }

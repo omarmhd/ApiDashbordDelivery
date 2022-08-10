@@ -19,7 +19,7 @@ class Order extends Model
         'time_of_receipt',
         'notes',
         'rate',
-        'driver_id',
+        // 'driver_id',
     ];
 
     public function customer()
