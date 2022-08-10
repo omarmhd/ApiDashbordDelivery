@@ -8,16 +8,7 @@
                     <div class="caption">
                         <i class="fa fa-globe"></i>إدارة المستخدمين
                     </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse">
-                        </a>
-                        <a href="#portlet-config" data-toggle="modal" class="config">
-                        </a>
-                        <a href="javascript:;" class="reload">
-                        </a>
-                        <a href="javascript:;" class="remove">
-                        </a>
-                    </div>
+
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
@@ -30,30 +21,13 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a href="javascript:;">
-                                                Print </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Save as PDF </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                Export to Excel </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover" id="table_id">
                         <thead>
                         <tr>
+                            <th>#</th>
 
                             <th>
                               الاسم
@@ -91,4 +65,5 @@
 @endsection
 @push('js')
     @include('dashboard.users._dataTable')
+    @include('part.sweetDelete',['route'=>route('user.destroy',['user'=>':id'])])
 @endpush

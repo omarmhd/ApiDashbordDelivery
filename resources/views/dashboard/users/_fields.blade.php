@@ -1,18 +1,18 @@
 <div class="form-body">
-    <h3 class="form-section">الحقول الأساسية</h3>
+    <h3 class="form-section"> معلومات المستخدم</h3>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="control-label col-md-3">الاسم</label>
+                <label class="control-label col-md-3"> الاسم</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="" value="{{old('name',$user->name)}}" name="name">
+                    <input type="text" class="form-control" placeholder="" value="{{old('first_name',$user->first_name)}}" name="first_name">
 
                 </div>
             </div>
         </div>
         <!--/span-->
         <div class="col-md-6">
-            <div class="form-group has-error">
+            <div class="form-group">
                 <label class="control-label col-md-3">اسم العائلة </label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" placeholder="" value="{{old('last_name',$user->last_name)}}" name="last_name">
@@ -89,26 +89,9 @@
         </div>
         <!--/span-->
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="control-label col-md-3">الصورة الشخصية</label>
-                <div class="col-md-9">
-                    <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}" placeholder="" >
-
-                </div>
-            </div>
-        </div>
-
-        <!--/span-->
-        <div class="col-md-6">
-
-        </div>
-        <!--/span-->
-    </div>
 
 
-    <h3 class="form-section">الحقول المخصصة</h3>
+
     <!--/row-->
     <div class="row">
         <div class="col-md-6">
@@ -129,7 +112,33 @@
         </div>
 
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">الصورة الشخصية</label>
+                <div class="col-md-9">
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
 
+                        </div>
+                        <div>
+                                                            <span class="btn red btn-outline btn-file">
+                                                                <span class="fileinput-new"> Select image </span>
+                                                                <span class="fileinput-exists"> Change </span>
+                                                                <input type="file" name="image"> </span>
+                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--/span-->
+        <div class="col-md-6">
+
+        </div>
+        <!--/span-->
+    </div>
     <!--/row-->
 </div>
 <div class="form-actions">

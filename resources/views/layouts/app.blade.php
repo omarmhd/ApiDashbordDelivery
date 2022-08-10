@@ -966,10 +966,11 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
+
     @include('layouts.inc._footer')
 
     @include('layouts.inc._script')
-    @include('layouts.inc._tost')
+@include('layouts.inc._tost')
 
     @stack('js')
     <!-- END JAVASCRIPTS -->

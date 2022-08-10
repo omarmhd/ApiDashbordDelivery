@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
+use App\Service\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
@@ -22,15 +24,16 @@ class UserController extends Controller
             $data = User::latest()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route('user.index') . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                ->addColumn('action', function ($data) {
+                    $actionBtn = '<a href="' . route('user.edit',$data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="'.$data->id.'"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('dashboard.users.index');
+        return  view('dashboard.users.index');
+
     }
 
     public function dataTable()
@@ -66,16 +69,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $createUserRequest)
+    public function store(CreateUserRequest $request,UploadService $service)
     {
-        $data = $createUserRequest->except(['password', 'role']);
-        $data['password'] = bcrypt($createUserRequest->getPassword());
+        $data = $request->except(['password', 'role','image']);
+        $data['password'] = bcrypt($request->getPassword());
         $user = User::create($data);
-        $user->attachRole($createUserRequest->role);
+        $user->attachRole($request->role);
 
-        Session::flash('success', 'تم الإضافة بنجاح');
+        if($request->image){
+            $attachment['name']=$service->upload($request->image,'images');
+            $user->attachment()->create($attachment);
+        }
 
-        return redirect()->route('user.index');
+
+
+        return redirect()->route('user.index')->with('success','jlll');
     }
 
     /**
@@ -84,7 +92,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $id)
     {
         //
     }
@@ -95,9 +103,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+
+        return  view('dashboard.users.edit', ['roles' => $roles, 'user' => $user]);
     }
 
     /**
@@ -107,9 +117,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request,User $user, UploadService $service)
     {
-        //
+        $data = $request->except(['password','image']);
+
+        if ($request->getPassword()){
+        $data['password'] = bcrypt($request->getPassword());
+    }else{
+            unset($data['password']);
+
+    }
+        $user->update(['name'=>$request->role]);
+        $user->update($data);
+
+        if($request->image){
+            $name=$service->upload($request->image,'images');
+            $user->attachment()->UpdateOrCreate(['name'=>$name]);
+        }
+
+        Session::flash('success', 'تم الإضافة بنجاح');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -118,8 +145,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(['status'=>'success']);
     }
 }

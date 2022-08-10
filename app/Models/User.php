@@ -43,14 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function usedCoupon()
+    public function attachment()
     {
-        return $this->belongsToMany(UsedCoupon::class);
-    }
-
-    public function selectedUserCoupon()
-    {
-        return $this->belongsToMany(SelectedUserCoupon::class);
+        return $this->morphOne(Attachment::class, 'attachmentable')->withDefault();
     }
 
     public function customers()

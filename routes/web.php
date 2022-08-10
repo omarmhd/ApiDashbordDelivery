@@ -20,9 +20,7 @@ use App\Http\Controllers\SettingsController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.users.index');
-});
+
 Route::get('/saas', function () {
     return view('test');
 });
@@ -60,3 +58,7 @@ Route::post('/order/{order_id}/select-driver', [DriverOrderRequestController::cl
 
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -16,7 +16,7 @@
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{asset('assets')}}/pages/scripts/form-samples.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{asset('assets')}}/global/scripts/datatable.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
@@ -35,25 +35,49 @@
 <script src="{{asset('assets')}}/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script>
 
+    $(document).ready(function() {
 
-    $('.btn-add').click(function(e){
-        e.preventDefault();
-        // Create clone of <div class='input-form'>
+        $('.btn-add').click(function (e) {
+            e.preventDefault();
+            // Create clone of <div class='input-form'>
 
-        var newel = $(this).parent().parent().clone(true);
+            var newel = $(this).parent().parent().siblings('.group-duplicate').clone();
+            newel.show()
+            newel.find('div').children("input").prop("disabled", false);
+            newel.removeClass('group-duplicate')
 
-        // Add after last <div class='input-form'>
-        $(newel).insertAfter( $(this).parent().parent());
 
+            // Add after last <div class='input-form'>
+            $(newel).insertAfter($(this).parent().parent());
+
+        });
+
+        $(document).on("click",".btn-remove",function (e) {
+
+            e.preventDefault();
+
+            $(this).parent().parent().remove()
+            // Create clone of <div class='input-form'>
+
+        });
+
+        $(document).on("click","input[name=exBread]",function () {
+            var $this = $(this);
+            if ($(this).is(":checked")) {
+                $('.box-bread').fadeIn()
+            } else {
+                $('.box-bread').fadeOut()
+            }
+        });
+        $(document).on("click","input[name=exSweet]",function () {
+            var $this = $(this);
+            if ($(this).is(":checked")) {
+                $('.box-sweet').fadeIn()
+            } else {
+                $('.box-sweet').fadeOut()
+            }
+        });
     });
-
-    $('.btn-remove').click(function(e){
-        e.preventDefault();
-        $(this).parent().parent().remove()
-        // Create clone of <div class='input-form'>
-
-    });
-
 
 </script>
 
