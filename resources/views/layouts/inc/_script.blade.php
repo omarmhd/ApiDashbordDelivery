@@ -64,17 +64,25 @@
         $(document).on("click","input[name=exBread]",function () {
             var $this = $(this);
             if ($(this).is(":checked")) {
-                $('.box-bread').fadeIn()
+                    $('.box-bread').fadeIn()
+                $('.box-bread-child').find('input').removeAttr("disabled");
+
             } else {
                 $('.box-bread').fadeOut()
+                $('.box-bread-child').find('input').prop("disabled", true);
+
             }
         });
         $(document).on("click","input[name=exSweet]",function () {
             var $this = $(this);
             if ($(this).is(":checked")) {
+                $('.box-sweet-child').find('input').removeAttr("disabled");
+
                 $('.box-sweet').fadeIn()
             } else {
                 $('.box-sweet').fadeOut()
+                $('.box-sweet-child').find('input').prop("disabled", true);
+
             }
         });
     });

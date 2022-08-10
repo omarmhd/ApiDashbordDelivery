@@ -39,6 +39,21 @@ Route::get('/order/{order_id}/meal-details', [OrderMealDetailsController::class,
 Route::get('/order/{order_id}/meal-details/create', [OrderMealDetailsController::class, 'create'])->name('order.meal_details.create');
 Route::post('/order/{order_id}/meal-details', [OrderMealDetailsController::class, 'store'])->name('order.meal_details.store');
 
+Route::get('/attachment/{image}',function ($image){
+    $attachment=\App\Models\Attachment::where('name','=',$image)->first();
+    $path=public_path('images').'/'.$attachment->name;
+
+if(File::exists($path)){
+    File::delete($path);
+    $attachment->delete();
+    return redirect()->back()->with('success','تم حذف الصور بنجاح');
+}else{
+    return redirect()->back()->with('error','الصورة غير موجودة');
+}
+
+
+
+})->name('attachment.destroy');
 
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');

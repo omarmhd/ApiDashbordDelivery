@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMealRequest;
 use App\Http\Requests\UpdateMealRequest;
+use App\Models\Attachment;
 use App\Models\Extras;
 use App\Models\Meal;
 use App\Models\Message;
@@ -53,9 +54,11 @@ class MealController extends Controller
 
         $meal=new Meal();
         $restaurants=Restaurant::select(['id','name'])->get();
+        $extras=new Extras();
+        $images=new Attachment();
 
 
-        return view('dashboard.meals.create',['meal'=>$meal,'restaurants'=>$restaurants]);
+        return view('dashboard.meals.create',['meal'=>$meal,'restaurants'=>$restaurants,'extras'=>$extras,'images'=>$images]);
     }
 
     /**
@@ -84,6 +87,7 @@ class MealController extends Controller
 
 
         $sweets = [];
+
         foreach ($request->sweet_name  as $key => $value) {
             $sweets[$key]['name'] = $request->sweet_name[$key];;
             $sweets[$key]['price'] = $request->sweet_price[$key];;

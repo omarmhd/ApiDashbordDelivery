@@ -137,7 +137,7 @@
                                                                 <span class="fileinput-new"> اختيار صورة </span>
                                                                 <span class="fileinput-exists"> تغير </span>
                                                                 <input type="file" name="image[1]"> </span>
-                            <a href="javascript:;" class="btn red {{array_key_exists('1',$images)?"":"fileinput-exists"}}" data-dismiss="fileinput"> حذف  </a>
+                            <a href="" class="btn red {{array_key_exists('1',$images)?"":"fileinput-exists"}}" data-dismiss="fileinput"> حذف  </a>
                         </div>
                     </div>
 
@@ -163,7 +163,7 @@
                                                                 <span class="fileinput-new">اختيار صورة </span>
                                                                 <span class="fileinput-exists"> تغير الصورة </span>
                                                                 <input type="file" name="image[2]"> </span>
-                            <a href="javascript:;" class="btn red {{array_key_exists('2',$images)?"":"fileinput-exists"}} " data-dismiss="fileinput"> حذف </a>
+                            <a href="{{array_key_exists('2',$images)?route('attachment.destroy',['image'=>$images['2']]):'javascript:;'}}" class="btn red {{array_key_exists('2',$images)?"":"fileinput-exists"}} "> حذف </a>
                         </div>
                     </div>
 
