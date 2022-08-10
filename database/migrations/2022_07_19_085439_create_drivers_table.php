@@ -18,6 +18,7 @@ class CreateDriversTable extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();;
 
             $table->boolean('available')->default(0);
+            $table->unique('user_id');
             $table->text('notes')->default('لا يوجد ملاحظات');
 
             $table->timestamps();

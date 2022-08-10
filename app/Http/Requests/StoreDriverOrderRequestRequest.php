@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCouponRequest extends FormRequest
+class StoreDriverOrderRequestRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,10 @@ class UpdateCouponRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'code' => ['required'],
-            'ammount' => ['required', 'integer'],
-            'uses' => ['nullable'],
-            'status' => ['nullable'],
-            'start_avilable_at' => ['date'],
-            'end_avilable_at' => ['date'],
-            'selected_users' => ['nullable'],
+            'driver_id' => 'exists:users,id',
+            'order_id' => 'exists:orders,id'
         ];
     }
 }

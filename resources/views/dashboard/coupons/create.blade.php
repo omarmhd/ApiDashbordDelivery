@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -147,12 +146,12 @@
                                                                     @if (old('selected') !== null) @foreach (old('selected') as $selected)
                                                                     @if ($selected == $user->id) checked @endif
                                                                     @endforeach
-                                                                />
-                                                                <span></span>
-                                                            </label>
-                                                        </td>
-                                                        <td> {{ $user->first_name }} </td>
-                                                    </tr>
+                                                @endif />
+                                                <span></span>
+                                                </label>
+                                                </td>
+                                                <td> {{ $user->first_name }} </td>
+                                                </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -180,7 +179,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @push('js')
     <script>

@@ -37,6 +37,10 @@
                     data: 'end_avilable_at',
                     name: 'end_avilable_at'
                 },
+                {
+                    data: 'action',
+                    name: 'action'
+                },
             ]
         });
 

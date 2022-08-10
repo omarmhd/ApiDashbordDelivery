@@ -171,7 +171,7 @@
                 {{-- </ul> --}}
             </li>
             <li class="start ">
-                <a href="javascript:;">
+                <a href="{{ route('settings.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">إعدادات التطبيق</span>
                     <span class="arrow "></span>

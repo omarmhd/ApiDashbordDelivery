@@ -9,7 +9,7 @@
                 <i class="fa fa-home"></i>
                 <a href="{{ route('user.index') }}">الرئيسية</a>
                 <i class="fa fa-angle-left"></i>
-                <a href="{{ route('coupon.index') }}">{{ $public_content['name'] }}</a>
+                <a href="{{ route('order.select_driver.index', $order_id) }}">{{ $public_content['name'] }}</a>
             </li>
         </ul>
     </div>
@@ -37,7 +37,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a id="sample_editable_1_new" class="btn green" href="{{ route('coupon.create') }}">
+                                    <a id="sample_editable_1_new" class="btn green"
+                                        href="{{ route('order.select_driver.create', $order_id) }}">
                                         {{ $public_content['singular_name'] }} جديد <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -65,35 +66,20 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-bcouponed table-hover" id="table_id">
+                    <table class="table table-striped table-bordered table-hover" id="table_id">
                         <thead>
                             <tr>
                                 <th>
-                                    الترتيب
+                                    #
                                 </th>
                                 <th>
-                                    الكود
+                                    رقم الطلب
                                 </th>
                                 <th>
-                                    الكمية
-                                </th>
-                                <th>
-                                    الاستخدامات
+                                    السائق
                                 </th>
                                 <th>
                                     الحالة
-                                </th>
-                                <th>
-                                    هل القسيمة مخصصة
-                                </th>
-                                <th>
-                                    وقت البدء
-                                </th>
-                                <th>
-                                    وقت الانتهاء
-                                </th>
-                                <th>
-                                    الإعدادات
                                 </th>
                             </tr>
                         </thead>
@@ -107,5 +93,5 @@
     </div>
 @endsection
 @push('js')
-    @include('dashboard.coupons._dataTable')
+    @include('dashboard.driverOrderRequest._dataTable')
 @endpush

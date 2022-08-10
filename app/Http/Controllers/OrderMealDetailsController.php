@@ -80,7 +80,7 @@ class OrderMealDetailsController extends Controller
         ])->toJson();
         OrderMealDetails::create([
             'order_id' => $request->order_id,
-            'meal_id' => Meal::first()->id,
+            'meal_id' => 1,
             'number_of_meals' => 2,
             'extras' => $extars,
             'total_price' => 20,

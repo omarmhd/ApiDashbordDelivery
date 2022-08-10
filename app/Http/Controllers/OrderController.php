@@ -47,10 +47,11 @@ class OrderController extends Controller
                     return $data->payment_way;
                 })
                 ->addColumn('driver', function ($data) {
-                    return $data->driver->first_name;
+                    return $data->driver == null ? 'None' : $data->driver->first_name;
                 })
                 ->addColumn('action', function ($data) {
                     $actionBtn = "<a href='/order/" . $data->id . "/meal-details' class='info btn btn-info btn-sm'><i class='fa fa-eye'></i></a>
+                                  <a href='/order/" . $data->id . "/select-driver' class='info btn btn-success btn-sm'><i class='fa fa-car'></i></a>
                                   <a href='/order/" . $data->id . "/edit' class='btn btn-warning btn-sm'><i class='fa fa-pencil-square-o'></i></a>
                                   <a data-id='$data->id' class='delete btn btn-danger btn-sm'><i class='fa fa-trash'></i></a>";
                     return $actionBtn;
@@ -80,7 +81,6 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
         return view('dashboard.orders.create')->with('public_content', $this->public_content);
     }
 
@@ -90,11 +90,11 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreorderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $order)
+    public function store(/*StoreOrderRequest $request*/)
     {
         // $order->validated();
         // dd(
-        // $order->validate([
+        // $request->validate([
         //     'user_id' => User::first()->id,
         //     'total_price' => '20',
         //     'status' => 'IN_WAY',
@@ -119,7 +119,7 @@ class OrderController extends Controller
                 'time_of_receipt' => date('Y-m-d H:i:s'),
                 'notes' => 'Hello World',
                 'rate' => 1,
-                'driver_id' => 2,
+                // 'driver_id' => 2,
             ]
         );
         return redirect()->route('order.index');

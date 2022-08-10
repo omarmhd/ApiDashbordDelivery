@@ -5,7 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\DriverOrderRequestController;
 use App\Http\Controllers\OrderMealDetailsController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +37,9 @@ Route::resource('/order', OrderController::class);
 Route::resource('/coupon', CouponController::class);
 Route::resource('/message', \App\Http\Controllers\MessageController::class);
 
-Route::get('/order/{order_id}/meal-details', [OrderMealDetailsController::class, 'index'])->name('order.meal_details.index');
-Route::get('/order/{order_id}/meal-details/create', [OrderMealDetailsController::class, 'create'])->name('order.meal_details.create');
-Route::post('/order/{order_id}/meal-details', [OrderMealDetailsController::class, 'store'])->name('order.meal_details.store');
+
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
 
 Route::get('/attachment/{image}',function ($image){
     $attachment=\App\Models\Attachment::where('name','=',$image)->first();
