@@ -35,7 +35,7 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="nav-item">
+            <li class="nav-item @if (Str::contains(url()->current(), 'home')) active @endif">
                 <a href="{{ route('home') }}">
                     <i class="icon-home"></i>
                     <span class="title">الرئيسية</span>
@@ -59,24 +59,24 @@
                 {{-- </li> --}}
                 {{-- </ul> --}}
             </li>
-            <li class="nav-item">
+            <li class="nav-item @if (Str::contains(url()->current(), 'user') || Str::contains(url()->current(), 'driver')) active @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">إدارة الأعضاء والمستخدمين</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                    <li class=" @if (Str::contains(url()->current(), 'user')) active @endif">
                         <a href="{{ route('user.index') }}">
                             <i class="icon-user"></i>
                             المستخدمين</a>
                     </li>
-                    <li>
+                    <li class=" @if (Str::contains(url()->current(), 'potato')) active @endif">
                         <a href="#">
                             <i class="icon-bulb"></i>
                             الأعضاء</a>
                     </li>
-                    <li>
+                    <li class=" @if (Str::contains(url()->current(), 'driver')) active @endif">
                         <a href="#">
                             <i class="icon-bulb"></i>
                             السائقين</a>
@@ -84,25 +84,25 @@
 
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="javascript:;">
+            <li class="nav-item @if (Str::contains(url()->current(), 'meal') || Str::contains(url()->current(), 'extra')) active @endif">
+                <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-hamburger"></i>
                     <span class="title"> إدارة الوجبات</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                    <li class=" @if (Str::contains(url()->current(), 'meal')) active @endif">
                         <a href="{{ route('meal.index') }}">
                             <i class="icon-bar-chart"></i>الوجبات
                         </a>
                     </li>
-                    <li>
+                    <li class=" @if (Str::contains(url()->current(), 'extra')) active @endif">
                         <a href="{{ route('extra.index') }}">
                             <i class="icon-bulb"></i>الإضافات</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item @if (Str::contains(url()->current(), 'restaurant')) active @endif">
                 <a href="{{ route('restaurant.index') }}">
                     <i class="icon-home"></i>
                     <span class="title"> إدارة المطاعم</span>
@@ -126,7 +126,7 @@
                 {{-- </li> --}}
                 {{-- </ul> --}}
             </li>
-            <li class="start">
+            <li class="nav-item @if (Str::contains(url()->current(), 'order')) active @endif">
                 <a href="{{ route('order.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">إدارة الطلبات</span>
@@ -140,7 +140,7 @@
                     </li>
                 </ul> --}}
             </li>
-            <li class="start">
+            <li class="nav-item @if (Str::contains(url()->current(), 'coupon')) active @endif">
                 <a href="{{ route('coupon.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">القسائم الشرائية</span>
@@ -164,7 +164,7 @@
                 {{-- </li> --}}
                 {{-- </ul> --}}
             </li>
-            <li class="nav-item">
+            <li class="nav-item @if (Str::contains(url()->current(), 'settings')) active @endif">
                 <a href="{{ route('settings.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">إعدادات التطبيق</span>

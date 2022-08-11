@@ -1,11 +1,12 @@
 <?php
 
-// namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\MainController;
+use Illuminate\Http\Request;
 use App\Models\Driver;
+use Yajra\DataTables\Facades\DataTables;
 
-class DriverController extends MainController
+class DriverController extends Controller
 {
     /**
      * Display a listing of the resource.
