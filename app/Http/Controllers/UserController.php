@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Driver;
 use App\Models\Role;
 use App\Models\User;
 use App\Service\UploadService;
@@ -22,10 +23,19 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $data = User::latest()->get();
+
+            $drivers = Driver::get('user_id');
+            foreach ($data as  $user)
+                foreach ($drivers as $driver)
+                    if ($driver->user_id == $user->id) {
+                        $data->forget($user->id - 1);
+                        break;
+                    }
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('user.edit',$data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="'.$data->id.'"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -33,7 +43,6 @@ class UserController extends Controller
         }
 
         return  view('dashboard.users.index');
-
     }
 
     public function dataTable()
@@ -69,21 +78,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request,UploadService $service)
+    public function store(CreateUserRequest $request, UploadService $service)
     {
-        $data = $request->except(['password', 'role','image']);
+        $data = $request->except(['password', 'role', 'image']);
         $data['password'] = bcrypt($request->getPassword());
         $user = User::create($data);
         $user->attachRole($request->role);
 
-        if($request->image){
-            $attachment['name']=$service->upload($request->image,'images');
+        if ($request->image) {
+            $attachment['name'] = $service->upload($request->image, 'images');
             $user->attachment()->create($attachment);
         }
 
 
 
-        return redirect()->route('user.index')->with('success','jlll');
+        return redirect()->route('user.index')->with('success', 'jlll');
     }
 
     /**
@@ -117,22 +126,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request,User $user, UploadService $service)
+    public function update(UpdateUserRequest $request, User $user, UploadService $service)
     {
-        $data = $request->except(['password','image']);
+        $data = $request->except(['password', 'image']);
 
-        if ($request->getPassword()){
-        $data['password'] = bcrypt($request->getPassword());
-    }else{
+        if ($request->getPassword()) {
+            $data['password'] = bcrypt($request->getPassword());
+        } else {
             unset($data['password']);
-
-    }
-        $user->update(['name'=>$request->role]);
+        }
+        $user->update(['name' => $request->role]);
         $user->update($data);
 
-        if($request->image){
-            $name=$service->upload($request->image,'images');
-            $user->attachment()->UpdateOrCreate(['name'=>$name]);
+        if ($request->image) {
+            $name = $service->upload($request->image, 'images');
+            $user->attachment()->UpdateOrCreate(['name' => $name]);
         }
 
         Session::flash('success', 'تم الإضافة بنجاح');
@@ -148,6 +156,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->json(['status'=>'success']);
+        return response()->json(['status' => 'success']);
     }
 }

@@ -24,17 +24,16 @@ class CreateRestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-
-         'name'=>'required',
-        'description'=>'required',
-        'address'=>'required',
-        'phone'=>'required',
-        'active'=>'required',
-        'review'=>'required',
-            'image'=>'required',
-            'latitude'=>'nullable',
-            ''
-
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'active' => 'required',
+            'review' => 'required',
+            'image' => 'required',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+            'delivery_time' => 'nullable',
         ];
     }
 }
