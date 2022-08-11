@@ -56,6 +56,22 @@ if(File::exists($path)){
 
 
 })->name('attachment.destroy');
+Route::get('/dashboard', function (){
+
+    $orders=\App\Models\Order::count();
+
+    $client=\App\Models\Role::where('name','client')->first();
+    $client=$client->users->count();
+    $driver=\App\Models\Role::where('name','driver')->first();
+    $driver= $driver->users->count();
+
+    $messages=\App\Models\Message::latest()->take(4)->get();
+    $resturants=\App\Models\Restaurant::count();
+
+    $users=\App\Models\User::count();
+
+    return view('dashboard.dash',['orders'=>$orders,'clients'=>$client,'drivers'=>$driver,'users'=>$users,'messages'=>$messages,'resturants'=>$resturants]);
+});
 
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');

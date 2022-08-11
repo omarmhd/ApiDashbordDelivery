@@ -47,7 +47,10 @@ class User extends Authenticatable
     {
         return $this->morphOne(Attachment::class, 'attachmentable')->withDefault();
     }
-
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withDefault();
+    }
     public function customers()
     {
 

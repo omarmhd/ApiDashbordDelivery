@@ -78,22 +78,24 @@ class MealController extends Controller
 
 
         $breads = [];
+        if ($request->bread_name) {
         foreach ($request->bread_name  as $key => $value) {
             $breads[$key]['name'] = $request->bread_name[$key];;
             $breads[$key]['price'] = $request->bread_price[$key];;
             $breads[$key]['type'] = "bread";;
 
         }
+        }
 
 
         $sweets = [];
-
+        if ($request->sweet_name) {
         foreach ($request->sweet_name  as $key => $value) {
             $sweets[$key]['name'] = $request->sweet_name[$key];;
             $sweets[$key]['price'] = $request->sweet_price[$key];;
             $sweets[$key]['type'] = "sweet";;
 
-        }
+        }}
 
 
         $extras=array_merge( $sweets, $breads);
@@ -178,21 +180,23 @@ class MealController extends Controller
 
 
         $breads = [];
-        foreach ($request->bread_name  as $key => $value) {
-            $breads[$key]['name'] = $request->bread_name[$key];;
-            $breads[$key]['price'] = $request->bread_price[$key];;
-            $breads[$key]['type'] = "bread";;
+        if ($request->bread_name) {
+            foreach ($request->bread_name as $key => $value) {
+                $breads[$key]['name'] = $request->bread_name[$key];;
+                $breads[$key]['price'] = $request->bread_price[$key];;
+                $breads[$key]['type'] = "bread";;
+
+            }
 
         }
-
-
         $sweets = [];
+        if ($request->sweet_name) {
         foreach ($request->sweet_name  as $key => $value) {
             $sweets[$key]['name'] = $request->sweet_name[$key];;
             $sweets[$key]['price'] = $request->sweet_price[$key];;
             $sweets[$key]['type'] = "sweet";;
 
-        }
+        }}
 
 
         $extras=array_merge( $sweets, $breads);
