@@ -35,11 +35,11 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="start ">
-                <a href="javascript:;">
+            <li class="nav-item">
+                <a href="{{ route('home') }}">
                     <i class="icon-home"></i>
                     <span class="title">الرئيسية</span>
-                    <span class="arrow "></span>
+                    {{-- <span class="arrow "></span> --}}
                 </a>
                 {{-- <ul class="sub-menu"> --}}
                 {{-- <li> --}}
@@ -59,60 +59,54 @@
                 {{-- </li> --}}
                 {{-- </ul> --}}
             </li>
-            <li class="start ">
-                <a href="javascript:;">
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">إدارة الأعضاء والمستخدمين</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="index.html">
-                            <i class="icon-"></i>
+                        <a href="{{ route('user.index') }}">
+                            <i class="icon-user"></i>
                             المستخدمين</a>
                     </li>
                     <li>
-                        <a href="index_2.html">
+                        <a href="#">
                             <i class="icon-bulb"></i>
                             الأعضاء</a>
                     </li>
                     <li>
-                        <a href="index_2.html">
+                        <a href="#">
                             <i class="icon-bulb"></i>
                             السائقين</a>
                     </li>
 
                 </ul>
             </li>
-            <li class="start ">
+            <li class="nav-item">
                 <a href="javascript:;">
                     <i class="fa fa-hamburger"></i>
                     <span class="title"> إدارة الوجبات</span>
                     <span class="arrow "></span>
                 </a>
-                {{-- <ul class="sub-menu"> --}}
-                {{-- <li> --}}
-                {{-- <a href="index.html"> --}}
-                {{-- <i class="icon-bar-chart"></i> --}}
-                {{-- Default Dashboard</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_2.html"> --}}
-                {{-- <i class="icon-bulb"></i> --}}
-                {{-- New Dashboard #1</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_3.html"> --}}
-                {{-- <i class="icon-graph"></i> --}}
-                {{-- New Dashboard #2</a> --}}
-                {{-- </li> --}}
-                {{-- </ul> --}}
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('meal.index') }}">
+                            <i class="icon-bar-chart"></i>الوجبات
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('extra.index') }}">
+                            <i class="icon-bulb"></i>الإضافات</a>
+                    </li>
+                </ul>
             </li>
-            <li class="start ">
-                <a href="javascript:;">
+            <li class="nav-item">
+                <a href="{{ route('restaurant.index') }}">
                     <i class="icon-home"></i>
                     <span class="title"> إدارة المطاعم</span>
-                    <span class="arrow "></span>
+                    {{-- <span class="arrow "></span> --}}
                 </a>
                 {{-- <ul class="sub-menu"> --}}
                 {{-- <li> --}}
@@ -136,7 +130,7 @@
                 <a href="{{ route('order.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">إدارة الطلبات</span>
-                    <span class="arrow "></span>
+                    {{-- <span class="arrow "></span> --}}
                 </a>
                 {{-- <ul class="sub-menu">
                     <li>
@@ -170,11 +164,11 @@
                 {{-- </li> --}}
                 {{-- </ul> --}}
             </li>
-            <li class="start ">
+            <li class="nav-item">
                 <a href="{{ route('settings.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">إعدادات التطبيق</span>
-                    <span class="arrow "></span>
+                    {{-- <span class="arrow "></span> --}}
                 </a>
                 {{-- <ul class="sub-menu"> --}}
                 {{-- <li> --}}

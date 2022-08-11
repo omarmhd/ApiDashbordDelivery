@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class CouponController extends Controller
+class CouponController extends MainController
 {
 
     protected $public_content;

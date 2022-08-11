@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DriverOrderRequestController;
 use App\Http\Controllers\OrderMealDetailsController;
 use App\Http\Controllers\SettingsController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,7 @@ Route::get('/saas', function () {
 // Route::get('/coupon/all', [CouponController::class, 'all'])->name('coupon.all');
 
 Route::resource('/user', UserController::class);
+Route::resource('/driver', DriverController::class);
 Route::resource('/restaurant', RestaurantController::class);
 Route::resource('/meal', \App\Http\Controllers\MealController::class);
 Route::resource('/extra', \App\Http\Controllers\ExtrasController::class);
@@ -76,6 +79,6 @@ Route::get('/dashboard', function (){
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -22,15 +22,38 @@ class RestaurantController extends Controller
             $data = Restaurant::latest()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('image', function ($data) {
-                    $imageTag = "<img class='img-thumbnail' src=" . asset("images") . "/" . $data->attachment->name . ">";
-                    return $imageTag;
+                ->addColumn('id', function ($data) {
+                    return $data->id;
+                })
+                ->addColumn('name', function ($data) {
+                    return $data->name;
+                })
+                ->addColumn('phone', function ($data) {
+                    return $data->phone;
+                })
+                ->addColumn('active', function ($data) {
+                    return $data->active;
+                })
+                ->addColumn('review', function ($data) {
+                    return $data->review;
+                })
+                ->addColumn('address', function ($data) {
+                    return $data->address;
                 })
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('restaurant.edit', $data) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = "<a href='/resturant/" . $data->id . "/edit' class='btn btn-warning btn-sm'><i class='fa fa-pencil-square-o'></i></a>
+                                  <a data-id='$data->id' class='delete btn btn-danger btn-sm'><i class='fa fa-trash'></i></a>";
                     return $actionBtn;
                 })
-                ->rawColumns(['image', 'action'])
+                // ->addColumn('image', function ($data) {
+                //     $imageTag = "<img class='img-thumbnail' src=" . asset("images") . "/" . $data->attachment->name . ">";
+                //     return $imageTag;
+                // })
+                // ->addColumn('action', function ($data) {
+                //     $actionBtn = '<a href="' . route('restaurant.edit', $data) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                //     return $actionBtn;
+                // })
+                ->rawColumns(['id', 'name', 'phone', 'active', 'review', 'address', 'action'])
                 ->make(true);
         }
 
@@ -87,7 +110,7 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        return view('dashboard.restaurants.edit', compact('restaurant'))->with('public_content', $this->public_content);
     }
 
     /**
