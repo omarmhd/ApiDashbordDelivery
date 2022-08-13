@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group([],function(){
+
 
 Route::get('/', function () {
     return view('dashboard.dash');
@@ -82,4 +82,4 @@ Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-}); Auth::routes();
+ Auth::routes();
