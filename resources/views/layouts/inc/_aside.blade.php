@@ -37,7 +37,7 @@
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'home')) active @endif">
-                <a href="{{ route('home') }}">
+                <a href="{{ route('dashboard.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">الرئيسية</span>
                     {{-- <span class="arrow "></span> --}}
