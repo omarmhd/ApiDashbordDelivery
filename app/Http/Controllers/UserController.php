@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Service\UploadService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,7 +23,7 @@ class UserController extends Controller
     public function index(Request  $request)
     {
 
-        $data = User::find(1);
+
         if ($request->ajax()) {
 
             $data = User::latest()->get();
@@ -103,7 +104,10 @@ class UserController extends Controller
     public function store(CreateUserRequest $request, UploadService $service)
     {
         $data = $request->except(['password', 'role', 'image']);
-        $data['password'] = bcrypt($request->getPassword());
+
+
+
+        $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         $user->attachRole($request->role);
         if ($user->hasRole('driver')){

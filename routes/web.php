@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group([],function(){
 
-
-Route::get('/saas', function () {
-    return view('test');
+Route::get('/', function () {
+    return view('dashboard.dash');
 });
 
 // Route::get('/order/all', [OrderController::class, 'all'])->name('order.all');
@@ -79,6 +79,7 @@ Route::get('/dashboard', function (){
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');
 
-// Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+}); Auth::routes();

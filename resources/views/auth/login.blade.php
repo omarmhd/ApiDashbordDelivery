@@ -146,15 +146,15 @@
                                         @enderror
 
         <div class="form-actions">
-            <button type="submit" class="btn green uppercase">Login</button>
+            <button type="submit" class="btn green uppercase">تسجيل دخول</button>
             <label class="rememberme check mt-checkbox mt-checkbox-outline">
 
-                <input type="checkbox"  name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />Remember
+                <input type="checkbox"  name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />تذكرني
                 <span></span>
             </label>
                                             @if (Route::has('password.request'))
                                                 <a class="btn btn-link" id="forget-password" class="forget-password"  href="{{ route('password.request') }}">
-                                                    {{ __('نسيت كلمة المرور?') }}
+
                                                 </a>
                                             @endif
         </div>
@@ -164,7 +164,7 @@
 
 
 </div>
-<div class="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>
+<div class="copyright">  </div>
 <!--[if lt IE 9]>
 <script src="/assets/global/plugins/respond.min.js"></script>
 <script src="/assets/global/plugins/excanvas.min.js"></script>

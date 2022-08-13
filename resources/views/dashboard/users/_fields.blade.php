@@ -53,7 +53,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3">كلمة المرور</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control" value="{{old('password',$user->password)}}" name="password" placeholder="" >
+                    <input type="password" class="form-control"  name="password" placeholder="" >
                 </div>
             </div>
         </div>
