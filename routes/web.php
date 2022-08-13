@@ -74,7 +74,7 @@ Route::get('/dashboard', function (){
     $users=\App\Models\User::count();
 
     return view('dashboard.dash',['orders'=>$orders,'clients'=>$client,'drivers'=>$driver,'users'=>$users,'messages'=>$messages,'resturants'=>$resturants]);
-});
+})->name('dashboard.index');
 
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');

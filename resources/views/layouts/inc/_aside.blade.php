@@ -36,9 +36,9 @@
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="nav-item">
-                <a href="{{ route('home') }}">
+                <a href="{{ route('dashboard.index') }}">
                     <i class="icon-home"></i>
-                    <span class="title">الرئيسية</span>
+                    <span class="title">اللوحة الرئيسية</span>
                     {{-- <span class="arrow "></span> --}}
                 </a>
                 {{-- <ul class="sub-menu"> --}}
@@ -62,7 +62,7 @@
             <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
-                    <span class="title">إدارة الأعضاء والمستخدمين</span>
+                    <span class="title">إدارة المستخدمين والسائقين</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
@@ -71,16 +71,12 @@
                             <i class="icon-user"></i>
                             المستخدمين</a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-bulb"></i>
-                            الأعضاء</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-bulb"></i>
-                            السائقين</a>
-                    </li>
+
+{{--                    <li>--}}
+{{--                        <a href="{{route('drivers.index')}}">--}}
+{{--                            <i class="icon-bulb"></i>--}}
+{{--                            السائقين</a>--}}
+{{--                    </li>--}}
 
                 </ul>
             </li>

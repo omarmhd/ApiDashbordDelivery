@@ -5,17 +5,14 @@
         globalThis.table = $('#table_id').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('user.index') }}",
+            ajax: "{{ route('driver.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-
                 {data: 'first_name', name: 'first_name'},
-                {data: 'last_name', name: 'last_name'},
-                {data: 'role', name: 'role'},
-
-                {data: 'phone', name: 'phone'},
-                {data: 'gender', name: 'gender'},
+                {data: 'phone', name: 'email'},
                 {data: 'email', name: 'email'},
+                {data: 'notes', name: 'notes'},
+                {data: 'available', name: 'available'},
                 {data: 'action'},
 
             ]
