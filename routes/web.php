@@ -77,5 +77,4 @@ Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
  Auth::routes();
