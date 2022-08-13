@@ -51,6 +51,7 @@
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
+
     </div>
 @endsection
 @push('js')
