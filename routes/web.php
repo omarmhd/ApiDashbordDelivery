@@ -25,6 +25,9 @@ use Illuminate\Support\Facades\Auth;
 
 // Route::get('/order/all', [OrderController::class, 'all'])->name('order.all');
 // Route::get('/coupon/all', [CouponController::class, 'all'])->name('coupon.all');
+Route::group(['middleware'=>"auth"],function(){
+
+
 Route::get('/', function (){
 
     $orders=\App\Models\Order::count();
@@ -75,6 +78,6 @@ if(File::exists($path)){
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');
 
-
+});
 
  Auth::routes();
