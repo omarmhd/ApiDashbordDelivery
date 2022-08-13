@@ -21,16 +21,39 @@ class UserController extends Controller
      */
     public function index(Request  $request)
     {
+
+        $data = User::find(1);
         if ($request->ajax()) {
+
             $data = User::latest()->get();
 
-            $drivers = Driver::get('user_id');
-            foreach ($data as  $user)
-                foreach ($drivers as $driver)
-                    if ($driver->user_id == $user->id) {
-                        $data->forget($user->id - 1);
-                        break;
-                    }
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('role',function ($data){
+                    return '<span class="bg-blue">'.$data->roles[0]->name.'</span>';
+
+                })
+                ->addColumn('action', function ($data) {
+                    $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['role','action'])
+                ->make(true);
+        }
+
+        return  view('dashboard.users.index');
+    }
+
+    public function indexDrivers(Request  $request){
+        if ($request->ajax()) {
+            $data = User::whereHas(
+                'roles', function($q){
+
+                $q->where('name', 'driver');
+
+            }
+            )->latest()->get();
+
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -42,7 +65,6 @@ class UserController extends Controller
                 ->make(true);
         }
 
-        return  view('dashboard.users.index');
     }
 
     public function dataTable()
@@ -84,6 +106,9 @@ class UserController extends Controller
         $data['password'] = bcrypt($request->getPassword());
         $user = User::create($data);
         $user->attachRole($request->role);
+        if ($user->hasRole('driver')){
+            Driver::create(['user_id'=>$user->id]);
+        }
 
         if ($request->image) {
             $attachment['name'] = $service->upload($request->image, 'images');
@@ -92,7 +117,7 @@ class UserController extends Controller
 
 
 
-        return redirect()->route('user.index')->with('success', 'jlll');
+        return redirect()->route('user.index')->with('success', 'تم الاضافة بنجاح');
     }
 
     /**
@@ -135,8 +160,16 @@ class UserController extends Controller
         } else {
             unset($data['password']);
         }
-        $user->update(['name' => $request->role]);
+
+
+        $user->syncRoles([$request->role]);
+        if($request->role!=="driver" and $user->hasRole('driver')){
+                $user->driver->delete;
+        }
+
         $user->update($data);
+
+
 
         if ($request->image) {
             $name = $service->upload($request->image, 'images');

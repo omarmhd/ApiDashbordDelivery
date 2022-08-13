@@ -1,35 +1,46 @@
 <?php
 
-namespace App\Http\Controllers;
+ namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\MainController;
 use App\Models\Driver;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class DriverController extends Controller
+class DriverController extends MainController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request  $request){
+        $data = User::whereRoleIs('driver')->latest()->get();
+
         if ($request->ajax()) {
-            $data = Driver::latest()->get();
+
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('notes', function ($data) {
+                  return $data->driver->notes;
+                })
+                ->addColumn('available', function ($data) {
+                    return $data->driver->available;
+                })
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    $actionBtn = '<a href="' . route('driver.edit',[$data]) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['notes','available','action'])
                 ->make(true);
         }
 
-        return  view('dashboard.users.index');
+        return view('dashboard.users.drivers.index');
+
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -71,7 +82,11 @@ class DriverController extends Controller
      */
     public function edit($id)
     {
-        //
+
+            $driver=Driver::findorfail($id);
+
+      return view('dashboard.users.drivers.edit',['driver'=>$driver]);
+
     }
 
     /**
@@ -83,7 +98,14 @@ class DriverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=$request->except('_token','_method');
+        $driver=Driver::where('user_id',$id)->update($data);
+        if($driver){
+            return redirect()->route('driver.index')->with('success','تم التعديل بنجاح');
+        }else{
+
+            return redeirect()->back()->with('error','خطأ في عملية تعديل البيانات');
+        }
     }
 
     /**
@@ -92,8 +114,16 @@ class DriverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Driver $driver)
     {
-        //
+
+       $delete= $driver->delete();
+        if($delete){
+
+            return redirect()->route('driver.index')->with('success','تم الحذف بنجاح');
+        }else{
+            return redirect()->back()->with('error','خطأ في عملية الحذف');
+
+        }
     }
 }

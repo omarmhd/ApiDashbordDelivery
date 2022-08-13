@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'user_id';
+
+
+    protected $guarded=[];
 
     public function user(){
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class)->withDefault();;
     }
 }

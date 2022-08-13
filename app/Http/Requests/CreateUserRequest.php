@@ -28,7 +28,7 @@ class CreateUserRequest extends FormRequest
             'last_name'=>'required',
             'password'=>'required',
             'phone'=>'required|numeric',
-            'role'=>'required|exists:roles,nam3e',
+            'role'=>'required|exists:roles,name',
             'address'=>'required',
             'gender'=>'required',
             'email'=>'required|email|unique:users',
