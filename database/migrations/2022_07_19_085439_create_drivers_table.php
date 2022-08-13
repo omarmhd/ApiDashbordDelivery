@@ -14,13 +14,10 @@ class CreateDriversTable extends Migration
     public function up()
     {
         Schema::create('drivers', function (Blueprint $table) {
-
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();;
-
             $table->boolean('available')->default(0);
             $table->unique('user_id');
-            $table->text('notes')->default('لا يوجد ملاحظات');
-
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

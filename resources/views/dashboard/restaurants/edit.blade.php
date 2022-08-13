@@ -23,9 +23,10 @@
 
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    <form action="{{ route('restaurant.update', $resturant->id) }}" method="post" class="form-horizontal"
+                    <form action="{{ route('restaurant.update', $restaurant->id) }}" method="post" class="form-horizontal"
                         enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="form-body">
                             <h3 class="form-section">المعلومات الأساسية</h3>
                             <div class="row">
@@ -170,7 +171,8 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-9">
                                             <button type="submit" class="btn green">حفظ</button>
-                                            <button type="button" class="btn default">إلغاء</button>
+                                            <a type="button" class="btn default"
+                                                href="{{ route('restaurant.index') }}">إلغاء</a>
                                         </div>
                                     </div>
                                 </div>

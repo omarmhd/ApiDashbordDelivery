@@ -3,13 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRestaurantRequest;
+use App\Http\Requests\UpdateRestaurantRequest;
 use App\Models\Restaurant;
 use App\Service\UploadService;
 use Illuminate\Http\Request;
+use LDAP\Result;
 use Yajra\DataTables\Facades\DataTables;
 
 class RestaurantController extends Controller
 {
+
+    protected $public_content;
+
+    public function __construct()
+    {
+        $this->public_content = collect([
+            'name' => 'وجبات الطلب',
+            'singular_name' => 'وجبة الطلب'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +54,7 @@ class RestaurantController extends Controller
                     return $data->address;
                 })
                 ->addColumn('action', function ($data) {
-                    $actionBtn = "<a href='/resturant/" . $data->id . "/edit' class='btn btn-warning btn-sm'><i class='fa fa-pencil-square-o'></i></a>
+                    $actionBtn = "<a href='" . route('restaurant.edit', $data->id)  . "' class='btn btn-warning btn-sm'><i class='fa fa-pencil-square-o'></i></a>
                                   <a data-id='$data->id' class='delete btn btn-danger btn-sm'><i class='fa fa-trash'></i></a>";
                     return $actionBtn;
                 })
@@ -88,6 +101,7 @@ class RestaurantController extends Controller
             $restaurant->attachment()->create($attachment);
         }
 
+        session()->flash('success', 'تم إنشاء مطعم جديد بنجاح');
         return redirect()->route('restaurant.index');
     }
 
@@ -120,9 +134,17 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant, UploadService $service)
     {
-        //
+        $restaurant->update($request->validated());
+
+        if ($request->image) {
+            $attachment['name'] = $service->upload($request->image, 'images');
+            $restaurant->attachment->update($attachment);
+        }
+
+        session()->flash('success', 'تم تحديث المطعم بنجاح');
+        return redirect()->route('restaurant.index');
     }
 
     /**

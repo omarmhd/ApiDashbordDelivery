@@ -32,7 +32,7 @@
                                     <div class="form-group @error('conditions') has-error @enderror">
                                         <label class="control-label col-md-1">الشروط</label>
                                         <div class="col-md-11">
-                                            <textarea name="conditions" cols="100" rows="10">{{ old('conditions', $settings->conditions) }}</textarea>
+                                            <textarea name="conditions" cols="100" rows="10">{{ $settings != null ? old('conditions', $settings->conditions) : '' }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,21 @@
                                     <div class="form-group @error('terms') has-error @enderror">
                                         <label class="control-label col-md-1">الأحكام</label>
                                         <div class="col-md-11">
-                                            <textarea name="terms" cols="100" rows="10">{{ old('terms', $settings->terms) }}</textarea>
+                                            <textarea name="terms" cols="100" rows="10">{{ $settings != null ? old('terms', $settings->terms) : '' }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group @error('delivary_price') has-error @enderror">
+                                        <label class="control-label col-md-4">تسعيرة الديلفري</label>
+                                        <div class="col-md-8">
+                                            <input type="number" class="form-control" name="delivary_price" min="0"
+                                                value="{{ $settings != null ? old('delivary_price', $settings->delivary_price) : '' }}">
                                         </div>
                                     </div>
                                 </div>

@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->text('conditions');
             $table->text('terms');
+            $table->text('delivary_price');
             $table->timestamps();
         });
     }

@@ -7,14 +7,14 @@
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Managed Table</span>
+                        <span class="caption-subject bold uppercase"> إدارة الوجبات</span>
                     </div>
                     <div class="actions">
                         <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <label class="btn btn-transparent dark btn-outline btn-circle btn-sm active">
+                            {{-- <label class="btn btn-transparent dark btn-outline btn-circle btn-sm active">
                                 <input type="radio" name="options" class="toggle" id="option1">Actions</label>
                             <label class="btn btn-transparent dark btn-outline btn-circle btn-sm">
-                                <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                                <input type="radio" name="options" class="toggle" id="option2">Settings</label> --}}
                         </div>
                     </div>
                 </div>
@@ -23,9 +23,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn sbold green"> Add New
+                                    <a href="{{ route('meal.create') }}" id="sample_editable_1_new"
+                                        class="btn sbold green">إضافة وجبة
                                         <i class="fa fa-plus"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -51,16 +52,16 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table_id">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                        id="table_id">
                         <thead>
-                        <tr>
-
-                            <th>#</th>
-                            <th> الاسم  </th>
-                            <th> السعر </th>
-                            <th> الحالة </th>
-                            <th> الاجراءات </th>
-                        </tr>
+                            <tr>
+                                <th>#</th>
+                                <th> الاسم </th>
+                                <th> السعر </th>
+                                <th> الحالة </th>
+                                <th> الاجراءات </th>
+                            </tr>
                         </thead>
                         <tbody>
 
@@ -71,10 +72,8 @@
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
     </div>
-
 @endsection
 @push('js')
     @include('dashboard.meals._dataTable')
-    @include('part.sweetDelete',['route'=>route('meal.destroy',['meal'=>":id"])])
-
+    @include('part.sweetDelete', ['route' => route('meal.destroy', ['meal' => ':id'])])
 @endpush

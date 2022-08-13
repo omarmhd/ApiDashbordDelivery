@@ -48,7 +48,7 @@ class CouponController extends MainController
                     return $data->uses;
                 })
                 ->addColumn('status', function ($data) {
-                    return $data->extras;
+                    return $data->status == 'ACTIVE' ? 'مفعل' : 'غير مفعل';
                 })
                 ->addColumn('is_selected', function ($data) {
                     return $data->is_selected;
@@ -116,6 +116,8 @@ class CouponController extends MainController
             }
             SelectedUsersCoupon::insert($users->toArray());
         }
+
+        session()->flash('success', 'تم إنشاء قسيمة شرائية جديدة بنجاح');
         return redirect()->route('coupon.index');
     }
 
@@ -153,6 +155,7 @@ class CouponController extends MainController
     public function update(UpdateCouponRequest $request, Coupon $coupon)
     {
         $coupon->update($request->validated());
+        session()->flash('success', 'تم تعديل القسيمة الشرائية بنجاح');
         return redirect()->route('coupon.index');
     }
 
@@ -164,6 +167,9 @@ class CouponController extends MainController
      */
     public function destroy(Coupon $coupon)
     {
-        //
+
+        $coupon->delete();
+        session()->flash('success', 'تم حذف القسيمة الشرائية');
+        return redirect()->route('coupon.index');
     }
 }
