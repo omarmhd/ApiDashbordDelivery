@@ -18,4 +18,14 @@ class Coupon extends Model
         'start_avilable_at',
         'end_avilable_at',
     ];
+
+    public function setStatusAttribute($value)
+    {
+        return $value == 1 ? 'ACTIVE' : 'NOT_ACTIVE';
+    }
+
+    // public function getStatusAttribute()
+    // {
+    // return $this->value == 'ACTIVE' ? 1 : 'NOT_ACTIVE';
+    // }
 }

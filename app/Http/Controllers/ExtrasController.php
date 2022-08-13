@@ -22,14 +22,24 @@ class ExtrasController extends Controller
         if ($request->ajax()) {
             $data = Extras::latest()->get();
             return DataTables::of($data)
-                ->addIndexColumn()
+                // ->addIndexColumn()
+                ->addColumn('id', function ($data) {
+                    return $data->id;
+                })
                 ->addColumn('image', function ($data) {
-                    $img = '<img src="'.asset('images')."/".$data->attachment->name.'" alt="" class="img-fluid img-thumbnail" style="width:40%">';
+                    $img = '<img src="' . asset('images') . "/" . $data->attachment->name . '" alt="" class="img-fluid img-thumbnail" style="width:40%">';
                     return $img;
-                })->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('extra.edit',$data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="'.$data->id.'"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                })
+                ->addColumn('name', function ($data) {
+                    return $data->name;
+                })
+                ->addColumn('price', function ($data) {
+                    return $data->price;
+                })
+                ->addColumn('action', function ($data) {
+                    $actionBtn = '<a href="' . route('extra.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
-                })->rawColumns(['image','action'])
+                })->rawColumns(['id', 'image', 'name', 'price', 'action'])
                 ->make(true);
         }
 
@@ -44,9 +54,8 @@ class ExtrasController extends Controller
     public function create()
 
     {
-        $extra=new Extras();
-        return view('dashboard.extras.create',['extra'=>$extra]);
-
+        $extra = new Extras();
+        return view('dashboard.extras.create', ['extra' => $extra]);
     }
 
     /**
@@ -55,22 +64,19 @@ class ExtrasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateExtraRequest $request,UploadService $service)
+    public function store(CreateExtraRequest $request, UploadService $service)
     {
 
-        $data=$request->except('_token','image');
-        $extras=Extras::create($data);
+        $data = $request->except('_token', 'image');
+        $extras = Extras::create($data);
 
 
-        if($request->image){
-            $attachment['name']=$service->upload($request->image,'images');
+        if ($request->image) {
+            $attachment['name'] = $service->upload($request->image, 'images');
             $extras->attachment()->create($attachment);
-
         }
-        Session::flash('success','لم');
+        Session::flash('success', 'لم');
         return  redirect()->route('extra.index');
-
-
     }
 
     /**
@@ -92,7 +98,7 @@ class ExtrasController extends Controller
      */
     public function edit(Extras $extra)
     {
-        return view('dashboard.extras.edit',['extra'=>$extra]);
+        return view('dashboard.extras.edit', ['extra' => $extra]);
     }
 
     /**
@@ -102,21 +108,21 @@ class ExtrasController extends Controller
      * @param  \App\Models\Extras  $extras
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExtraRequest $request,Extras $extra,UploadService $service )
+    public function update(UpdateExtraRequest $request, Extras $extra, UploadService $service)
     {
 
-        $data=$request->except('_token','image');
+        $data = $request->except('_token', 'image');
 
 
 
-        if($request->image){
-            $attachment['name']=$service->upload($request->image,'images');
+        if ($request->image) {
+            $attachment['name'] = $service->upload($request->image, 'images');
             $extra->attachment->update($attachment);
-
         }
-       $extra->update($data);
+        $extra->update($data);
 
-        Session::flash('success','لم');
+        session()->flash('success', 'تم إنشاء إضافة وجبة جديدة بنجاح');
+
         return  redirect()->route('extra.index');
     }
 

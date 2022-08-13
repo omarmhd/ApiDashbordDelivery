@@ -9,9 +9,7 @@ class Settings extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['conditions', 'terms'];
-
-
+    protected $fillable = ['conditions', 'terms', 'delivary_price'];
 
     /**
      * Add a settings value

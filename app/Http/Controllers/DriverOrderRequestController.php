@@ -75,6 +75,7 @@ class DriverOrderRequestController extends Controller
     {
         DriverOrderRequest::create($request->validated());
         // Notify driver about that order
+        session()->flash('success', 'تم إرسال طلب التوصيل للسائق بنجاح');
         return redirect()->route('order.select_driver.index', compact('order_id'));
     }
 

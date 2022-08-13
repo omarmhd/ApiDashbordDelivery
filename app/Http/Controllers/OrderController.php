@@ -122,6 +122,7 @@ class OrderController extends Controller
                 // 'driver_id' => 2,
             ]
         );
+
         return redirect()->route('order.index');
     }
 
@@ -158,6 +159,8 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         $order->update($request->validated());
+
+        session()->flash('success', 'تم إنشاء مطعم جديد بنجاح');
         return redirect()->route('order.index');
     }
 

@@ -28,9 +28,11 @@ class SettingsController extends Controller
      */
     public function index(Request $request)
     {
-        if (Settings::first() == null)
-            Settings::create(['conditions' => 'conditions', 'terms' => 'terms']);
+        // if (Settings::first() == null)
+        //     Settings::create(['conditions' => 'conditions', 'terms' => 'terms']);
         $settings = Settings::first();
+        // if ($settings == null)
+        //     dd('null');
         return view('dashboard.settings.index', compact('settings'))->with('public_content', $this->public_content);
     }
 
@@ -47,6 +49,8 @@ class SettingsController extends Controller
             Settings::create($request->validated());
         else
             Settings::first()->update($request->validated());
+
+        session()->flash('success', 'تم تحديث إعدادات النظام بنجاح');
         return redirect()->route('settings.index');
     }
 }
