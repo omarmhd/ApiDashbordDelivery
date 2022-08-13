@@ -25,6 +25,23 @@ use Illuminate\Support\Facades\Auth;
 
 // Route::get('/order/all', [OrderController::class, 'all'])->name('order.all');
 // Route::get('/coupon/all', [CouponController::class, 'all'])->name('coupon.all');
+Route::get('/', function (){
+
+    $orders=\App\Models\Order::count();
+
+    $client=\App\Models\Role::where('name','client')->first();
+    $client=$client->users->count();
+    $driver=\App\Models\Role::where('name','driver')->first();
+    $driver= $driver->users->count();
+
+    $messages=\App\Models\Message::latest()->take(4)->get();
+    $resturants=\App\Models\Restaurant::count();
+
+    $users=\App\Models\User::count();
+
+    return view('dashboard.dash',['orders'=>$orders,'clients'=>$client,'drivers'=>$driver,'users'=>$users,'messages'=>$messages,'resturants'=>$resturants]);
+})->name('dashboard.index');
+
 
 Route::resource('/user', UserController::class);
 Route::resource('/driver', DriverController::class);
@@ -55,23 +72,6 @@ if(File::exists($path)){
 
 
 })->name('attachment.destroy');
-Route::get('/', function (){
-
-    $orders=\App\Models\Order::count();
-
-    $client=\App\Models\Role::where('name','client')->first();
-    $client=$client->users->count();
-    $driver=\App\Models\Role::where('name','driver')->first();
-    $driver= $driver->users->count();
-
-    $messages=\App\Models\Message::latest()->take(4)->get();
-    $resturants=\App\Models\Restaurant::count();
-
-    $users=\App\Models\User::count();
-
-    return view('dashboard.dash',['orders'=>$orders,'clients'=>$client,'drivers'=>$driver,'users'=>$users,'messages'=>$messages,'resturants'=>$resturants]);
-})->name('dashboard.index');
-
 
 Route::get('/dataTable', [UserController::class, 'dataTable'])->name('dataTable.index');
 
