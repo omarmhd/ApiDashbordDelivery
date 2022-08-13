@@ -23,10 +23,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Route::get('/', function () {
-    return view('dashboard.dash');
-});
-
 // Route::get('/order/all', [OrderController::class, 'all'])->name('order.all');
 // Route::get('/coupon/all', [CouponController::class, 'all'])->name('coupon.all');
 
@@ -59,7 +55,7 @@ if(File::exists($path)){
 
 
 })->name('attachment.destroy');
-Route::get('/dashboard', function (){
+Route::get('/', function (){
 
     $orders=\App\Models\Order::count();
 
