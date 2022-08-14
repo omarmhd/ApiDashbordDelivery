@@ -16,9 +16,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn sbold green"> أضافة مطعم
+                                    <a href="{{route('restaurant.create')}}" id="sample_editable_1_new" class="btn sbold green"> أضافة مطعم
                                         <i class="fa fa-plus"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 
