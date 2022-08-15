@@ -11,21 +11,21 @@
                     </div>
 
                 </div>
-                <div class="alert alert-danger">
-                    <ul>
-                        @if ($errors->any())
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                        @endif
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                @endif
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
                     <form action="{{ route('order.select_driver.store', $order_id) }}" method="post" class="form-horizontal"
                         enctype="multipart/form-data">
                         @csrf
-                        <input type="text" name="order_id" style="display: none" value="{{$order_id}}">
+                        <input type="text" name="order_id" style="display: none" value="{{ $order_id }}">
                         <div class="form-body">
                             <h3 class="form-section">الحقول الأساسية</h3>
                             <div class="row">
@@ -37,7 +37,8 @@
                                                 <option value="" selected>اختر سائق</option>
                                                 @foreach ($drivers as $driver)
                                                     <option {{ old('driver_id') == $driver->id ? 'selected' : '' }}
-                                                        value="{{ $driver->user->id }}">{{ $driver->user->first_name }}</option>
+                                                        value="{{ $driver->id }}">{{ $driver->first_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>

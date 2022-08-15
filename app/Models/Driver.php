@@ -10,10 +10,10 @@ class Driver extends Model
     use HasFactory;
     protected $primaryKey = 'user_id';
 
+    protected $guarded = [];
 
-    protected $guarded=[];
-
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class)->withDefault();;
     }
 }

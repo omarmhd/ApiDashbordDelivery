@@ -13,8 +13,6 @@ use Laratrust\Traits\LaratrustUserTrait;
 class User extends Authenticatable
 {
 
-
-
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -51,7 +49,8 @@ class User extends Authenticatable
         return $this->morphOne(Attachment::class, 'attachmentable')->withDefault();
     }
 
-    public function driver(){
+    public function driver()
+    {
         return $this->hasOne(Driver::class)->withDefault();
     }
 }

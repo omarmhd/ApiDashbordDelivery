@@ -13,7 +13,8 @@
             <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
             <li class="sidebar-toggler-wrapper">
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                <div class="sidebar-toggler" style="background:url(https://preview.keenthemes.com/metronic-v4/theme/assets/layouts/layout4/img/sidebar-toggle-light.png)">
+                <div class="sidebar-toggler"
+                    style="background:url(https://preview.keenthemes.com/metronic-v4/theme/assets/layouts/layout4/img/sidebar-toggle-light.png)">
 
                 </div>
                 <!-- END SIDEBAR TOGGLER BUTTON -->
@@ -23,42 +24,14 @@
                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
                 <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
                 <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-{{--                <form class="sidebar-search" action="extra_search.html" method="POST">--}}
-{{--                    <a href="javascript:;" class="remove">--}}
-{{--                        <i class="icon-close"></i>--}}
-{{--                    </a>--}}
-{{--                    <div class="input-group">--}}
-{{--                        <input type="text" class="form-control" placeholder="Search...">--}}
-{{--                        <span class="input-group-btn">--}}
-{{--                            <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>--}}
-{{--                        </span>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'home')) active @endif">
                 <a href="{{ route('dashboard.index') }}">
                     <i class="icon-home"></i>
                     <span class="title">الرئيسية</span>
-                    {{-- <span class="arrow "></span> --}}
                 </a>
-                {{-- <ul class="sub-menu"> --}}
-                {{-- <li> --}}
-                {{-- <a href="index.html"> --}}
-                {{-- <i class="icon-bar-chart"></i> --}}
-                {{-- Default Dashboard</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_2.html"> --}}
-                {{-- <i class="icon-bulb"></i> --}}
-                {{-- New Dashboard #1</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_3.html"> --}}
-                {{-- <i class="icon-graph"></i> --}}
-                {{-- New Dashboard #2</a> --}}
-                {{-- </li> --}}
-                {{-- </ul> --}}
+
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'user') || Str::contains(url()->current(), 'driver')) active @endif">
                 <a href="javascript:;" class="nav-link nav-toggle">
@@ -72,13 +45,8 @@
                             <i class="icon-user"></i>
                             المستخدمين</a>
                     </li>
-{{--                    <li class=" @if (Str::contains(url()->current(), 'potato')) active @endif">--}}
-{{--                        <a href="#">--}}
-{{--                            <i class="icon-bulb"></i>--}}
-{{--                            الأعضاء</a>--}}
-{{--                    </li>--}}
                     <li class=" @if (Str::contains(url()->current(), 'driver')) active @endif">
-                        <a href="{{route('driver.index')}}">
+                        <a href="{{ route('driver.index') }}">
                             <i class="fa fa-car"></i>
                             السائقين</a>
                     </li>
@@ -107,39 +75,14 @@
                 <a href="{{ route('restaurant.index') }}">
                     <i class="fa fa-cog"></i>
                     <span class="title"> إدارة المطاعم</span>
-                    {{-- <span class="arrow "></span> --}}
                 </a>
-                {{-- <ul class="sub-menu"> --}}
-                {{-- <li> --}}
-                {{-- <a href="index.html"> --}}
-                {{-- <i class="icon-bar-chart"></i> --}}
-                {{-- Default Dashboard</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_2.html"> --}}
-                {{-- <i class="icon-bulb"></i> --}}
-                {{-- New Dashboard #1</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_3.html"> --}}
-                {{-- <i class="icon-graph"></i> --}}
-                {{-- New Dashboard #2</a> --}}
-                {{-- </li> --}}
-                {{-- </ul> --}}
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'order')) active @endif">
                 <a href="{{ route('order.index') }}">
                     <i class="fa fa-send"></i>
                     <span class="title">إدارة الطلبات</span>
-                    {{-- <span class="arrow "></span> --}}
                 </a>
-                {{-- <ul class="sub-menu">
-                    <li>
-                        <a href="{{ route('order.index') }}">
-                            <i class="icon-bar-chart"></i>
-                            All orders</a>
-                    </li>
-                </ul> --}}
+
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'coupon')) active @endif">
                 <a href="{{ route('coupon.index') }}">
@@ -147,47 +90,12 @@
                     <span class="title">القسائم الشرائية</span>
                     {{-- <span class="arrow "></span> --}}
                 </a>
-                {{-- <ul class="sub-menu"> --}}
-                {{-- <li> --}}
-                {{-- <a href="index.html"> --}}
-                {{-- <i class="icon-bar-chart"></i> --}}
-                {{-- Default Dashboard</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_2.html"> --}}
-                {{-- <i class="icon-bulb"></i> --}}
-                {{-- New Dashboard #1</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_3.html"> --}}
-                {{-- <i class="icon-graph"></i> --}}
-                {{-- New Dashboard #2</a> --}}
-                {{-- </li> --}}
-                {{-- </ul> --}}
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'settings')) active @endif">
                 <a href="{{ route('settings.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">إعدادات التطبيق</span>
-                    {{-- <span class="arrow "></span> --}}
                 </a>
-                {{-- <ul class="sub-menu"> --}}
-                {{-- <li> --}}
-                {{-- <a href="index.html"> --}}
-                {{-- <i class="icon-bar-chart"></i> --}}
-                {{-- Default Dashboard</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_2.html"> --}}
-                {{-- <i class="icon-bulb"></i> --}}
-                {{-- New Dashboard #1</a> --}}
-                {{-- </li> --}}
-                {{-- <li> --}}
-                {{-- <a href="index_3.html"> --}}
-                {{-- <i class="icon-graph"></i> --}}
-                {{-- New Dashboard #2</a> --}}
-                {{-- </li> --}}
-                {{-- </ul> --}}
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->

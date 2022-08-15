@@ -6,6 +6,7 @@ use App\Models\DriverOrderRequest;
 use App\Http\Requests\StoreDriverOrderRequestRequest;
 use App\Http\Requests\UpdateDriverOrderRequestRequest;
 use App\Models\Driver;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -42,7 +43,7 @@ class DriverOrderRequestController extends Controller
                 })
                 ->addColumn('driver_id', function ($data) {
                     //
-                    return $data->driver->user->first_name;
+                    return $data->driver->first_name;
                 })
                 ->addColumn('status', function ($data) {
                     return $data->status;
@@ -61,7 +62,7 @@ class DriverOrderRequestController extends Controller
      */
     public function create($order_id)
     {
-        $drivers = Driver::all();
+        $drivers = User::whereRoleIs('driver')->get();
         return view('dashboard.driverOrderRequest.create', compact('order_id', 'drivers'));
     }
 

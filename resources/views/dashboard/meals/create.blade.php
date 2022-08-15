@@ -210,8 +210,6 @@
                                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput"
                                                     style="width: 200px; height: 150px;">
 
-
-
                                                 </div>
                                                 <div>
                                                     <span class="btn red btn-outline btn-file">
@@ -265,8 +263,6 @@
                                 <div class="col-md-6">
                                     <div class="form-group @error('exBread') has-error @enderror">
                                         <label class="control-label col-md-3">أصناف الخبز</label>
-                                        @dump(old('exBread'))
-
                                         <div class="col-md-6">
 
                                             <div class="radio-list">
@@ -279,8 +275,6 @@
 
                                     </div>
                                     @php $breads=old('bread_name'); @endphp
-                                    @dump($breads)
-
                                     <div class="box-bread  {{ $breads ? '' : 'display-hide' }}">
 
                                         @if ($breads)
@@ -357,7 +351,6 @@
                                 <div class="col-md-6">
                                     <div class="form-group @error('exSweet') has-error @enderror">
                                         <label class="control-label col-md-3">أصناف الحلويات</label>
-                                        @dump(old('exSweet'))
                                         <div class="col-md-6">
                                             <div class="radio-list">
                                                 <label class="radio-inline">
@@ -369,14 +362,11 @@
 
                                     </div>
                                     @php $sweets=old('sweet_name'); @endphp
-                                    @dump($sweets)
                                     <div class="{{ $sweets ? '' : 'display-hide' }} box-sweet">
                                         @if ($sweets)
-                                        @dump('Hello from inside sweets')
                                             @foreach ($sweets as $key => $value)
                                                 <div class="form-group box-sweet-child">
                                                     <label class="control-label col-md-3"></label>
-
                                                     <div
                                                         class="col-md-3 @error('sweet_name.' . $key) has-error @enderror ">
                                                         <input type="text" class="form-control" name="sweet_name[]"
@@ -405,13 +395,12 @@
                                                 <label class="control-label col-md-3"></label>
 
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" name="sweet_name[]"
+                                                    <input type="text" class="form-control" disabled name="sweet_name[]"
                                                         placeholder="نوع الحلويات">
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" name="sweet_price[]"
+                                                    <input type="text" class="form-control" disabled name="sweet_price[]"
                                                         placeholder="السعر">
-
 
                                                 </div>
                                                 <div class="col-md-1">
@@ -422,7 +411,6 @@
 
                                             </div>
                                         @endif
-
 
                                         <div class="form-group group-duplicate display-hide">
                                             <label class="control-label col-md-3"></label>
@@ -445,7 +433,6 @@
                                         </div>
 
                                     </div>
-
                                 </div>
 
                                 <!--/row-->
@@ -471,7 +458,6 @@
 
                 </div>
             </div>
-
 
             <!-- END FORM-->
 

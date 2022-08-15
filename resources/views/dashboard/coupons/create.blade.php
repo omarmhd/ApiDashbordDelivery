@@ -125,18 +125,18 @@
                                             id="table_id">
                                             <thead>
                                                 <tr>
-                                                    <th>
-                                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                    <th>#
+                                                        {{-- <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                             <input type="checkbox" class="group-checkable"
                                                                 data-set="#sample_1 .checkboxes" />
                                                             <span></span>
-                                                        </label>
+                                                        </label> --}}
                                                     </th>
                                                     <th> Username </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($users as $user)
+                                                {{-- @foreach ($users as $user)
                                                     <tr class="odd gradeX">
                                                         <td>
                                                             <label
@@ -152,7 +152,7 @@
                                                 </td>
                                                 <td> {{ $user->first_name }} </td>
                                                 </tr>
-                                                @endforeach
+                                                @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -188,4 +188,6 @@
             }).trigger('init-post-format');
         });
     </script>
+
+    @include('dashboard.coupons._usersDataTable')
 @endpush

@@ -20,6 +20,7 @@ class CreateOrderMealDetailsTable extends Migration
             $table->foreignId('meal_id')->constrained('meals')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('number_of_meals')->default(1);
             $table->json('extras')->nullable();
+            $table->text('meal_extras')->nullable();
             //Extras details
             // $table->json('categories')->nullable();// category_id, category_ammount
             $table->double('total_price');

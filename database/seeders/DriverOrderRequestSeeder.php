@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DreiverOrderRequestSeeder extends Seeder
+class DriverOrderRequestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
