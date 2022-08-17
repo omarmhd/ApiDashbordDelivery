@@ -25,20 +25,6 @@ use Illuminate\Support\Facades\File;
 |
 */
 
-Route::get('crcr', function () {
-    $user = User::create([
-        'first_name' => 'admin',
-        'last_name' => 'admin',
-        'phone' => '0597728982',
-        'email' => 'admin@example.com',
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
-    ]);
-    $user->attachRole('admin');
-    return $user;
-});
-
 // Route::get('/order/all', [OrderController::class, 'all'])->name('order.all');
 // Route::get('/coupon/all', [CouponController::class, 'all'])->name('coupon.all');
 Route::group(['middleware' => "auth"], function () {
@@ -47,7 +33,6 @@ Route::group(['middleware' => "auth"], function () {
     Route::get('/', function () {
 
         $orders = \App\Models\Order::count();
-
         $client = \App\Models\Role::where('name', 'client')->first();
         $client = $client->users->count();
         $driver = \App\Models\Role::where('name', 'driver')->first();

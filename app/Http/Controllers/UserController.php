@@ -29,6 +29,9 @@ class UserController extends Controller
                 ->addColumn('role', function ($data) {
                     return '<span class="bg-blue">' . $data->roles[0]->name . '</span>';
                 })
+                ->addColumn('full_name', function ($data) {
+                    return $data->fullName();
+                })
                 ->addColumn('action', function ($data) {
                     $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
@@ -113,7 +116,6 @@ class UserController extends Controller
             $attachment['name'] = $service->upload($request->image, 'images');
             $user->attachment()->create($attachment);
         }
-
 
 
         return redirect()->route('user.index')->with('success', 'تم الاضافة بنجاح');

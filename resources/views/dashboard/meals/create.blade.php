@@ -395,12 +395,12 @@
                                                 <label class="control-label col-md-3"></label>
 
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" disabled name="sweet_name[]"
-                                                        placeholder="نوع الحلويات">
+                                                    <input type="text" class="form-control" disabled
+                                                        name="sweet_name[]" placeholder="نوع الحلويات">
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" disabled name="sweet_price[]"
-                                                        placeholder="السعر">
+                                                    <input type="text" class="form-control" disabled
+                                                        name="sweet_price[]" placeholder="السعر">
 
                                                 </div>
                                                 <div class="col-md-1">

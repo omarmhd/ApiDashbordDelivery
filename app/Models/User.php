@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Driver::class)->withDefault();
     }
+
+    public function fullName()
+    {
+        return  $this->first_name . ' ' . $this->last_name;
+    }
 }

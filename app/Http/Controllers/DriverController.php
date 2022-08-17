@@ -28,7 +28,7 @@ class DriverController extends MainController
                     return $data->driver->notes;
                 })
                 ->addColumn('available', function ($data) {
-                    return $data->driver->available;
+                    return $data->driver->available == 1 ? 'متاح' : 'غير متاح';
                 })
                 ->addColumn('action', function ($data) {
                     $actionBtn = '<a href="' . route('driver.edit', [$data]) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';

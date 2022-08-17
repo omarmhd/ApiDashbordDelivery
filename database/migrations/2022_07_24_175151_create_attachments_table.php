@@ -16,10 +16,9 @@ class CreateAttachmentsTable extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('order',['1','2','3','4'])->nullable();
+            $table->enum('order', ['1', '2', '3', '4'])->nullable();
             $table->unsignedBigInteger('attachmentable_id');
             $table->string('attachmentable_type');
-
             $table->timestamps();
         });
     }

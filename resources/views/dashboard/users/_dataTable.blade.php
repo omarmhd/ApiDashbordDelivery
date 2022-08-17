@@ -10,13 +10,13 @@
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'first_name',
-                    name: 'first_name'
+                    data: 'full_name',
+                    name: 'full_name'
                 },
-                {
-                    data: 'last_name',
-                    name: 'last_name'
-                },
+                // {
+                //     data: 'last_name',
+                //     name: 'last_name'
+                // },
                 {
                     data: 'role',
                     name: 'role'

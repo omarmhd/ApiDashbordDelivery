@@ -28,9 +28,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a id="sample_editable_1_new" class="btn green" href="{{ route('order.create') }}">
+                                    {{-- <a id="sample_editable_1_new" class="btn green" href="{{ route('order.create') }}">
                                         {{ $public_content['singular_name'] }} جديد <i class="fa fa-plus"></i>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                             <div class="col-md-6">

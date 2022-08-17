@@ -44,6 +44,7 @@
     <link href="{{ asset('assets') }}/layouts/layout/css/themes/darkblue-rtl.min.css" rel="stylesheet" type="text/css"
         id="style_color" />
     <link href="{{ asset('assets') }}/layouts/layout/css/custom-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets') }}/global/css/extra.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
