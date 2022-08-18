@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -13,18 +11,19 @@
                     </div>
 
                 </div>
-                @if($errors->any())
+                @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
                 @endif
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    <form action="{{route('user.update',$user)}}" method="post" class="form-horizontal"  enctype="multipart/form-data">
+                    <form action="{{ route('user.update', $user) }}" method="post" class="form-horizontal"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         @include('dashboard.users._fields')

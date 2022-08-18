@@ -27,7 +27,7 @@ class UpdateMealRequest extends FormRequest
             'restaurant_id'=>'required|exists:restaurants,id',
             'name'=>'required',
             'description'=>'required',
-            'price'=>'required|numeric',
+            'price'=>'required|numeric|min:1',
             'extras'=>'nullable',
             'bread_name.*'=>'sometimes|required',
             'bread_price.*'=>'sometimes|required|numeric',

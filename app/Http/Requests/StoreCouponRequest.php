@@ -25,7 +25,7 @@ class StoreCouponRequest extends FormRequest
     {
         return [
             'code' => ['required'],
-            'ammount' => ['required', 'integer'],
+            'ammount' => ['required', 'integer', 'min:1'],
             'uses' => ['nullable'],
             'status' => ['nullable'],
             'start_avilable_at' => ['date'],

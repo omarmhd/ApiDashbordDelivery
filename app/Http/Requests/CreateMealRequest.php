@@ -27,7 +27,7 @@ class CreateMealRequest extends FormRequest
             'restaurant_id' => 'required|exists:restaurants,id',
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:1',
             'extras' => 'nullable',
             'exBread' => 'sometimes',
             'exSweet' => 'sometimes',

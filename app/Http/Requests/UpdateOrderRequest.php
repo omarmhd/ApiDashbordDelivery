@@ -27,7 +27,7 @@ class UpdateOrderRequest extends FormRequest
         // dd($this->order);
         return [
             // 'user_id' => 'exists:App\Models\User,id',
-            'total_price' => ['required', 'numeric'],
+            'total_price' => ['required', 'numeric', 'min:1'],
             'status' => ['required', Rule::in(['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'])],
             'total_arrive_time' => 'date_format:Y-m-d H:i:s',
             'payment_way' => ['nullable', Rule::in(['VISA', 'MASTER', 'BY_HAND'])],

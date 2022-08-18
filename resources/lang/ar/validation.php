@@ -202,6 +202,7 @@ return [
         'start_avilable_at ' => 'يبدأ العمل في',
         'end_avilable_at ' => 'ينتهي عمله في',
         'delivery_time ' => 'وقت التوصيل',
+        'role  ' => 'الصلاحية',
 
 
     ],

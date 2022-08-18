@@ -29,7 +29,7 @@ class StoreOrderMealDetailsRequest extends FormRequest
             'number_of_meals' => ['nullable'],
             'extras' => ['nullable'],
             'categories' => ['nullable'],
-            'total_price' => ['nullable'],
+            'total_price' => ['nullable', 'min:1'],
         ];
     }
 }

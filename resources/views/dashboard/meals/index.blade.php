@@ -22,7 +22,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="btn-group pull-right">
                                     <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
                                         <i class="fa fa-angle-down"></i>
@@ -42,7 +42,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column"

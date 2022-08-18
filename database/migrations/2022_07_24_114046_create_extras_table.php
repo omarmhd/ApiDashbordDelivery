@@ -17,7 +17,7 @@ class CreateExtrasTable extends Migration
             $table->id();
             $table->foreignId('meals_id')->nullable()->constrained('meals')->cascadeOnDelete();
             $table->string('name');
-            $table->enum('type', ['bread', 'sweet', 'suggested']);
+            $table->enum('type', ['bread', 'sweet', 'suggested'])->default('suggested');
             $table->float('price');
             $table->timestamps();
         });

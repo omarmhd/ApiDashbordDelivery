@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return  $this->first_name . ' ' . $this->last_name;
     }
+
+    public function arRoleName(){
+        $role = $this->roles[0]->name;
+        return __('others.'.$role);
+    }
+
+    public function roleName(){
+        return $this->roles[0]->name;
+    }
+
 }

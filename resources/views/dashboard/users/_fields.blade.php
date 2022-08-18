@@ -72,7 +72,8 @@
                         <option value="" disabled selected></option>
 
                         @foreach ($roles as $role)
-                            <option {{ old('role') == $role->name ? 'selected' : '' }} value="{{ $role->name }}">
+                            <option {{ old('role', $user->roleName()) == $role->name ? 'selected' : '' }}
+                                value="{{ $role->name }}">
                                 {{ $role->name }}
 
                             </option>
