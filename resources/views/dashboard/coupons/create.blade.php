@@ -1,4 +1,20 @@
 @extends('layouts.app')
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/global/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}">
+    @error('selected_users')
+        <style>
+            .select2-container--bootstrap.select2-container--focus .select2-selection,
+            .select2-container--bootstrap.select2-container--open .select2-selection {
+                border-color: #e73d4a !important;
+            }
+
+            .select2-container--bootstrap .select2-selection--multiple {
+                border-color: #e73d4a;
+            }
+        </style>
+    @enderror
+@endpush
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -6,7 +22,8 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-equalizer"></i>
-                        <span class="caption-subject bold uppercase">إضافة {{ $public_content['singular_name'] }} جديد</span>
+                        <span class="caption-subject bold uppercase">إضافة {{ $public_content['singular_name'] }}
+                            جديد</span>
                     </div>
 
                 </div>
@@ -29,7 +46,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group @error('code') has-error @enderror">
-                                        <label class="control-label col-md-3">الكود</label>
+                                        <label class="control-label col-md-3">القسيمة الشرائية</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder=""
                                                 value="{{ old('code') }}" name="code">
@@ -91,103 +108,92 @@
                                 </div>
                                 <!--/span-->
                             </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group @error('start_avilable_at') has-error @enderror">
+                                    <label class="control-label col-md-3">يبدأ العمل في</label>
+                                    <div class="col-md-9">
+                                        <input type="datetime-local" class="form-control" placeholder=""
+                                            value="{{ old('start_avilable_at') }}" name="start_avilable_at">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group @error('end_avilable_at') has-error @enderror">
+                                    <label class="control-label col-md-3">ينتهي عمله في</label>
+                                    <div class="col-md-9">
+                                        <input type="datetime-local" class="form-control" placeholder=""
+                                            value="{{ old('end_avilable_at') }}" name="end_avilable_at">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div id="users_list" style="display: none">
+                            <h3 class="form-section">المستخدمين</h3>
                             <!--/row-->
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group  @error('start_avilable_at') has-error @enderror">
-                                        <label class="control-label col-md-3">يبدأ العمل في</label>
-                                        <div class="col-md-9">
-                                            <input type="datetime-local" class="form-control" placeholder=""
-                                                value="{{ old('start_avilable_at') }}" name="start_avilable_at">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 has-error" for="multiple">
+                                            المستخدمين</label>
+                                        <div class="col-md-10">
+                                            <select id="multiple" class="form-control select2-multiple"
+                                                name="selected_users[]" multiple>
+                                                @foreach ($clients as $client)
+                                                    <option value="{{ $client->id }}"
+                                                        @if (old('selected_users') != null) @foreach (old('selected_users') as $selected)
+                                                        @if ($selected == $client->id) selected @endif
+                                                        @endforeach
+                                                @endif>
+                                                {{ $client->first_name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group  @error('end_avilable_at') has-error @enderror">
-                                        <label class="control-label col-md-3">ينتهي عمله في</label>
-                                        <div class="col-md-9">
-                                            <input type="datetime-local" class="form-control" placeholder=""
-                                                value="{{ old('end_avilable_at') }}" name="end_avilable_at">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                            <!--/row-->
-                            <div id="users_list" style="display: none">
-                                <h3 class="form-section">المستخدمين</h3>
-                                <!--/row-->
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table
-                                            class="table table-striped table-bordered table-hover table-checkable order-column"
-                                            id="table_id">
-                                            <thead>
-                                                <tr>
-                                                    <th>#
-                                                        {{-- <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                            <input type="checkbox" class="group-checkable"
-                                                                data-set="#sample_1 .checkboxes" />
-                                                            <span></span>
-                                                        </label> --}}
-                                                    </th>
-                                                    <th> Username </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{-- @foreach ($users as $user)
-                                                    <tr class="odd gradeX">
-                                                        <td>
-                                                            <label
-                                                                class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                                <input type="checkbox" class="checkboxes"
-                                                                    value="{{ $user->id }}" name="selected[]"
-                                                                    @if (old('selected') !== null) @foreach (old('selected') as $selected)
-                                                                    @if ($selected == $user->id) checked @endif
-                                                                    @endforeach
-                                                @endif />
-                                                <span></span>
-                                                </label>
-                                                </td>
-                                                <td> {{ $user->first_name }} </td>
-                                                </tr>
-                                                @endforeach --}}
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button type="submit" class="btn green">حفظ</button>
-                                            <button type="button" class="btn default">إلغاء</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- END FORM-->
                 </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">حفظ</button>
+                                    <button type="button" class="btn default">إلغاء</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <!-- END FORM-->
             </div>
         </div>
     </div>
+    </div>
 @endsection
 @push('js')
+    <script src="{{ asset('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/apps/scripts/custom-components-select2.js') }}" type="text/javascript"></script>
     <script>
         $(function() {
             $('input[name=is_selected]').on('click init-post-format', function() {
                 $('#users_list').toggle($('#show-is-selected').prop('checked'));
             }).trigger('init-post-format');
         });
-    </script>
 
-    @include('dashboard.coupons._usersDataTable')
+
+        $(".select2, .select2-multiple").select2({
+            placeholder: 'اختر الزبائن',
+            width: null
+        });
+    </script>
 @endpush

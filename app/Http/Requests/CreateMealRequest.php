@@ -26,6 +26,7 @@ class CreateMealRequest extends FormRequest
         return [
             'restaurant_id' => 'required|exists:restaurants,id',
             'name' => 'required',
+            'name_en' => 'required',
             'description' => 'required',
             'price' => 'required|numeric|min:1',
             'extras' => 'nullable',
@@ -44,10 +45,10 @@ class CreateMealRequest extends FormRequest
         return [
             'restaurant_id.required' => trans('messages.restaurant_id_required'),
             'name.required' => trans('messages.name_required'),
-            'bread_name.*.required' => trans('messages.bread_name_required'),
-            'bread_price.*.required' => trans('messages.bread_price_required'),
-            'sweet_name.*.required' => trans('messages.sweet_name_required'),
-            'sweet_price.*.required' => trans('messages.sweet_price_required'),
+            'bread_name.*.required_if' => trans('messages.bread_name_required'),
+            'bread_price.*.required_if' => trans('messages.bread_price_required'),
+            'sweet_name.*.required_if' => trans('messages.sweet_name_required'),
+            'sweet_price.*.required_if' => trans('messages.sweet_price_required'),
         ];
     }
 }

@@ -75,7 +75,6 @@
                             <option {{ old('role', $user->roleName()) == $role->name ? 'selected' : '' }}
                                 value="{{ $role->name }}">
                                 {{ $role->name }}
-
                             </option>
                         @endforeach
 
@@ -124,7 +123,7 @@
                         </div>
                         <div>
                             <span class="btn red btn-outline btn-file">
-                                <span class="fileinput-new"> Select image </span>
+                                <span class="fileinput-new"> اختر صورة </span>
                                 <span class="fileinput-exists"> Change </span>
                                 <input type="file" name="image"> </span>
                             <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove

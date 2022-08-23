@@ -55,12 +55,39 @@
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">الحالة</label>
+                                        <div class="col-md-9">
+                                            <select name="active" id="" class="form-control">
+                                                <option value="1">فعال</option>
+                                                <option value="0">متوقف</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <!--/span-->
+                                <div class="col-md-6">
                                     <div class="form-group @error('name') has-error @enderror">
                                         <label class="control-label col-md-3">اسم الوجبة </label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder=""
                                                 value="{{ old('name') }}" name="name">
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group @error('name_en') has-error @enderror">
+                                        <label class="control-label col-md-3"> اسم الوجبة بالإنجليزية </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" placeholder=""
+                                                value="{{ old('name_en') }}" name="name_en">
                                         </div>
                                     </div>
                                 </div>
@@ -74,28 +101,9 @@
                                         <div class="col-md-9">
                                             <input type="number" class="form-control" placeholder="" name="price"
                                                 value="{{ old('price') }}">
-
-
                                         </div>
                                     </div>
                                 </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">الحالة</label>
-                                        <div class="col-md-9">
-                                            <select name="active" id="" class="form-control">
-                                                <option value="1">فعال</option>
-                                                <option value="0">متوقف</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                            <!--/row-->
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group @error('delivery_time') has-error @enderror">
                                         <label class="control-label col-md-3">وقت التسليم</label>
@@ -106,22 +114,7 @@
                                     </div>
                                 </div>
                                 <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group @error('review') has-error @enderror">
-                                        <label class="control-label col-md-3">التقييم</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" name="review"
-                                                value="{{ old('review') }}" placeholder="">
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <!--/span-->
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group @error('name') has-error @enderror">
@@ -132,19 +125,27 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group @error('extras') has-error @enderror">
-                                        <label class="control-label col-md-3">إضافات الوجبة</label>
+                                    <div class="form-group @error('review') has-error @enderror">
+                                        <label class="control-label col-md-3">التقييم</label>
                                         <div class="col-md-9">
+                                            <input type="text" class="form-control" name="review"
+                                                value="{{ old('review') }}" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group @error('extras') has-error @enderror">
+                                        <label class="control-label col-md-2" style="text-align:right">إضافات الوجبة</label>
+                                        <div class="col-md-10">
                                             <select class="js-example-tags form-control" name="extras[]" multiple
                                                 data-role="tagsinput">
                                             </select>
                                         </div>
                                     </div>
-
                                 </div>
-
-                                <!--/span-->
-
                                 <!--/span-->
                             </div>
                             <h3 class="form-section">صور الوجبة</h3>
@@ -157,8 +158,6 @@
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput"
                                                     style="width: 200px; height: 150px;">
-
-
                                                 </div>
                                                 <div>
                                                     <span class="btn red btn-outline btn-file">

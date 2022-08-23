@@ -37,7 +37,6 @@
                     <input type="number" class="form-control" placeholder="" name="price" min="1"
                         value="{{ old('price', $restaurant->price) }}">
 
-
                 </div>
             </div>
         </div>
@@ -142,7 +141,8 @@
                                 <span class="fileinput-new"> اختيار صورة </span>
                                 <span class="fileinput-exists"> تغير </span>
                                 <input type="file" name="image[1]"> </span>
-                            <a href="" class="btn red {{ array_key_exists('1', $images) ? '' : 'fileinput-exists' }}"
+                            <a href=""
+                                class="btn red {{ array_key_exists('1', $images) ? '' : 'fileinput-exists' }}"
                                 data-dismiss="fileinput"> حذف </a>
                         </div>
                     </div>
@@ -171,7 +171,8 @@
                                 <span class="fileinput-exists"> تغير الصورة </span>
                                 <input type="file" name="image[2]"> </span>
                             <a href="{{ array_key_exists('2', $images) ? route('attachment.destroy', ['image' => $images['2']]) : 'javascript:;' }}"
-                                class="btn red {{ array_key_exists('2', $images) ? '' : 'fileinput-exists' }} "> حذف </a>
+                                class="btn red {{ array_key_exists('2', $images) ? '' : 'fileinput-exists' }} "> حذف
+                            </a>
                         </div>
                     </div>
 
@@ -197,7 +198,8 @@
                         <div>
                             <span class="btn red btn-outline btn-file">
                                 <span class="fileinput-new"> اختيار الصورة </span>
-                                <span class="{{ array_key_exists('3', $images) ? '' : 'fileinput-exists' }}"> تغير </span>
+                                <span class="{{ array_key_exists('3', $images) ? '' : 'fileinput-exists' }}"> تغير
+                                </span>
                                 <input type="file" name="image[3]"> </span>
                             <a href="javascript:;"
                                 class="btn red {{ array_key_exists('3', $images) ? '' : 'fileinput-exists' }}"

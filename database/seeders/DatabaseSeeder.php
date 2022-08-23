@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Driver;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Laratrust\Laratrust;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             LaratrustSeeder::class,
+            ResturantSeeder::class,
         ]);
         $user = User::create([
             'first_name' => 'admin',

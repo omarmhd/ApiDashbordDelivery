@@ -30,7 +30,14 @@ class StoreCouponRequest extends FormRequest
             'status' => ['nullable'],
             'start_avilable_at' => ['date'],
             'end_avilable_at' => ['date'],
-            'selected_users' => ['nullable'],
+            'selected_users' => ['required_if:is_selected,1'],
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'selected_users.required_if' => __('messages.selected_users_required_if')
         ];
     }
 }

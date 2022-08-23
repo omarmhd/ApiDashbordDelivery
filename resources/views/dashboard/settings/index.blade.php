@@ -32,7 +32,7 @@
                                     <div class="form-group @error('conditions') has-error @enderror">
                                         <label class="control-label col-md-1">الشروط</label>
                                         <div class="col-md-11">
-                                            <textarea name="conditions" cols="100" rows="10">{{ $settings != null ? old('conditions', $settings->conditions) : '' }}</textarea>
+                                            <textarea name="conditions" cols="100" rows="10" @error('conditions') style="border-color: #e73d4a" @enderror>{{ $settings != null ? old('conditions', $settings->conditions) : '' }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="form-group @error('terms') has-error @enderror">
                                         <label class="control-label col-md-1">الأحكام</label>
                                         <div class="col-md-11">
-                                            <textarea name="terms" cols="100" rows="10">{{ $settings != null ? old('terms', $settings->terms) : '' }}</textarea>
+                                            <textarea name="terms" cols="100" rows="10" @error('terms') style="border-color: #e73d4a" @enderror>{{ $settings != null ? old('terms', $settings->terms) : '' }}</textarea>
                                         </div>
                                     </div>
                                 </div>
