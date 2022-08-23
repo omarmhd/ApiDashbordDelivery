@@ -28,11 +28,13 @@ class CreateUserRequest extends FormRequest
             'last_name'=>'required',
             'password'=>'required',
             'phone'=>'required|numeric',
-            'role'=>'required|exists:roles,name',
+            'role'=>'sometimes|required|exists:roles,name',
             'address'=>'required',
             'gender'=>'required',
             'email'=>'required|email|unique:users',
             'image'=>'required|image',
+            'latitude'=>'nullable',
+            'longitude'=>'nullable'
 
         ];
     }
