@@ -27,13 +27,13 @@ class CreateRestaurantRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
             'active' => 'required',
-            'review' => 'required',
+            'review' => 'required|numeric',
             'image' => 'required',
             'latitude' => 'nullable',
             'longitude' => 'nullable',
-            'delivery_time' => 'nullable',
+            'delivery_time' => 'required',
         ];
     }
 }

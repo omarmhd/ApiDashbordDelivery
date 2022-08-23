@@ -9,7 +9,6 @@
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase"> إدارة المطاعم</span>
                     </div>
-
                 </div>
                 <div class="portlet-body">
                     <div class="table-toolbar">
@@ -28,23 +27,16 @@
                         id="table_id">
                         <thead>
                             <tr>
-                                {{-- <th>
-                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                        <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                        <span></span>
-                                    </label>
-                                </th> --}}
                                 <th> # </th>
-                                <th> name </th>
-                                <th> phone </th>
-                                <th> active </th>
-                                <th> review </th>
-                                <th> address </th>
-                                <th> actions </th>
+                                <th> الاسم </th>
+                                <th> الهاتف </th>
+                                <th> الحالة </th>
+                                <th> التقييم </th>
+                                <th> العنوان </th>
+                                <th> الإعدادات </th>
                             </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>

@@ -9,10 +9,8 @@ class Role extends LaratrustRole
     public $guarded = [];
 
 
-    public function users(){
-
+    public function users()
+    {
         return $this->belongsToMany(User::class);
-
-
     }
 }

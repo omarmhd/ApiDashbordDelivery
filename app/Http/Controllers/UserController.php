@@ -22,38 +22,36 @@ class UserController extends Controller
      */
     public function index(Request  $request)
     {
-
-
-
         if ($request->ajax()) {
-
             $data = User::latest()->get();
-
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('role',function ($data){
-                    return '<span class="bg-blue">'.$data->roles[0]->name.'</span>';
-
+                ->addColumn('role', function ($data) {
+                    return '<span class="bg-green">' . $data->arRoleName() . '</span>';
+                })
+                ->addColumn('full_name', function ($data) {
+                    return $data->fullName();
                 })
                 ->addColumn('action', function ($data) {
                     $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['role','action'])
+                ->rawColumns(['role', 'action'])
                 ->make(true);
         }
 
         return  view('dashboard.users.index');
     }
 
-    public function indexDrivers(Request  $request){
+    public function indexDrivers(Request  $request)
+    {
         if ($request->ajax()) {
             $data = User::whereHas(
-                'roles', function($q){
+                'roles',
+                function ($q) {
 
-                $q->where('name', 'driver');
-
-            }
+                    $q->where('name', 'driver');
+                }
             )->latest()->get();
 
 
@@ -66,7 +64,6 @@ class UserController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
     }
 
     public function dataTable()
@@ -99,7 +96,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requclientest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateUserRequest $request, UploadService $service)
@@ -111,15 +108,14 @@ class UserController extends Controller
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         $user->attachRole($request->role);
-        if ($user->hasRole('driver')){
-            Driver::create(['user_id'=>$user->id]);
+        if ($user->hasRole('driver')) {
+            Driver::create(['user_id' => $user->id]);
         }
 
         if ($request->image) {
             $attachment['name'] = $service->upload($request->image, 'images');
             $user->attachment()->create($attachment);
         }
-
 
 
         return redirect()->route('user.index')->with('success', 'تم الاضافة بنجاح');
@@ -168,8 +164,8 @@ class UserController extends Controller
 
 
         $user->syncRoles([$request->role]);
-        if($request->role!=="driver" and $user->hasRole('driver')){
-                $user->driver->delete;
+        if ($request->role !== "driver" and $user->hasRole('driver')) {
+            $user->driver->delete;
         }
 
         $user->update($data);

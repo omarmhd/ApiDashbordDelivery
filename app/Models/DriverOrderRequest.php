@@ -13,6 +13,6 @@ class DriverOrderRequest extends Model
 
     public function driver()
     {
-        return $this->hasOne(Driver::class, 'id', 'driver_id');
+        return $this->hasOne(User::class, 'id', 'driver_id');
     }
 }

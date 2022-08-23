@@ -29,7 +29,6 @@ class UpdateUserRequest extends FormRequest
             'first_name'=>'required',
             'last_name'=>'required',
             'password'=>'nullable',
-
             'phone'=>'required|numeric',
             'role'=>'required|exists:roles,name',
             'address'=>'required',

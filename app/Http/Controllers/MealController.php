@@ -28,8 +28,8 @@ class MealController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '  <a  data-id=' . $data->id . ' class="delete btn btn-danger btn-bg"><i class="fa fa-trash"></i></a>
-                                    <a href=' . route('meal.edit', $data) . '  class="btn btn-primary btn-bg"><i class="fa fa-pencil"></i></a>';
+                    $actionBtn = '  <a href=' . route('meal.edit', $data) . '  class="btn btn-primary btn-bg"><i class="fa fa-pencil"></i></a>
+                                    <a  data-id=' . $data->id . ' class="delete btn btn-danger btn-bg"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })->addColumn('active', function ($data) {
                     if ($data->active == 1) {
@@ -146,8 +146,6 @@ class MealController extends Controller
         $images = $meal->attachments->pluck('name', 'order')->toArray();
 
 
-
-
         return view(
             'dashboard.meals.edit',
             [
@@ -203,7 +201,6 @@ class MealController extends Controller
         $images = [];
         if ($request->image) {
             foreach ($request->image as $key => $value) {
-
 
                 $name = $service->upload($value, 'images');
 

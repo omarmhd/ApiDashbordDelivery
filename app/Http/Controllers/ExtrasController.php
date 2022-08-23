@@ -22,7 +22,6 @@ class ExtrasController extends Controller
         if ($request->ajax()) {
             $data = Extras::latest()->get();
             return DataTables::of($data)
-                // ->addIndexColumn()
                 ->addColumn('id', function ($data) {
                     return $data->id;
                 })
@@ -52,7 +51,6 @@ class ExtrasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-
     {
         $extra = new Extras();
         return view('dashboard.extras.create', ['extra' => $extra]);
@@ -70,12 +68,11 @@ class ExtrasController extends Controller
         $data = $request->except('_token', 'image');
         $extras = Extras::create($data);
 
-
         if ($request->image) {
             $attachment['name'] = $service->upload($request->image, 'images');
             $extras->attachment()->create($attachment);
         }
-        Session::flash('success', 'لم');
+        Session::flash('success', 'تم إضافة الإضافة بنجاح');
         return  redirect()->route('extra.index');
     }
 

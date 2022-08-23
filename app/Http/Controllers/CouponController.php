@@ -83,20 +83,50 @@ class CouponController extends MainController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // $GLOBALS['old_selected'] = $request->old('selected');
+        // if ($GLOBALS['old_selected'] != null)
+        //     dd('enter');
+        // dump($GLOBALS['old_selected']);
+        // dd($request->old('selected'));
+        // global $old_selected;
+        // global $old_selected;
+        // $GLOBALS['old_selected'] = $request->old('selected');
 
-        $users = User::all();
 
-        $drivers = Driver::get('user_id');
-        foreach ($users as  $user)
-            foreach ($drivers as $driver)
-                if ($driver->user_id == $user->id) {
-                    $users->forget($user->id);
-                    break;
-                }
+        if ($request->ajax()) {
+            $data = User::latest()->get();
+            $old_request = old('selected');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('checkbox', function ($data) use ($old_request) {
+                    if ($old_request != null)
+                        foreach ($old_request as $selected)
+                            if ($selected == $data->id)
+                                return "<input type='checkbox' class='checkboxes' value='$data->id' name='selected[]' checked />";
+                    return "<input type='checkbox' class='checkboxes' value='$data->id' name='selected[]'/>";
+                })
+                ->addColumn('name', function ($data) {
+                    return $data->first_name;
+                })
+                ->rawColumns(['checkbox', 'name'])
+                ->make(true);
+        }
 
-        return view('dashboard.coupons.create', compact('users'))->with('public_content', $this->public_content);
+        // $clients = \App\Models\Role::where('name', 'client')->first();
+
+        // $users = User::all();
+
+        // $drivers = Driver::get('user_id');
+
+        // foreach ($drivers as $driver)
+        //     if ($driver->user_id == $user->id) {
+        //         $users->forget($user->id);
+        //         break;
+        //     }
+
+        return view('dashboard.coupons.create'/*, compact('clients')*/)->with('public_content', $this->public_content);
     }
 
     /**

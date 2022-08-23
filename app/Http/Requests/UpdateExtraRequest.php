@@ -25,7 +25,7 @@ class UpdateExtraRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'price'=>'required|numeric',
+            'price'=>'required|numeric|min:1',
             'image'=>'sometimes|required'
         ];
     }

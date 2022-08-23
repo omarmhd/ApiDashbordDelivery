@@ -157,18 +157,11 @@
                                         <div class="col-md-9">
                                             <input type="file" class="form-control" name="avatar"
                                                 value="{{ old('avatar') }}" placeholder="">
-
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--/span-->
-                                <div class="col-md-6">
-
-                                </div>
                                 <!--/span-->
                             </div>
-
 
                             <h3 class="form-section">الحقول المخصصة</h3>
                             <!--/row-->

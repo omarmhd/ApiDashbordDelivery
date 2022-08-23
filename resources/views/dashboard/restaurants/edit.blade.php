@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -31,7 +34,7 @@
                             <h3 class="form-section">المعلومات الأساسية</h3>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('name') has-error @enderror">
                                         <label class="control-label col-md-3">الاسم</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder=""
@@ -43,7 +46,7 @@
                                 <!--/span-->
 
                                 <div class="col-md-6">
-                                    <div class="form-group has-error">
+                                    <div class="form-group @error('address') has-error @enderror">
                                         <label class="control-label col-md-3">العنوان </label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder=""
@@ -57,7 +60,7 @@
                             <!--/row-->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('phone') has-error @enderror">
                                         <label class="control-label col-md-3">رفم الجوال</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" placeholder=""
@@ -69,7 +72,7 @@
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('active') has-error @enderror">
                                         <label class="control-label col-md-3">الحالة</label>
                                         <div class="col-md-9">
                                             <select name="active" id="" class="form-control">
@@ -87,7 +90,7 @@
                             <!--/row-->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('delivery_time') has-error @enderror">
                                         <label class="control-label col-md-3">وقت التسليم</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control"
@@ -98,29 +101,20 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('review') has-error @enderror">
                                         <label class="control-label col-md-3">التقيم</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control"
                                                 value="{{ old('review', $restaurant->review) }}" name="review"
                                                 placeholder="">
-
-
                                         </div>
-
-
                                     </div>
-
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-
                                 </div>
                                 <!--/span-->
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('description') has-error @enderror">
                                         <label class="control-label col-md-3">الوصف</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="description"
@@ -130,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group @error('image') has-error @enderror">
                                         <label class="control-label col-md-3">الصورة البازرة</label>
                                         <div class="col-md-9">
                                             <div class="form-group ">
@@ -148,21 +142,13 @@
                                                                 data-dismiss="fileinput"> Remove </a>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--/span-->
-
                                 <!--/span-->
                             </div>
-
                             <!--/row-->
                         </div>
                         <div class="form-actions">
@@ -171,8 +157,7 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-9">
                                             <button type="submit" class="btn green">حفظ</button>
-                                            <a type="button" class="btn default"
-                                                href="{{ route('restaurant.index') }}">إلغاء</a>
+                                            <button type="button" class="btn default">إلغاء</button>
                                         </div>
                                     </div>
                                 </div>
@@ -186,5 +171,4 @@
             </div>
         </div>
     </div>
-
 @endsection

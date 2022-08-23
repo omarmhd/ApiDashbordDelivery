@@ -25,7 +25,7 @@ class CreateExtraRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'price'=>'required|numeric',
+            'price'=>'required|numeric|min:1',
             'image'=>'required'
         ];
     }

@@ -9,11 +9,10 @@ class Attachment extends Model
 {
     use HasFactory;
 
-
     public $guarded = ['_token'];
+
     public function attachmentable()
     {
         return $this->morphTo();
     }
-
 }

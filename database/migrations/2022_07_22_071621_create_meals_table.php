@@ -21,7 +21,6 @@ class CreateMealsTable extends Migration
             $table->float('price');
             $table->json('extras')->nullable();
             $table->boolean('active')->nullable()->default(0); // //added
-
             $table->timestamps();
         });
     }
