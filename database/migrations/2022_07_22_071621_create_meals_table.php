@@ -17,6 +17,7 @@ class CreateMealsTable extends Migration
             $table->id();
             $table->foreignId('restaurant_id')->constrained('restaurants')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
+            $table->string('name_en');
             $table->text('description');
             $table->float('price');
             $table->json('extras')->nullable();

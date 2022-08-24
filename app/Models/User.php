@@ -66,7 +66,12 @@ class User extends Authenticatable
     }
 
     public function roleName(){
-        return $this->roles[0]->name;
+        // $this->roles->count()
+        if(sizeof($this->roles) != 0)
+            return $this->roles[0]->name;
+        return '';
     }
+
+    // public function byRole()
 
 }

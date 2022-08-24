@@ -6,6 +6,7 @@ use App\Models\Coupon;
 use App\Http\Requests\StoreCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
 use App\Models\Driver;
+use App\Models\Role;
 use App\Models\SelectedUsersCoupon;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,26 +96,26 @@ class CouponController extends MainController
         // $GLOBALS['old_selected'] = $request->old('selected');
 
 
-        if ($request->ajax()) {
-            $data = User::latest()->get();
-            $old_request = old('selected');
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('checkbox', function ($data) use ($old_request) {
-                    if ($old_request != null)
-                        foreach ($old_request as $selected)
-                            if ($selected == $data->id)
-                                return "<input type='checkbox' class='checkboxes' value='$data->id' name='selected[]' checked />";
-                    return "<input type='checkbox' class='checkboxes' value='$data->id' name='selected[]'/>";
-                })
-                ->addColumn('name', function ($data) {
-                    return $data->first_name;
-                })
-                ->rawColumns(['checkbox', 'name'])
-                ->make(true);
-        }
+        // if ($request->ajax()) {
+        //     $data = User::latest()->get();
+        //     $old_request = old('selected');
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()
+        //         ->addColumn('checkbox', function ($data) use ($old_request) {
+        //             if ($old_request != null)
+        //                 foreach ($old_request as $selected)
+        //                     if ($selected == $data->id)
+        //                         return "<input type='checkbox' class='checkboxes' value='$data->id' name='selected[]' checked />";
+        //             return "<input type='checkbox' class='checkboxes' value='$data->id' name='selected[]'/>";
+        //         })
+        //         ->addColumn('name', function ($data) {
+        //             return $data->first_name;
+        //         })
+        //         ->rawColumns(['checkbox', 'name'])
+        //         ->make(true);
+        // }
 
-        // $clients = \App\Models\Role::where('name', 'client')->first();
+        $clients = User::whereRoleIs('client')->get();
 
         // $users = User::all();
 
@@ -126,7 +127,7 @@ class CouponController extends MainController
         //         break;
         //     }
 
-        return view('dashboard.coupons.create'/*, compact('clients')*/)->with('public_content', $this->public_content);
+        return view('dashboard.coupons.create', compact('clients'))->with('public_content', $this->public_content);
     }
 
     /**
