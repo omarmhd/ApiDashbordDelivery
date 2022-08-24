@@ -11,8 +11,29 @@ use Illuminate\Http\Request;
 class MealsController extends Controller
 {
     public function index(){
-        $meal=Meal::with('extrasReL','attachments')->get();
-        return MealResource::collection(Meal::all());
 
-    }
+        try {
+        $meal=Meal::with('extrasReL','attachments')->get();
+        return MealResource::collection($meal);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }}
+
+
+    public function show(Meal $meal){
+        try {
+
+            return MealResource::collection($meal);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }}
+
 }
