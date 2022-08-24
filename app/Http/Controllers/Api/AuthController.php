@@ -14,13 +14,25 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function createUser(CreateUserRequest $request,UploadService $service)
+    public function createUser(Request $request)
     {
 
         try {
             //Validated
+            $validateUser = Validator::make($request->all(),
+                [
+                    'email' => 'required|email|unique:users',
+                    'password' => 'required'
+                ]);
 
-            $data = $request->except(['password', 'role', 'image']);
+            if($validateUser->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+            $data = $request->only(['email']);
 
             $data['password'] = Hash::make($request->password);
             $data['role'] = 'client';
@@ -28,15 +40,64 @@ class AuthController extends Controller
             $user = User::create($data);
             $user->attachRole($request->role);
 
-            if ($request->image) {
-                $attachment['name'] = $service->upload($request->image, 'images');
-                $user->attachment()->create($attachment);
-            }
+
 
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'user'=>$user
+            ], 200);
+
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+    public function infoRegister(Request $request,UploadService $service)
+    {
+
+        try {
+            //Validated
+            $validateUser = Validator::make($request->all(),
+                [
+                    'id'=>'exists:users,id',
+                    'first_name'=>'required',
+                    'last_name'=>'required',
+                    'phone'=>'required|numeric',
+                    'role'=>'sometimes|required|exists:roles,name',
+                    'address'=>'required',
+                    'gender'=>'required',
+                    'image'=>'required|image',
+                    'latitude'=>'nullable',
+                    'longitude'=>'nullable'
+                ]);
+
+            if($validateUser->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+            $user=User::find($request->id);
+
+            if ($request->image) {
+                $attachment['name'] = $service->upload($request->image, 'images');
+                $user->attachment()->create($attachment);
+            }
+            $data = $request->except(['image']);
+
+           $user->update($data);
+
+
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User updated Successfully',
+                'user'=>$user
             ], 200);
 
         } catch (Throwable $th) {
