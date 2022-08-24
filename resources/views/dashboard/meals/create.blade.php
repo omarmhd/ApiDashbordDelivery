@@ -163,7 +163,7 @@
                                                     <span class="btn red btn-outline btn-file">
                                                         <span class="fileinput-new"> اختيار صورة </span>
                                                         <span class="fileinput-exists"> تغير </span>
-                                                        <input type="file" name="image[1]"> </span>
+                                                        <input type="file" name="images[1]"> </span>
                                                     <a href="javascript:;" class="btn red fileinput-exists"
                                                         data-dismiss="fileinput"> حذف </a>
                                                 </div>
@@ -189,7 +189,7 @@
                                                     <span class="btn red btn-outline btn-file">
                                                         <span class="fileinput-new">اختيار صورة </span>
                                                         <span class="fileinput-exists"> تغير الصورة </span>
-                                                        <input type="file" name="image[2]"> </span>
+                                                        <input type="file" name="images[2]"> </span>
                                                     <a href="javascript:;" class="btn red fileinput-exists"
                                                         data-dismiss="fileinput"> حذف </a>
                                                 </div>
@@ -214,7 +214,7 @@
                                                     <span class="btn red btn-outline btn-file">
                                                         <span class="fileinput-new"> اختيار الصورة </span>
                                                         <span class="fileinput-exists"> تغير </span>
-                                                        <input type="file" name="image[3]"> </span>
+                                                        <input type="file" name="images[3]"> </span>
                                                     <a href="javascript:;" class="btn red fileinput-exists"
                                                         data-dismiss="fileinput"> حذف </a>
                                                 </div>
@@ -240,7 +240,7 @@
                                                     <span class="btn red btn-outline btn-file">
                                                         <span class="fileinput-new"> اختيار صورة </span>
                                                         <span class="fileinput-exists"> تغير </span>
-                                                        <input type="file" name="image[4]"> </span>
+                                                        <input type="file" name="images[4]"> </span>
                                                     <a href="javascript:;" class="btn red fileinput-exists"
                                                         data-dismiss="fileinput"> حذف </a>
                                                 </div>

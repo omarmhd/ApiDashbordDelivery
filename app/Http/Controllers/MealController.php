@@ -107,12 +107,13 @@ class MealController extends Controller
         $images = [];
 
         if ($request->images != null)
-            foreach ($request->image as  $key => $value) {
+            foreach ($request->images as  $key => $value) {
 
                 $images[$key]['name'] = $service->upload($value, 'images');
 
                 $images[$key]['order'] = $key;
             }
+
         $meal->attachments()->createMany($images);
 
         session()->flash('success', "تم إضافة وجبة جديدة بنجاح");
