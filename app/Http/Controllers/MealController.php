@@ -196,7 +196,6 @@ class MealController extends Controller
 
         $extras = array_merge($sweets, $breads);
         $meal->extrasReL()->delete();
-        $meal->attachments()->createMany($extras);
 
         $images = [];
         if ($request->image) {
