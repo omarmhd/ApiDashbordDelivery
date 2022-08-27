@@ -20,6 +20,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/auth/register', [App\Http\Controllers\Api\AuthController::class, 'createUser']);
 Route::post('/auth/login', [App\Http\Controllers\Api\AuthController::class, 'loginUser']);
 
-Route::post('/auth/infoRegister', [App\Http\Controllers\Api\AuthController::class, 'infoRegister']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/auth/logout', [App\Http\Controllers\Api\AuthController::class, 'logoutUser']);
+    Route::post('/auth/infoRegister', [App\Http\Controllers\Api\AuthController::class, 'infoRegister']);
+    Route::apiResource('/meals', 'App\Http\Controllers\Api\MealsController');
+    Route::get('/restaurants', [App\Http\Controllers\Api\MealsController::class, 'indexRestaurants']);
 
-Route::apiResource('/meals', 'App\Http\Controllers\Api\MealsController');
+
+});
+
+
+

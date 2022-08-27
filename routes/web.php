@@ -53,6 +53,9 @@ Route::group(['middleware' => "auth"], function () {
     Route::resource('/meal', \App\Http\Controllers\MealController::class);
     Route::resource('/extra', \App\Http\Controllers\ExtrasController::class);
     Route::resource('/order', OrderController::class);
+
+    Route::resource('/category', \App\Http\Controllers\CategoryController::class);
+
     // Route::resource('/order/meal-details', OrderMealDetails::class);
     Route::resource('/coupon', CouponController::class);
     Route::resource('/message', \App\Http\Controllers\MessageController::class);

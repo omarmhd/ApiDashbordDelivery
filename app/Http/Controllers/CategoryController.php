@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
@@ -12,9 +13,22 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request  $request)
     {
-        //
+        $data = Category::latest()->get();
+
+        if ($request->ajax()) {
+
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
+                    $actionBtn = '<a href="' . route('category.edit', [$data]) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    return $actionBtn;
+                })->rawColumns(['action'])->make(true);
+        }
+
+        return view('dashboard.categories.index');
     }
 
     /**
@@ -24,7 +38,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category=new Category();
+       return view("dashboard.categories.create",['category'=>$category]);
     }
 
     /**
@@ -35,7 +50,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     $this->validate($request,['name'=>'required|unique:categories,name']);
+
+       $category=Category::create(['name'=>$request->name]);
+
+       return redirect()->route('category.index');
+
     }
 
     /**
@@ -57,7 +77,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
+        return view('dashboard.categories.edit',['category'=>$category]);
+
     }
 
     /**
@@ -69,7 +91,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+       $request->validate(['name'=>'required|unique:categories,name,'.$category->id,'id']);
+
+        $category=$category->update(['name'=>$request->name]);
+
+        return redirect()->route('category.index')->with('success','تمت تعديل التصنيف  بنجاح');
+
     }
 
     /**
@@ -80,6 +107,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('category.index')->with('success','تمت حذف التصنيف  بنجاح');
+
     }
 }

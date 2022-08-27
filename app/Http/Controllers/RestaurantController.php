@@ -140,7 +140,7 @@ class RestaurantController extends Controller
 
         if ($request->image) {
             $attachment['name'] = $service->upload($request->image, 'images');
-            $restaurant->attachment->update($attachment);
+            $restaurant->attachment()->updateOrCreate($attachment);
         }
 
         session()->flash('success', 'تم تحديث المطعم بنجاح');
