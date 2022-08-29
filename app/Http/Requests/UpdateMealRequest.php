@@ -25,6 +25,7 @@ class UpdateMealRequest extends FormRequest
     {
         return [
             'restaurant_id'=>'required|exists:restaurants,id',
+            'category_id'=>'required|exists:categories,id',
             'name'=>'required',
             'description'=>'required',
             'price'=>'required|numeric|min:1',

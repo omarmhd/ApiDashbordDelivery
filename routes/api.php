@@ -26,6 +26,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('/meals', 'App\Http\Controllers\Api\MealsController');
     Route::get('/restaurants', [App\Http\Controllers\Api\MealsController::class, 'indexRestaurants']);
 
+    //category
+    Route::get('/categories', [App\Http\Controllers\Api\CategoryController::class, 'index']);
+    Route::get('/categories/{id}',[App\Http\Controllers\Api\CategoryController::class, 'show'])->name('categories.show');
+
+    //orders
+
 
 });
 

@@ -69,6 +69,11 @@
                         <a href="{{ route('extra.index') }}">
                             <i class="icon-plus"></i>الإضافات</a>
                     </li>
+
+                    <li class=" @if (Str::contains(url()->current(), 'category')) active @endif">
+                        <a href="{{ route('category.index') }}">
+                            <i class="icon-plus"></i>التصنيفات</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'restaurant')) active @endif">

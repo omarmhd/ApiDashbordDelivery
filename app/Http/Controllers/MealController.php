@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMealRequest;
 use App\Http\Requests\UpdateMealRequest;
 use App\Models\Attachment;
+use App\Models\Category;
 use App\Models\Extras;
 use App\Models\Meal;
 use App\Models\Message;
@@ -56,9 +57,10 @@ class MealController extends Controller
         $restaurants = Restaurant::select(['id', 'name'])->get();
         $extras = new Extras();
         $images = new Attachment();
+        $categories=Category::all();
 
 
-        return view('dashboard.meals.create', ['meal' => $meal, 'restaurants' => $restaurants, 'extras' => $extras, 'images' => $images]);
+        return view('dashboard.meals.create', ['meal' => $meal, 'restaurants' => $restaurants, 'extras' => $extras, 'images' => $images,'categories'=>$categories]);
     }
 
     /**

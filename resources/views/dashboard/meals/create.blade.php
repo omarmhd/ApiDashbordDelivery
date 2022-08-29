@@ -36,7 +36,7 @@
                         <div class="form-body">
                             <h3 class="form-section">البيانات الأساسية</h3>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group @error('restaurant_id') has-error @enderror">
                                         <label class="control-label col-md-3">المطعم</label>
                                         <div class="col-md-9">
@@ -47,6 +47,23 @@
                                                     <option value="{{ $restaurant->id }}"
                                                         {{ old('restaurant_id') == $restaurant->id ? 'selected' : '' }}>
                                                         {{ $restaurant->name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group @error('restaurant_id') has-error @enderror">
+                                        <label class="control-label col-md-3">التصنيف</label>
+                                        <div class="col-md-9">
+                                            <select class="js-example-placeholder-single js-states form-control"
+                                                    name="category_id" >
+                                                <option value="">اختر التصنيف</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->name }}
+                                                     </option>
                                                 @endforeach
 
                                             </select>

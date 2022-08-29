@@ -25,6 +25,8 @@ class CreateMealRequest extends FormRequest
     {
         return [
             'restaurant_id' => 'required|exists:restaurants,id',
+            'category_id'=>'required|exists:categories,id',
+
             'name' => 'required',
             'name_en' => 'required',
             'description' => 'required',
