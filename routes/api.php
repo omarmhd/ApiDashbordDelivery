@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/categories/{id}',[App\Http\Controllers\Api\CategoryController::class, 'show'])->name('categories.show');
 
     //orders
-
-
+    Route::get('/orders', [OrderController::class,'index']);
+    Route::post('/orders', [OrderController::class,'store']);
 });
-
-
-
