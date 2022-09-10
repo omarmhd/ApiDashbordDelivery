@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiBaseController;
 use App\Http\Resources\V1\RestaurantResource;
 use App\Models\Restaurant;
-use App\Traits\ApiResponder;
 
-class RestaurantController extends Controller
+class RestaurantController extends ApiBaseController
 {
-    use ApiResponder;
     public function index()
     {
         $restaurant = Restaurant::get();

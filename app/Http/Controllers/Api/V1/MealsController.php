@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\MealCollection;
+use App\Http\Controllers\Api\ApiBaseController;
 use App\Http\Resources\MealResource;
 use App\Models\Meal;
-use App\Traits\ApiResponder;
 
-class MealsController extends Controller
+class MealsController extends ApiBaseController
 {
-    use ApiResponder;
     public function index()
     {
         $meals = Meal::with('extrasReL', 'attachments')->get();

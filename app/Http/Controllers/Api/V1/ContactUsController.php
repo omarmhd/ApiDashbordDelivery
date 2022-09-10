@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiBaseController;
 use App\Http\Requests\Api\V1\StoreContactUsRequest;
-use App\Http\Resources\V1\RestaurantResource;
 use App\Models\ContactUs;
-use App\Models\Restaurant;
 use App\Service\UploadService;
-use App\Traits\ApiResponder;
 
-class ContactUsController extends Controller
+class ContactUsController extends ApiBaseController
 {
-    use ApiResponder;
     public function store(StoreContactUsRequest $request, UploadService $uploadService)
     {
 
