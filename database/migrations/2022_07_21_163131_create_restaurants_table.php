@@ -26,6 +26,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('review')->nullable()->default(0); // //added
             $table->string('image')->nullable()->default(0); // //added
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

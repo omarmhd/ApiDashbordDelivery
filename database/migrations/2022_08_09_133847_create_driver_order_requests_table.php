@@ -15,8 +15,8 @@ class CreateDriverOrderRequestsTable extends Migration
     {
         Schema::create('driver_order_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained('drivers')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('driver_id');
+            $table->foreignId('order_id');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

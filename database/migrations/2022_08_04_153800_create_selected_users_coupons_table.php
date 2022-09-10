@@ -19,6 +19,7 @@ class CreateSelectedUsersCouponsTable extends Migration
             $table->foreignId('coupon_id')->constrained('coupons')->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('is_used')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

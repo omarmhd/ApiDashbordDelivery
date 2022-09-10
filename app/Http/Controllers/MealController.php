@@ -147,7 +147,7 @@ class MealController extends Controller
         $extras = json_decode($meal->extras);
         $restaurants = Restaurant::select(['id', 'name'])->get();
         $images = $meal->attachments->pluck('name', 'order')->toArray();
-
+        $categories = Category::get();
 
         return view(
             'dashboard.meals.edit',
@@ -157,7 +157,8 @@ class MealController extends Controller
                 'meal' => $meal,
                 'extras' => $extras,
                 'restaurants' => $restaurants,
-                'images' => $images
+                'images' => $images,
+                'categories'=>$categories,
             ]
         );
     }

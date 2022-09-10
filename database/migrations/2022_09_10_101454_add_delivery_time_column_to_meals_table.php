@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class AddDeliveryTimeColumnToMealsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->id();
-            $table->text('conditions');
-            $table->text('terms');
-            $table->text('delivary_price');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('meals', function (Blueprint $table) {
+            $table->string('delivery_time')->nullable();
         });
     }
 
@@ -30,6 +25,8 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::table('meals', function (Blueprint $table) {
+           $table->dropColumn('delivery_time');
+        });
     }
 }

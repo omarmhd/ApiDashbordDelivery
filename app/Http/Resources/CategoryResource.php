@@ -16,13 +16,13 @@ class CategoryResource extends JsonResource
     {
         return [
             'data' => [
-                'name'=>$this->name,
-
+                'name' => $this->name,
+                'id' => $this->getKey(),
 
             ],
-            'links' => [
-                'self' => route('categories.show',['id'=>$this->id]),
-            ],
+            // 'links' => [
+            //     'self' => route('categories.show',['id'=>$this->id]),
+            // ],
         ];
     }
 }

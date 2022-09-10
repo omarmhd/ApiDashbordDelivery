@@ -20,6 +20,7 @@ class CreateAttachmentsTable extends Migration
             $table->unsignedBigInteger('attachmentable_id');
             $table->string('attachmentable_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

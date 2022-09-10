@@ -16,4 +16,10 @@ class UploadService
         $file->move($path . '/', $fileName);
         return $fileName;
     }
+    public function uploadWithPath($file, $path)
+    {
+
+        $fileName = $this->upload($file,$path);
+        return $path.'/'.$fileName;
+    }
 }

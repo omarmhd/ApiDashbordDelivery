@@ -7,6 +7,7 @@ use App\Http\Resources\MealCollection;
 use App\Http\Resources\MealResource;
 use App\Models\Meal;
 use App\Models\Restaurant;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class MealsController extends Controller
@@ -23,28 +24,21 @@ class MealsController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }}
-    public function indexRestaurants(){
 
+    public function show($id){
         try {
-        $restaurants=Restaurant::get();
-            return response()->json([
-                'status' => true,
-                'data' => $restaurants
-            ], 200);
+            $meal = Meal::findOrFail($id);
+            return new MealResource($meal);
 
-        } catch (\Throwable $th) {
+        } catch (ModelNotFoundException $e) {
+            $message ='العنصر غير موجود';
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage()
+                'message' => $message,
             ], 500);
-        }}
+        }
 
-    public function show(Meal $meal){
-        try {
-
-            return MealResource::collection($meal);
-
-        } catch (\Throwable $th) {
+        catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage()
