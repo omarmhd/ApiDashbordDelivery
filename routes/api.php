@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // contact us
     Route::post('/contact_us', [ContactUsController::class, 'store']);
 
+
 });
 
 

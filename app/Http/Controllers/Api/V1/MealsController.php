@@ -26,6 +26,7 @@ class MealsController extends ApiBaseController
             $query
             ->whereHas('restaurant',function($q2){
                 $q2->where('delivery_time','like','%'.request()->word.'%');
+                $q2->orWhere('name','like','%'.request()->word.'%');
              })
             ->orWhere('name','like','%'.request()->word.'%')
             ->orWhere('price','like','%'.request()->word.'%')

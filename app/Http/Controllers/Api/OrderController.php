@@ -13,13 +13,8 @@ class OrderController extends Controller
     use APITrait;
 
     public function store(StoreOrderRequest $request){
-        return $this->returnData('order','hello','This is an order');
-
-        try{
-            dd($request->all());
-        }catch(Exception $e){
-            return $this->returnError('404', 'Problem happen while store an order.');
-        }
+        // $categories = Category::get();
+        // return $this->setSuccess()->addItem(CategoryResource::collection($categories))->getResponse();
     }
 
     public function index(){
