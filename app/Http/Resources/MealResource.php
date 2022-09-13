@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\V1\ExtraResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MealResource extends JsonResource
@@ -25,7 +26,7 @@ class MealResource extends JsonResource
             'review'=>$this->review,
             'delivery_time'=>$this->restaurant->delivery_time,
             'created_at'=>$this->created_date,
-            'extras'=>$this->extrasReL,
+            'extras'=> ExtraResource::collection($this->extrasReL),
             'attachments'=>$this->attachments,
             // 'links' => [
             //     'self' => route('meals.show',['meal'=>$this->id]),
