@@ -10,6 +10,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DriverOrderRequestController;
 use App\Http\Controllers\OrderMealDetailsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SliderController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -53,12 +54,10 @@ Route::group(['middleware' => "auth"], function () {
     Route::resource('/meal', \App\Http\Controllers\MealController::class);
     Route::resource('/extra', \App\Http\Controllers\ExtrasController::class);
     Route::resource('/order', OrderController::class);
-
     Route::resource('/category', \App\Http\Controllers\CategoryController::class);
-
-    // Route::resource('/order/meal-details', OrderMealDetails::class);
     Route::resource('/coupon', CouponController::class);
     Route::resource('/message', \App\Http\Controllers\MessageController::class);
+    Route::resource('/slider', SliderController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');

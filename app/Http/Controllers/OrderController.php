@@ -160,7 +160,7 @@ class OrderController extends Controller
     {
         $order->update($request->validated());
 
-        session()->flash('success', 'تم إنشاء مطعم جديد بنجاح');
+        session()->flash('success', 'تم تحديث الطلب جديد بنجاح');
         return redirect()->route('order.index');
     }
 

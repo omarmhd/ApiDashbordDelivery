@@ -96,6 +96,12 @@
                     {{-- <span class="arrow "></span> --}}
                 </a>
             </li>
+            <li class="nav-item @if (Str::contains(url()->current(), 'slider')) active @endif">
+                <a href="{{ route('slider.index') }}">
+                    <i class="fa fa-gears"></i>
+                    <span class="title">السلايدر</span>
+                </a>
+            </li>
             <li class="nav-item @if (Str::contains(url()->current(), 'settings')) active @endif">
                 <a href="{{ route('settings.index') }}">
                     <i class="fa fa-gears"></i>

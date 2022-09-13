@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\RestaurantController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\MealsController;
 use App\Http\Controllers\Api\V1\ContactUsController;
@@ -51,3 +53,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/contact_us', [ContactUsController::class, 'store']);
 
 });
+
+
+Route::get('home', [HomeController::class, 'index']);
+Route::get('offers', [OfferController::class, 'index']);

@@ -14,7 +14,8 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'نعم, أريد الحذف!'
+            confirmButtonText: 'نعم, أريد الحذف!',
+            cancelButtonText: 'تراجع',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajaxSetup({
