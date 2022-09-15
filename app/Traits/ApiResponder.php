@@ -48,7 +48,7 @@ trait ApiResponder
         return $this;
     }
 
-    private function addPagination($paginator)
+    public function addPagination($paginator)
     {
         $p = new IlluminatePaginatorAdapter($paginator);
         $pagination = $p->getPaginator()->toArray();

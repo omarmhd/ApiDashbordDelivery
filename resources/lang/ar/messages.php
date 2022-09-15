@@ -16,5 +16,7 @@ return [
     'validation_errors'=>'رسائل الخطأ',
     'send_your_request'=>'تم ارسال طلبك بنجاح',
     'element_not_found'=>'العنصر غير موجود',
+    'send_your_order'=>'تم تنفيذ طلبك بنجاح',
+    'something_wrong'=>'حدث خطأ ما!',
 
 ];

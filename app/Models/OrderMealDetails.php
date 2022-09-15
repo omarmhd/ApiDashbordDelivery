@@ -16,5 +16,11 @@ class OrderMealDetails extends Model
         'extras',
         'categories',
         'total_price',
+        'meal_extras',
     ];
+
+    public function meal()
+    {
+        return $this->belongsTo(Meal::class, 'meal_id');
+    }
 }
