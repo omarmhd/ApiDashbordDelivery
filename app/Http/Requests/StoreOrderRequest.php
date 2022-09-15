@@ -26,14 +26,15 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:App\Models\User,id',
-            'total_price' => 'required|double|min:1',
+            'total_price' => 'required|numeric|min:1',
             'status' => ['required', Rule::in(['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'])],
-            'total_arrive_time' => 'date_format:Y-m-d H:i:s',
+            // 'total_arrive_time' => 'date_format:Y-m-d H:i:s',
             'payment_way' => ['required', Rule::in(['VISA', 'MASTER', 'BY_HAND'])],
-            'delivery_time' => 'date_format:Y-m-d H:i:s',
-            'time_of_receipt' => 'date_format:Y-m-d H:i:s',
-            'notes' => 'string|nullable',
-            'rate' =>  ['nullable', Rule::in([1, 2, 3, 4, 5])],
+            // 'delivery_time' => 'date_format:Y-m-d H:i:s',
+            // 'time_of_receipt' => 'date_format:Y-m-d H:i:s',
+            'meals'=>'required|array',
+            // 'notes' => 'string|nullable',
+            // 'rate' =>  ['nullable', Rule::in([1, 2, 3, 4, 5])],
             // 'driver_id' => 'exists:App\Models\User,id',
         ];
     }

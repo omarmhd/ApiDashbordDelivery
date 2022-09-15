@@ -15,4 +15,9 @@ class Attachment extends BaseModel
     {
         return $this->morphTo();
     }
+    public function  getImageUrlAttribute(){
+
+        return $this->name?asset('images/').'/'.$this->name:null;
+
+    }
 }

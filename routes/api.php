@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\V1\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\RestaurantController;
@@ -37,11 +37,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //category
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/categories/{id}', [CategoryController::class, 'show']);
+    Route::get('/categories/{id}/meals', [CategoryController::class, 'meals']);
 
     //orders
     Route::get('/orders', [OrderController::class, 'index']);
-    Route::post('/orders', [OrderController::class, 'store']);
+    Route::post('/order', [OrderController::class, 'store']);
+    Route::get('/order/{id}', [OrderController::class, 'show']);
 
     // meals
     // Route::apiResource('/meals', MealsController::class);
