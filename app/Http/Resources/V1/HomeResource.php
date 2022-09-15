@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\V1;
 
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\MealResource;
+use App\Http\Resources\SliderResource;
 use App\Models\Category;
 use App\Models\Meal;
 use App\Models\Restaurant;
