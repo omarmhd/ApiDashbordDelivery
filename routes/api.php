@@ -64,11 +64,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Admin id 1 5|HdtELzMVvt2N0HIq88xE8QOHTuWoRMc1ZF7CSbZ1
     // Driver id 10 4|ppRl9GdjsRfiHBIUnK4FqXqVOyJvuUe0B0t0qYLh
+    Route::get('home', [HomeController::class, 'index']);
 });
+// Route::get('driver_current_orders', [DriverController::class, 'currantOrders']);
 // Route::get('driver_current_orders', [DriverController::class, 'currantOrders']);
 
 // Route::get('driver_orders', [DriverController::class, 'orders']);
-
-
-Route::get('home', [V1HomeController::class, 'index']);
-Route::get('offers', [OfferController::class, 'index']);
