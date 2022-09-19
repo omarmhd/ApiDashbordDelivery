@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\V1\AttachmentsResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SliderResource extends JsonResource
@@ -19,7 +20,8 @@ class SliderResource extends JsonResource
             'name'=>$this->name,
             'order_index'=>$this->order_index,
             'status'=>$this->status,
-            'attachments'=>$this->attachments,
+            'image'=>$this->image_url,
+            // 'attachments'=>AttachmentsResource::collection($this->attachments),
             // 'links' => [
             //     'self' => route('meals.show',['meal'=>$this->id]),
             // ],
