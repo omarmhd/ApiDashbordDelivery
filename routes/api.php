@@ -55,8 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/contact_us', [ContactUsController::class, 'store']);
 
 
+    Route::get('home', [HomeController::class, 'index']);
 });
 
 
-Route::get('home', [HomeController::class, 'index']);
-Route::get('offers', [OfferController::class, 'index']);

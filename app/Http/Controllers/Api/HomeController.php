@@ -2,14 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\HomeResource;
-use App\Models\Category;
-use App\Models\Meal;
-use App\Models\Restaurant;
-use App\Models\Slider;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\Request;
+use App\Http\Resources\V1\HomeResource;
 
 class HomeController extends ApiBaseController
 {
