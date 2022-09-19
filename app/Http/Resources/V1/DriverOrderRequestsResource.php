@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources\V1;
 
-use App\Http\Resources\MealResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderDetailsResource extends JsonResource
+class DriverOrderRequestsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +15,10 @@ class OrderDetailsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->getKey(),
-            'number_of_meals' => $this->number_of_meals,
-            'total_price' => $this->total_price,
-            'meal' => new MealResource($this->meal),
+            'id' => $this->id,
+            'driver_id' => $this->driver_id,
+            'order_id' => $this->order_id,
+            'status' => $this->status,
         ];
     }
 }

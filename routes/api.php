@@ -5,11 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\RestaurantController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\MealsController;
 use App\Http\Controllers\Api\V1\ContactUsController;
+use App\Http\Controllers\Api\V1\DriverController;
+use App\Http\Controllers\Api\V1\HomeController as V1HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +55,20 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // contact us
     Route::post('/contact_us', [ContactUsController::class, 'store']);
 
+    // Driver
+    Route::get('driver_personal', [DriverController::class, 'index']);
+    Route::get('driver_orders', [DriverController::class, 'orders']);
 
+    // Driver Orders Requests
+    Route::get('driver_current_orders', [DriverController::class, 'currantOrders']);
+
+    // Admin id 1 5|HdtELzMVvt2N0HIq88xE8QOHTuWoRMc1ZF7CSbZ1
+    // Driver id 10 4|ppRl9GdjsRfiHBIUnK4FqXqVOyJvuUe0B0t0qYLh
 });
+// Route::get('driver_current_orders', [DriverController::class, 'currantOrders']);
+
+// Route::get('driver_orders', [DriverController::class, 'orders']);
 
 
-Route::get('home', [HomeController::class, 'index']);
+Route::get('home', [V1HomeController::class, 'index']);
 Route::get('offers', [OfferController::class, 'index']);

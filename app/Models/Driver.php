@@ -16,4 +16,8 @@ class Driver extends Model
     {
         return $this->belongsTo(User::class)->withDefault();
     }
+
+    public function orders(){
+        return $this->hasMany(DriverOrderRequest::class, 'id', 'order_id');
+    }
 }
