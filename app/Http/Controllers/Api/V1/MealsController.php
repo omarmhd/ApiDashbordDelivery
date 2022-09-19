@@ -10,8 +10,8 @@ class MealsController extends ApiBaseController
 {
     public function index()
     {
-        $meals = Meal::with('extrasReL', 'attachments')->get();
-        return $this->setSuccess()->addItem(MealResource::collection($meals))->getResponse();
+        $meals = Meal::with('extrasReL', 'attachments')->paginate(15);
+        return $this->setSuccess()->addItem(MealResource::collection($meals))->addPagination($meals)->getResponse();
     }
 
     public function show($id)
