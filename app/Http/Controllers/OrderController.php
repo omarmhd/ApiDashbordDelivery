@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Order, User};
+use App\Models\{Notification, Order, User};
 use App\Http\Requests\{StoreOrderRequest, UpdateOrderRequest};
 use FCM;
 use Illuminate\Http\Request;
