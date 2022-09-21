@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Driver;
 use App\Models\User;
+use App\Models\UserDevice;
 use App\Service\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,10 @@ class AuthController extends Controller
             $data['role'] = 'client';
 
             $user = User::create($data);
+           UserDevice::create([
+                'user_id'=>$user->getKey(),
+                'token'=>$request->header('X-FIREBASE-DEVICE-TOKEN'),
+            ]);
             $user->attachRole($request->role);
 
 
@@ -138,7 +143,13 @@ class AuthController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
-
+            $user_device = UserDevice::where(['user_id'=>$user->getKey(),'token'=>$request->header('X-FIREBASE-DEVICE-TOKEN')])->first();
+            if (!$user_device) {
+                UserDevice::create([
+                    'user_id'=>$user->getKey(),
+                    'token'=>$request->header('X-FIREBASE-DEVICE-TOKEN'),
+                ]);
+            }
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
