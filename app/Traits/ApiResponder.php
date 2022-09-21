@@ -72,6 +72,7 @@ trait ApiResponder
     }
     public function getResponse()
     {
-        return new Response($this->responseArray);
+        return response()->json($this->responseArray,200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+        JSON_UNESCAPED_UNICODE);
     }
 }
