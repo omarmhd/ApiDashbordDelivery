@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiBaseController;
-use App\Http\Resources\V1\HomeResource as V1HomeResource;
+use App\Http\Resources\V1\HomeResource;
 
 class HomeController extends ApiBaseController
 {
     public function index()
     {
         return $this->setSuccess(null, '200')
-            ->addItem(new V1HomeResource(1))
+            ->addItem(new HomeResource(1))
             ->getResponse();
     }
 

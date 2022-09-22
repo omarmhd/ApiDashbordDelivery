@@ -5,13 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\RestaurantController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\HomeController;
-use App\Http\Controllers\Api\OfferController;
+use App\Http\Controllers\Api\V1\HomeController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\MealsController;
 use App\Http\Controllers\Api\V1\ContactUsController;
 use App\Http\Controllers\Api\V1\DriverController;
-use App\Http\Controllers\Api\V1\HomeController as V1HomeController;
 
 /*
 |--------------------------------------------------------------------------
