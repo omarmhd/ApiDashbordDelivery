@@ -18,7 +18,7 @@ trait Resoureces
 
     public function  getImageUrlAttribute(){
 
-        return $this->attachment->name?asset('asset/images/').$this->attachment->name:null;
+        return $this->attachment->name?asset('images/').'/'.$this->attachment->name:null;
 
     }
 }
