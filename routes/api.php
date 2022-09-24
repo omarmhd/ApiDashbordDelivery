@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\MealsController;
 use App\Http\Controllers\Api\V1\ContactUsController;
 use App\Http\Controllers\Api\V1\DriverController;
+use App\Http\Controllers\Api\V1\EmailVerificationController;
+use App\Http\Controllers\Api\V1\NewPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
+
+Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
+Route::post('get-token', [NewPasswordController::class, 'getToken']);
+Route::post('reset-password', [NewPasswordController::class, 'reset']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
@@ -69,3 +75,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // Route::get('driver_current_orders', [DriverController::class, 'currantOrders']);
 
 // Route::get('driver_orders', [DriverController::class, 'orders']);
+

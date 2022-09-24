@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\ResetPassword as ModelsResetPassword;
+use App\Notifications\ResetPasswordNotification;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -72,6 +75,18 @@ class User extends Authenticatable
         return '';
     }
 
-    // public function byRole()
+    public function sendPasswordResetNotification($token)
+    {
+
+        // $url = url('/').'/api/reset-password?token=' . $token;
+        $code =  rand(100000,999999);
+        ModelsResetPassword::updateOrCreate(['email'=>request()->email,'token'=>$token],[
+            'email'=>request()->email,
+            'token'=>$token,
+            'code'=> $code,
+        ]);
+
+        $this->notify(new ResetPasswordNotification($code));
+    }
 
 }
