@@ -63,14 +63,16 @@ class User extends Authenticatable
         return  $this->first_name . ' ' . $this->last_name;
     }
 
-    public function arRoleName(){
+    public function arRoleName()
+    {
         $role = $this->roles[0]->name;
-        return __('others.'.$role);
+        return __('others.' . $role);
     }
 
-    public function roleName(){
+    public function roleName()
+    {
         // $this->roles->count()
-        if(sizeof($this->roles) != 0)
+        if (sizeof($this->roles) != 0)
             return $this->roles[0]->name;
         return '';
     }
@@ -79,14 +81,18 @@ class User extends Authenticatable
     {
 
         // $url = url('/').'/api/reset-password?token=' . $token;
-        $code =  rand(100000,999999);
-        ModelsResetPassword::updateOrCreate(['email'=>request()->email,'token'=>$token],[
-            'email'=>request()->email,
-            'token'=>$token,
-            'code'=> $code,
+        $code =  rand(100000, 999999);
+        ModelsResetPassword::updateOrCreate(['email' => request()->email, 'token' => $token], [
+            'email' => request()->email,
+            'token' => $token,
+            'code' => $code,
         ]);
 
         $this->notify(new ResetPasswordNotification($code));
     }
 
+    public function  getAvatarAttribute($value)
+    {
+        return $value ? asset('/'.$value) : null;
+    }
 }

@@ -12,7 +12,8 @@ class UploadService
         $file_name = pathinfo($input_file, PATHINFO_FILENAME);
 
         $extension = $file->getClientOriginalExtension();
-        $fileName = $file_name . "-" . time() . "." . $extension;
+        $uniqid = uniqid();
+        $fileName = $file_name . "-" .$uniqid. time() . "." . $extension;
         $file->move($path . '/', $fileName);
         return $fileName;
     }

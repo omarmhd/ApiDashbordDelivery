@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function createUser(Request $request)
+    public function createUser(Request $request, UploadService $service)
     {
 
         try {
@@ -33,7 +33,11 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-            $data = $request->only(['email']);
+            $data = $request->except('avatar');
+
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $service->uploadWithPath(request('avatar'), 'avatars');
+            }
 
             $data['password'] = Hash::make($request->password);
             $data['role'] = 'client';
