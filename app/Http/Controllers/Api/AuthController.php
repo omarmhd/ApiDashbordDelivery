@@ -79,7 +79,7 @@ class AuthController extends Controller
                     'role'=>'sometimes|required|exists:roles,name',
                     'address'=>'required',
                     'gender'=>'required',
-                    'image'=>'required|image',
+                    'avatar'=>'required|image',
                     'latitude'=>'nullable',
                     'longitude'=>'nullable'
                 ]);
