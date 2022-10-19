@@ -93,11 +93,16 @@ class AuthController extends Controller
             }
             $user=User::find($request->id);
 
-            if ($request->image) {
-                $attachment['name'] = $service->upload($request->image, 'images');
-                $user->attachment()->create($attachment);
+            // if ($request->image) {
+            //     $attachment['name'] = $service->upload($request->image, 'images');
+            //     $user->attachment()->create($attachment);
+            // }
+            $data = $request->except(['avatar']);
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $service->uploadWithPath(request('avatar'), 'avatars');
             }
-            $data = $request->except(['image']);
+
+
 
            $user->update($data);
 
