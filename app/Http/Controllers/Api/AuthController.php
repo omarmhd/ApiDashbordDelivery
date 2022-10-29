@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -79,7 +80,12 @@ class AuthController extends Controller
                     'role'=>'sometimes|required|exists:roles,name',
                     'address'=>'required',
                     'gender'=>'required',
-                    'avatar'=>'required|image',
+                    'avatar'=>[
+                    'image',
+                        Rule::requiredIf(function () {
+                            return !$this->filled('id');
+                        })
+                    ],
                     'latitude'=>'nullable',
                     'longitude'=>'nullable'
                 ]);
