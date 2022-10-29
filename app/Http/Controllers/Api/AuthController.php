@@ -83,7 +83,7 @@ class AuthController extends Controller
                     'avatar'=>[
                     'image',
                         Rule::requiredIf(function () {
-                            return !$this->filled('id');
+                            return !request()->has('id');
                         })
                     ],
                     'latitude'=>'nullable',
