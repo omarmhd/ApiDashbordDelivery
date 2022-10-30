@@ -19,6 +19,7 @@ class ExtraResource extends JsonResource
             'name'=>$this->name,
             'price'=>$this->price,
             'type'=>$this->type,
+            'image'=>$this->image_url,
         ];
     }
 }
