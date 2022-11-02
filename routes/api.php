@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\RestaurantController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\V1\HomeController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\ConstantController;
 use App\Http\Controllers\Api\V1\MealsController;
 use App\Http\Controllers\Api\V1\ContactUsController;
 use App\Http\Controllers\Api\V1\DriverController;
@@ -40,6 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Route::get('/restaurants', [App\Http\Controllers\Api\MealsController::class, 'indexRestaurants']);
     Route::get('/restaurants', [RestaurantController::class, 'index']);
+    Route::get('/constants/{key}', [ConstantController::class, 'index']);
 
     //category
     Route::get('/categories', [CategoryController::class, 'index']);

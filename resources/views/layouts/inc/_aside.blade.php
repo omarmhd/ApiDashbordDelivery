@@ -108,6 +108,21 @@
                     <span class="title">إعدادات التطبيق</span>
                 </a>
             </li>
+
+            <li class="nav-item @if (Str::contains(url()->current(), 'constants') ) active @endif">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cutlery"></i>
+                    <span class="title"> الثوابت</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class=" @if (Str::contains(url()->current(), 'AREAS')) active @endif">
+                        <a href="{{ route('constants.index',['key'=>'AREAS']) }}">
+                            <i class="fa fa-globe"></i>المناطق
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>
