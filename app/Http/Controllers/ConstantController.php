@@ -14,9 +14,10 @@ class ConstantController extends Controller
 
     public function __construct()
     {
+        Constant::where(['key' => request('key')])->firstOrFail();
         $this->public_content = collect([
-            'name' => trans('general.'.  request('key')),
-            'singular_name' =>  trans('general.'.  request('key')),
+            'name' => trans('general.' .  request('key')),
+            'singular_name' =>  trans('general.' .  request('key')),
         ]);
     }
 
@@ -27,7 +28,7 @@ class ConstantController extends Controller
      */
     public function index($key)
     {
-        return view('dashboard.constants.index')->with(['public_content'=>$this->public_content]);
+        return view('dashboard.constants.index')->with(['public_content' => $this->public_content]);
     }
 
     /**
@@ -35,9 +36,10 @@ class ConstantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($key)
     {
-        return view('dashboard.constants.create')->with(['public_content'=>$this->public_content]);
+
+        return view('dashboard.constants.create')->with(['public_content' => $this->public_content]);
     }
 
     /**
@@ -48,9 +50,9 @@ class ConstantController extends Controller
      */
     public function store(StoreConstantRequest $request)
     {
-        Constant::create(['parent_id'=>$request->id,'value'=>$request->value]);
+        Constant::create(['parent_id' => $request->id, 'value' => $request->value]);
         session()->flash('success', 'تمت اضافة العنصر بنجاح');
-        return redirect()->route('constants.index',['key'=>request('key')]);
+        return redirect()->route('constants.index', ['key' => request('key')]);
     }
 
     /**
@@ -70,9 +72,9 @@ class ConstantController extends Controller
      * @param  \App\Models\Constant  $constant
      * @return \Illuminate\Http\Response
      */
-    public function edit($key,Constant $constant)
+    public function edit($key, Constant $constant)
     {
-        return view('dashboard.constants.edit')->with(['public_content'=>$this->public_content,'constant'=>$constant]);
+        return view('dashboard.constants.edit')->with(['public_content' => $this->public_content, 'constant' => $constant]);
     }
 
     /**
@@ -82,11 +84,11 @@ class ConstantController extends Controller
      * @param  \App\Models\Constant  $constant
      * @return \Illuminate\Http\Response
      */
-    public function update($key,StoreConstantRequest $request, Constant $constant)
+    public function update($key, StoreConstantRequest $request, Constant $constant)
     {
-        $constant->update(['value'=>$request->value]);
+        $constant->update(['value' => $request->value]);
         session()->flash('success', 'تمت تعديل العنصر بنجاح');
-        return redirect()->route('constants.index',['key'=>request('key')]);
+        return redirect()->route('constants.index', ['key' => request('key')]);
     }
 
     /**
@@ -95,21 +97,21 @@ class ConstantController extends Controller
      * @param  \App\Models\Constant  $constant
      * @return \Illuminate\Http\Response
      */
-    public function destroy($key,Constant $constant)
+    public function destroy($key, Constant $constant)
     {
         $constant->delete();
         session()->flash('success', 'تم حذف العنصر بنجاح');
-        return redirect()->route('constants.index',['key'=>request('key')]);
+        return redirect()->route('constants.index', ['key' => request('key')]);
     }
 
     public function datatable()
     {
-        $data = Constant::with('children')->where('key',request('key'))->first()->children();
+        $data = Constant::with('children')->where('key', request('key'))->first()->children();
         return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('constants.edit', ['key'=>request('key'),'constant'=>$data->id]) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
-                    return $actionBtn;
-                })->rawColumns(['action'])->make(true);
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $actionBtn = '<a href="' . route('constants.edit', ['key' => request('key'), 'constant' => $data->id]) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                return $actionBtn;
+            })->rawColumns(['action'])->make(true);
     }
 }
