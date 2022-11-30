@@ -24,7 +24,8 @@ class AuthController extends Controller
             $validateUser = Validator::make($request->all(),
                 [
                     'email' => 'required|email|unique:users',
-                    'password' => 'required'
+                    'password' => 'required',
+                    'place_id'=>'required|nullable|exists:constants,id'
                 ]);
 
             if($validateUser->fails()){
@@ -79,7 +80,8 @@ class AuthController extends Controller
                     'phone'=>'required|numeric',
                     'role'=>'sometimes|required|exists:roles,name',
                     'address'=>'required',
-                    'gender'=>'required',
+                    'gender'=>'nullable',
+                    'place_id'=>'required|nullable|exists:constants,id',
                     'avatar'=>[
                     'image',
                         Rule::requiredIf(function () {

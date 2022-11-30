@@ -31,6 +31,7 @@ class OrderController extends ApiBaseController
         try {
             DB::beginTransaction();
             $order = Order::create($order);
+            $total_price = 0;
             foreach ($meals as $meal) {
                 OrderMealDetails::create([
                     'order_id' => $order->getKey(),
@@ -40,7 +41,10 @@ class OrderController extends ApiBaseController
                     'extras' => json_encode($meal['extras']),
                     'meal_extras' => json_encode($meal['meal_extras']),
                 ]);
+                $total_price += $meal['total_price'];
             }
+            $order->total_price = $total_price;
+            $order->save();
             DB::commit();
             return $this->setSuccess(trans('messages.send_your_order'))
                 ->getResponse();
