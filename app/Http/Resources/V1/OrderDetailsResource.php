@@ -20,6 +20,8 @@ class OrderDetailsResource extends JsonResource
             'number_of_meals' => $this->number_of_meals,
             'total_price' => $this->total_price,
             'meal' => new MealResource($this->meal),
+            'extras'=>  json_decode($this->extras, true),
+            'meal_extras'=>  json_decode($this->meal_extras, true),
         ];
     }
 }
