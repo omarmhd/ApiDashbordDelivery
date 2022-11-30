@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->belongsTo(Constant::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function fullName()
     {
         return  $this->first_name . ' ' . $this->last_name;

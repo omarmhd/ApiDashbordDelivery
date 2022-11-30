@@ -25,8 +25,8 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:App\Models\User,id',
-            'total_price' => 'required|numeric|min:1',
+            // 'user_id' => 'required|exists:App\Models\User,id',
+            // 'total_price' => 'required|numeric|min:1',
             'status' => ['required', Rule::in(['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'])],
             // 'total_arrive_time' => 'date_format:Y-m-d H:i:s',
             'payment_way' => ['required', Rule::in(['VISA', 'MASTER', 'BY_HAND'])],
