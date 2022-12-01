@@ -23,8 +23,24 @@
                     name: 'order_id'
                 },
                 {
-                    data: 'driver_id',
-                    name: 'driver_id'
+                    data: 'meal_id',
+                    name: 'meal_id'
+                },
+                {
+                    data: 'number_of_meals',
+                    name: 'number_of_meals'
+                },
+                {
+                    data: 'meal_extras',
+                    name: 'meal_extras'
+                },
+                {
+                    data: 'extras',
+                    name: 'extras'
+                },
+                {
+                    data: 'total_price',
+                    name: 'total_price'
                 },
             ]
         });

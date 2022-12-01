@@ -41,20 +41,22 @@ class OrderController extends ApiBaseController
             foreach ($meals as $meal) {
                 $meal_price = Meal::where('id',$meal['meal_id'])->firstOrFail();
                 $total_extra_price = 0;
-                $extra_prices = Extras::whereIn('id',array_column($meal['extras'], 'id'))->get();
-                foreach ($extra_prices as $key => $extra_price) {
-                  $total_extra_price += $meal['extras'][$key]['count'] * $extra_price->price;
+                if (isset($meal['extras'])) {
+                    $extra_prices = Extras::whereIn('id',array_column($meal['extras'], 'id'))->get();
+                    foreach ($extra_prices as $key => $extra_price) {
+                      $total_extra_price += $meal['extras'][$key]['count'] * $extra_price->price;
+                    }
                 }
                 OrderMealDetails::create([
                     'order_id' => $order->getKey(),
                     'meal_id' => $meal['meal_id'],
-                    'total_price' => $meal_price->price,
+                    'total_price' => ($meal_price->price * $meal['number_of_meals']) + $total_extra_price,
                     'number_of_meals' => $meal['number_of_meals'],
-                    'extras' => json_encode($meal['extras']),
-                    'meal_extras' => json_encode($meal['meal_extras']),
+                    'extras' => isset($meal['extras']) ? json_encode($meal['extras']) : null,
+                    'meal_extras' =>isset($meal['meal_extras']) ? json_encode($meal['meal_extras']) : null,
                 ]);
-
                 $total_price += ($meal_price->price * $meal['number_of_meals']) + $total_extra_price;
+
             }
             $order->total_price = $total_price;
             $order->save();
