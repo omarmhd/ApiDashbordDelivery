@@ -64,7 +64,6 @@ class OrderController extends ApiBaseController
             return $this->setSuccess(trans('messages.send_your_order'))
                 ->getResponse();
         } catch (\Exception $e) {
-            dd( $e->getMessage());
             DB::rollback();
              return $this->setError(trans('messages.something_wrong'))
             ->getResponse();
