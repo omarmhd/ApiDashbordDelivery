@@ -40,7 +40,11 @@ class OrderController extends ApiBaseController
 
             foreach ($meals as $meal) {
                 $meal_price = Meal::where('id',$meal['meal_id'])->firstOrFail();
-                $total_extra_price = Extras::whereIn('id',array_column($meal['extras'], 'id'))->get()->sum('price');
+                $total_extra_price = 0;
+                $extra_prices = Extras::whereIn('id',array_column($meal['extras'], 'id'))->get();
+                foreach ($extra_prices as $key => $extra_price) {
+                  $total_extra_price += $meal['extras'][$key]['count'] * $extra_price->price;
+                }
                 OrderMealDetails::create([
                     'order_id' => $order->getKey(),
                     'meal_id' => $meal['meal_id'],
