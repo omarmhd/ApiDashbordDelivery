@@ -25,7 +25,6 @@ class AuthController extends Controller
                 [
                     'email' => 'required|email|unique:users',
                     'password' => 'required',
-                    'place_id'=>'required|nullable|exists:constants,id'
                 ]);
 
             if($validateUser->fails()){
