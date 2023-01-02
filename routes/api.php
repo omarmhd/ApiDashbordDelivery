@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Route::get('/restaurants', [App\Http\Controllers\Api\MealsController::class, 'indexRestaurants']);
     Route::get('/restaurants', [RestaurantController::class, 'index']);
     Route::get('/constants/{key}', [ConstantController::class, 'index']);
+    Route::get('/setting', [ConstantController::class, 'setting']);
+
 
     //category
     Route::get('/categories', [CategoryController::class, 'index']);
