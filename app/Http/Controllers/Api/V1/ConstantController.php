@@ -7,6 +7,7 @@ use App\Http\Resources\V1\ConstantResouece;
 use App\Http\Resources\V1\SettingsResource;
 use App\Models\Constant;
 use App\Models\Settings;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ConstantController extends ApiBaseController
 {
@@ -18,8 +19,8 @@ class ConstantController extends ApiBaseController
 
     public function setting(){
         $settings = Settings::findorfail(1);
-        dd($settings);
-        return $this->setSuccess()->addItem(SettingsResource::collection($settings))->getResponse();
+
+        return $this->setSuccess()->addItem( new SettingsResource($settings))->getResponse();
 
     }
 }
