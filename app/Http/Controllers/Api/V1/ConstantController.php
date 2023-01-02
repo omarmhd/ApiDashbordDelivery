@@ -18,6 +18,7 @@ class ConstantController extends ApiBaseController
 
     public function setting(){
         $settings = Settings::findorfail(1);
+        dd($settings);
         return $this->setSuccess()->addItem(SettingsResource::collection($settings))->getResponse();
 
     }
