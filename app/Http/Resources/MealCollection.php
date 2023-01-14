@@ -20,6 +20,8 @@ class MealCollection extends ResourceCollection
                 'price'=>$this->price,
                 'extras'=>$this->extras,
 
+
+
             ],
             'links' => [
                 'self' => '',
