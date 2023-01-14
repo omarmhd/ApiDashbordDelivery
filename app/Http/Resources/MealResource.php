@@ -27,7 +27,9 @@ class MealResource extends JsonResource
             'review'=>$this->review,
             'delivery_time'=>$this->restaurant->delivery_time,
             'created_at'=>$this->created_date,
-            'extras'=> ExtraResource::collection($this->extrasReL->where("type","bread")),
+            'extras_breads'=> ExtraResource::collection($this->extrasReL->where("type","bread")),
+            'extras_sweet'=> ExtraResource::collection($this->extrasReL->where("type","sweet")),
+            'extras_suggested'=> ExtraResource::collection($this->extrasReL->where("type","suggested")),
             'attachments'=> AttachmentsResource::collection($this->attachments),
             // 'links' => [
             //     'self' => route('meals.show',['meal'=>$this->id]),
