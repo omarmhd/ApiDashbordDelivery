@@ -36,7 +36,7 @@ class UserController extends Controller
                     $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['role', 'action'])
+                ->rawColumns(['role','full_name', 'action'])
                 ->make(true);
         }
 
