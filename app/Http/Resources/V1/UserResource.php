@@ -24,8 +24,11 @@ class UserResource extends JsonResource
             "gender"=> $this->gender,
             "email"=>$this->email,
             "address"=> $this->address,
+
             "latitude"=> $this->latitude,
             "longitude"=> $this->longitude,
+            "total_orders"=>$this->orders->sum("total_price"),
+            "count_orders"=>$this->orders->count("count_orders"),
             "created_at"=> $this->created_at,
             "place_id"=> $this->place_id,
         ];
