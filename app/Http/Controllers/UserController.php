@@ -27,7 +27,7 @@ class UserController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('role', function ($data) {
-                    return '<span class="bg-green">' . $data->arRoleName() . '</span>';
+//                    return '<span class="bg-green">' . $data->arRoleName() . '</span>';
                 })
                 ->addColumn('full_name', function ($data) {
                     return $data->fullName();
