@@ -154,9 +154,11 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user, UploadService $service)
     {
+
         $data = $request->except(['password', 'image']);
 
-        if ($request->getPassword()) {
+        if ($request->password) {
+            dd( Hash::make($request->password));
                 $data['password'] =  Hash::make($request->password);
         } else {
             unset($data['password']);
