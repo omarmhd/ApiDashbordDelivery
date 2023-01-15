@@ -158,7 +158,7 @@ class UserController extends Controller
         $data = $request->except(['password', 'image']);
 
         if ($request->password) {
-            dd( Hash::make($request->password));
+
                 $data['password'] =  Hash::make($request->password);
         } else {
             unset($data['password']);
