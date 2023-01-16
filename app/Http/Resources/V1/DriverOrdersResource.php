@@ -18,13 +18,6 @@ class DriverOrdersResource extends JsonResource
      */
     public function toArray($request)
     {
-        $id = auth()->user()->id;
-        // $id = 10;
-
-        $driver_orders = DB::table('orders')
-            ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
-            ->where('driver_order_requests.driver_id', '=', $id)
-            ->get();
 
         // return $driver_orders;
         // dd($driver_orders);

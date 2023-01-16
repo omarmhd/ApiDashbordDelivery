@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Driver
     Route::get('driver_personal', [DriverController::class, 'index']);
     Route::get('driver_orders', [DriverController::class, 'orders']);
+    Route::get('received_orders', [DriverController::class, 'orders']);
+
 
     // Driver Orders Requests
     Route::get('driver_current_orders', [DriverController::class, 'currantOrders']);

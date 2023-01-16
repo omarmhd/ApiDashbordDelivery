@@ -31,7 +31,7 @@ class UpdateOrderRequest extends FormRequest
             'status' => ['required', Rule::in(['NOT_GET_YET', 'GET_ORDER', 'IN_WAY', 'IN_LOCATION'])],
             'total_arrive_time' => 'date_format:Y/m/d H:i:s',
             'payment_way' => ['nullable', Rule::in(['VISA', 'MASTER', 'BY_HAND'])],
-            'delivery_time' => 'date_format:Y/m/d H:i',
+            'delivery_time' => 'date',
             'time_of_receipt' => 'date_format:Y/m/d H:i',
             'notes' => 'string|nullable',
             'rate' =>  ['nullable', Rule::in([1, 2, 3, 4, 5])],
