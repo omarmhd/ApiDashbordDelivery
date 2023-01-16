@@ -28,7 +28,7 @@ class DriverOrdersResource extends JsonResource
         // DriverOrderRequest::where('driver_id', $id)->get('order_id');
 
         return [
-            'driver_orders' => DriverOrderRequestsResource::collection($driver_orders),
+            'driver_orders' => DriverOrderRequestsResource::collection($this),
         ];
     }
 }
