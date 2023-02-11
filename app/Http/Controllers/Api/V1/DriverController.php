@@ -21,9 +21,7 @@ class DriverController extends ApiBaseController
         $id = auth()->user()->id;
         // $id = 10;
 
-        $driver_orders = DB::table('orders')
-            ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
-            ->where('driver_order_requests.driver_id', '=', $id)
+        $driver_orders = DriverOrderRequest::where('driver_id', '=', $id)
             ->get();
 
         return $this->setSuccess(null, '200')
@@ -36,9 +34,7 @@ class DriverController extends ApiBaseController
         $id = auth()->user()->id;
         // $id = 10;
 
-        $driver_orders = DB::table('orders')
-            ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
-            ->where('driver_order_requests.driver_id', '=', $id)
+        $driver_orders = DriverOrderRequest::where('driver_id', '=', $id)
             ->get();
         return $this->setSuccess(null, '200')
             ->addItem(new DriverOrdersResource($driver_orders))
@@ -52,7 +48,7 @@ class DriverController extends ApiBaseController
 
 
         $driver_orders=DriverOrderRequest::
-          where('driver_order_requests.driver_id', '=', $id)
+          where('driver_id', '=', $id)
           ->where('status',  0)->get();
 
 
@@ -70,11 +66,11 @@ class DriverController extends ApiBaseController
         $id = auth()->user()->id;
         // $id = 10;
 
-        $driver_orders = DB::table('orders')
-            ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
-            ->where('driver_order_requests.driver_id', '=', $id)
-            ->where('driver_order_requests.status', '=', 3)
-            ->get();
+
+        $driver_orders=DriverOrderRequest::
+        where('driver_id', '=', $id)
+            ->where('status',  3)->get();
+
         return $this->setSuccess(null, '200')
             ->addItem(new DriverCurrantOrdersResource($driver_orders))
             ->getResponse();
@@ -84,11 +80,11 @@ class DriverController extends ApiBaseController
 
         $id = auth()->user()->id;
 
-       $edit= DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)->update([
+       $edit= DriverOrderRequest::where("order_id",$request->order_id)->where("driver_id",$id)->update([
             'status'=>$request->status
         ]);
 
-        $driver_orders = DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)->get();
+        $driver_orders = DriverOrderRequest::where("order_id",$request->order_id)->where("driver_id",$id)->get();
 
 
         return $this->setSuccess(null, '200')
@@ -102,10 +98,9 @@ class DriverController extends ApiBaseController
         $id = auth()->user()->id;
         // $id = 10;
 
-        $driver_orders = DB::table('orders')
-            ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
-            ->where('driver_order_requests.driver_id', '=', $id)
-            ->where('driver_order_requests.status', '=', 1)
+        $driver_orders = DriverOrderRequest::
+             where('driver_id', '=', $id)
+            ->where('status', '=', 1)
             ->get();
         return $this->setSuccess(null, '200')
             ->addItem(new DriverCurrantOrdersResource($driver_orders))
