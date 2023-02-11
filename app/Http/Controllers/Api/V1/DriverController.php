@@ -76,11 +76,10 @@ class DriverController extends ApiBaseController
 
         $id = auth()->user()->id;
 
-       $edit= DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)
-            ->update([
+       $edit= DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)->update([
             'status'=>$request->status
         ]);
-       dd($edit);
+
         $driver_orders = DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)->get();
         return $this->setSuccess(null, '200')
             ->addItem(new DriverCurrantOrdersResource($driver_orders))
