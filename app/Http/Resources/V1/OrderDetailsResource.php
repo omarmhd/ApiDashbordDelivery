@@ -15,6 +15,7 @@ class OrderDetailsResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id' => $this->getKey(),
             'number_of_meals' => $this->number_of_meals,
@@ -22,7 +23,7 @@ class OrderDetailsResource extends JsonResource
             'meal' => new MealResource($this->meal),
             'extras'=>  json_decode($this->extras, true),
             'meal_extras'=>  json_decode($this->meal_extras, true),
-            'attachments'=> AttachmentsResource::collection($this->attachments),
+
         ];
     }
 }
