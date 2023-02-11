@@ -33,7 +33,7 @@ class DriverController extends ApiBaseController
 
         $driver_orders= DriverOrderRequest::find($id)->get();
         return $this->setSuccess(null, '200')
-            ->addItem(new PersonalDataResource($driver_orders))
+            ->addItem(new DriverCurrantOrdersResource($driver_orders))
             ->getResponse();
 
     }
