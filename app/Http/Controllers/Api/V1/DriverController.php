@@ -75,11 +75,11 @@ class DriverController extends ApiBaseController
     public  function driver_accept_reject_order(Request $request){
 
         $id = auth()->user()->id;
-        DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)
+        DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("user_id",$id)
             ->update([
             'status'=>$request->status
         ]);
-        $driver_orders =    DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("user_id",$id)->get();
+        $driver_orders =    DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)->get();
         return $this->setSuccess(null, '200')
             ->addItem(new DriverCurrantOrdersResource($driver_orders))
             ->getResponse();
