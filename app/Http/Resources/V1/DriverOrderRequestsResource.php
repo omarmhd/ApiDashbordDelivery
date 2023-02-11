@@ -19,6 +19,7 @@ class DriverOrderRequestsResource extends JsonResource
             'driver_id' => $this->driver_id,
             'order_id' => $this->order_id,
             'order'=>$this->order,
+            'order_all_details'=>$this->order->orderDetails,
             'user'=>$this->order->customer,
 
 

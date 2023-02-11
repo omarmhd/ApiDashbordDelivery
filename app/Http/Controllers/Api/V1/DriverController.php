@@ -29,6 +29,12 @@ class DriverController extends ApiBaseController
             ->getResponse();
     }
 
+    public function show($id){
+
+        DriverOrderRequest::findorfail($id)->get();
+
+    }
+
     public function orders()
     {
         $id = auth()->user()->id;

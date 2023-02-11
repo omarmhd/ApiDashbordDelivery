@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('driver_accept_reject_order', [DriverController::class, 'driver_accept_reject_order']);
     Route::get('driver_completed_orders', [DriverController::class, 'driver_completed_orders']);
 
+    Route::get('driver_orders/show/{id}', [DriverController::class, 'show']);
+
 
 
     // Driver Orders Requests
