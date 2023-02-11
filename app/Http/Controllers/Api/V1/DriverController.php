@@ -82,9 +82,9 @@ class DriverController extends ApiBaseController
 
         $driver_orders = DB::table('driver_order_requests')->where("order_id",$request->order_id)->where("driver_id",$id)->get();
 
-        dd($driver_orders);
+
         return $this->setSuccess(null, '200')
-            ->addItem(new DriverCurrantOrdersResource($driver_orders))
+            ->addItem(new DriverOrdersResource($driver_orders))
             ->getResponse();
 
     }
