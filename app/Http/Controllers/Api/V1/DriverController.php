@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\ApiBaseController;
 use App\Http\Resources\V1\DriverCurrantOrdersResource;
 use App\Http\Resources\V1\DriverOrdersResource;
 use App\Http\Resources\V1\PersonalDataResource;
+use App\Models\Driver;
+use App\Models\DriverOrderRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
@@ -47,11 +50,19 @@ class DriverController extends ApiBaseController
         $id = auth()->user()->id;
         // $id = 10;
 
+
+        $users=User::where("id","!=","null");
         $driver_orders = DB::table('orders')
             ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
             ->where('driver_order_requests.driver_id', '=', $id)
             ->where('status',  0)
+            ->union($users)
             ->get();
+
+
+
+
+
         return $this->setSuccess(null, '200')
             ->addItem(new DriverOrdersResource($driver_orders))
             ->getResponse();
