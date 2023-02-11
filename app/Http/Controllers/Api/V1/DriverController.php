@@ -31,7 +31,10 @@ class DriverController extends ApiBaseController
 
     public function show($id){
 
-        DriverOrderRequest::findorfail($id)->get();
+        $driver_orders= DriverOrderRequest::findorfail($id)->get();
+        return $this->setSuccess(null, '200')
+            ->addItem(new PersonalDataResource($driver_orders))
+            ->getResponse();
 
     }
 
