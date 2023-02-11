@@ -18,7 +18,7 @@ class DriverOrderRequestsResource extends JsonResource
             'id' => $this->id,
             'driver_id' => $this->driver_id,
             'order_id' => $this->order_id,
-            'address'=>$this->address,
+
 
 
 

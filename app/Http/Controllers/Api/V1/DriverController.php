@@ -51,13 +51,10 @@ class DriverController extends ApiBaseController
         // $id = 10;
 
 
-        $users=User::where("id","!=","null");
-        $driver_orders = DB::table('orders')
-            ->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
-            ->where('driver_order_requests.driver_id', '=', $id)
-            ->where('status',  0)
-            ->union($users)
-            ->get();
+        $driver_orders=DriverOrderRequest::
+          where('driver_order_requests.driver_id', '=', $id)
+          ->where('status',  0)->get();
+
 
 
 
