@@ -20,7 +20,7 @@ class CouponController extends MainController
     public function __construct()
     {
         $this->public_content = collect([
-            'name' => 'كوبونات',
+            'name' => 'كابونات',
             'singular_name' => 'كوبون'
         ]);
     }
