@@ -121,6 +121,24 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'تم الاضافة بنجاح');
     }
 
+    public  function updateAddress(Request  $request){
+
+        $this->validate($request->all(),[
+            'address'=>'required',
+            'latitude'=>'required',
+            'longitude'=>'required'
+        ]);
+
+        auth()->user()->update([
+            "address"=>$request->address,
+            'latitude'=>$request->latitude,
+            'longitude'=>$request->longitude,
+
+        ]);
+
+
+    }
+
     /**
      * Display the specified resource.
      *

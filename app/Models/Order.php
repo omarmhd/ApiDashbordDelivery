@@ -39,6 +39,6 @@ class Order extends Model
 
     public function driverOrderRequests()
     {
-        return $this->hasMany(DriverOrderRequest::class, 'id','order_id');
+        return $this->hasMany(DriverOrderRequest::class);
     }
 }

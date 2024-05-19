@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\ContactUsController;
 use App\Http\Controllers\Api\V1\DriverController;
 use App\Http\Controllers\Api\V1\EmailVerificationController;
 use App\Http\Controllers\Api\V1\NewPasswordController;
+use App\Http\Controllers\Api\V1\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +39,15 @@ Route::post('reset-password', [NewPasswordController::class, 'reset']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
     Route::post('/auth/infoRegister', [AuthController::class, 'infoRegister']);
+    Route::post("updateAddress",[AuthController::class,"updateAddress"]);
 
     // Route::get('/restaurants', [App\Http\Controllers\Api\MealsController::class, 'indexRestaurants']);
     Route::get('/restaurants', [RestaurantController::class, 'index']);
     Route::get('/constants/{key}', [ConstantController::class, 'index']);
     Route::get('/setting', [ConstantController::class, 'setting']);
 
+
+    Route::get("/notification/show",[NotificationController::class,'show']);
 
     //category
     Route::get('/categories', [CategoryController::class, 'index']);

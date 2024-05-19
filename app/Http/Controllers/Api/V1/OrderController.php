@@ -22,6 +22,7 @@ class OrderController extends ApiBaseController
 
     public function show($id)
     {
+
         $order = Order::where('user_id',auth()->user()->getKey())->findOrFail($id);
         return $this->setSuccess()->addItem(new OrderResource($order))->getResponse();
     }

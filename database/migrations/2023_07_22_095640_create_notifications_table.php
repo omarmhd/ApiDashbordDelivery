@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDriverOrderRequestsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateDriverOrderRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('driver_order_requests', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained("users");
-            $table->foreignId('order_id')->constrained("orders");
-            $table->boolean('status')->default(0);
+            $table->foreignId("user_id")->constrained("users");
+            $table->string("status");
+            $table->string("title");
+            $table->text("body");
+
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateDriverOrderRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dreiver_order_requests');
+        Schema::dropIfExists('notifications');
     }
 }

@@ -16,6 +16,10 @@ class FCM{
             "registration_ids" => $FcmToken,
             "notification" => $this->getMessageByStatus($status,$obj),
         ];
+        $data_mysql=$this->getMessageByStatus($status,$obj);
+        $data_mysql['user_id'];
+
+        \App\Models\notification::create($data_mysql);
         $encodedData = json_encode($data);
 
         $headers = [

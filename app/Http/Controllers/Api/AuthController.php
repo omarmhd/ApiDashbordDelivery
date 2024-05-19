@@ -131,12 +131,6 @@ class AuthController extends ApiBaseController
             ], 500);
         }
     }
-
-    /**
-     * Login The User
-     * @param Request $request
-     * @return User
-     */
     public function loginUser(Request $request)
     {
         try {
@@ -186,8 +180,6 @@ class AuthController extends ApiBaseController
             ->getResponse();
         }
     }
-
-
     public function  logoutUser(Request $request){
 
 
@@ -211,4 +203,32 @@ class AuthController extends ApiBaseController
             ->getResponse();
 
     }}
+    public  function updateAddress(Request  $request){
+
+
+        $this->validate($request, [
+            'address'=>'required',
+            'latitude'=>'required',
+            'longitude'=>'required'
+        ]);
+
+
+
+        auth()->user()->update([
+            "address"=>$request->address,
+            'latitude'=>$request->latitude,
+            'longitude'=>$request->longitude,
+
+        ]);
+
+        return response([
+            'status'=>'success',
+            "message"=>'تم تعديل العنوان بنجاح'
+
+        ]);
+
+
+    }
+
+
 }
