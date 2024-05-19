@@ -19,6 +19,7 @@ class CreateDriversTable extends Migration
             $table->unique('user_id');
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

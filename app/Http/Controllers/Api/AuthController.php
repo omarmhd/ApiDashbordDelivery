@@ -4,17 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Resources\V1\UserResource;
 use App\Models\Driver;
 use App\Models\User;
+use App\Models\UserDevice;
 use App\Service\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
-class AuthController extends Controller
+class AuthController extends ApiBaseController
 {
-    public function createUser(Request $request)
+    public function createUser(Request $request, UploadService $service)
     {
 
         try {
@@ -22,7 +25,7 @@ class AuthController extends Controller
             $validateUser = Validator::make($request->all(),
                 [
                     'email' => 'required|email|unique:users',
-                    'password' => 'required'
+                    'password' => 'required',
                 ]);
 
             if($validateUser->fails()){
@@ -32,28 +35,38 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-            $data = $request->only(['email']);
+            $data = $request->except('avatar');
+
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $service->uploadWithPath(request('avatar'), 'avatars');
+            }
 
             $data['password'] = Hash::make($request->password);
             $data['role'] = 'client';
 
             $user = User::create($data);
+           UserDevice::create([
+                'user_id'=>$user->getKey(),
+                'token'=>$request->header('X-FIREBASE-DEVICE-TOKEN'),
+            ]);
             $user->attachRole($request->role);
 
 
 
-            return response()->json([
-                'status' => true,
-                'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
-                'user'=>$user
-            ], 200);
-
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'User Created Successfully',
+            //     'token' => $user->createToken("API TOKEN")->plainTextToken,
+            //     'user'=>$user
+            // ], 200);
+            return $this->setSuccess('User Created Successfully')->addItem(new UserResource($user))->getResponse();
         } catch (Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'status' => false,
+            //     'message' => $th->getMessage()
+            // ], 500);
+            return $this->setError($th->getMessage())
+            ->getResponse();
         }
     }
     public function infoRegister(Request $request,UploadService $service)
@@ -69,8 +82,14 @@ class AuthController extends Controller
                     'phone'=>'required|numeric',
                     'role'=>'sometimes|required|exists:roles,name',
                     'address'=>'required',
-                    'gender'=>'required',
-                    'image'=>'required|image',
+                    'gender'=>'nullable',
+                    'place_id'=>'required|nullable|exists:constants,id',
+                    'avatar'=>[
+                    'image',
+                        Rule::requiredIf(function () {
+                            return !request()->has('id');
+                        })
+                    ],
                     'latitude'=>'nullable',
                     'longitude'=>'nullable'
                 ]);
@@ -84,11 +103,16 @@ class AuthController extends Controller
             }
             $user=User::find($request->id);
 
-            if ($request->image) {
-                $attachment['name'] = $service->upload($request->image, 'images');
-                $user->attachment()->create($attachment);
+            // if ($request->image) {
+            //     $attachment['name'] = $service->upload($request->image, 'images');
+            //     $user->attachment()->create($attachment);
+            // }
+            $data = $request->except(['avatar']);
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $service->uploadWithPath(request('avatar'), 'avatars');
             }
-            $data = $request->except(['image']);
+
+
 
            $user->update($data);
 
@@ -138,19 +162,28 @@ class AuthController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
-                'user'=>$user,
-            ], 200);
+            $user_device = UserDevice::where(['user_id'=>$user->getKey(),'token'=>$request->header('X-FIREBASE-DEVICE-TOKEN')])->first();
+            if (!$user_device) {
+                UserDevice::create([
+                    'user_id'=>$user->getKey(),
+                    'token'=>$request->header('X-FIREBASE-DEVICE-TOKEN'),
+                ]);
+            }
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'User Logged In Successfully',
+            //     'token' => $user->createToken("API TOKEN")->plainTextToken,
+            //     'user'=>$user,
+            // ], 200);
+            return $this->setSuccess('User Logged In Successfullyy')->addItem(new UserResource($user))->getResponse();
 
         } catch (Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'status' => false,
+            //     'message' => $th->getMessage()
+            // ], 500);
+            return $this->setError($th->getMessage())
+            ->getResponse();
         }
     }
 
@@ -161,20 +194,21 @@ class AuthController extends Controller
         try{
             $request->user()->currentAccessToken()->delete();
 
-            return response()->json([
-            'status' => true,
-            'message' => 'logout Successfully',
+        //     return response()->json([
+        //     'status' => true,
+        //     'message' => 'logout Successfully',
 
-        ], 200);
-
+        // ], 200);
+        return $this->setSuccess('logout Successfully')->getResponse();
         } catch (Throwable $th) {
 
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
+            // return response()->json([
+            //     'status' => false,
+            //     'message' => $th->getMessage()
 
-            ], 500);
-
+            // ], 500);
+            return $this->setError($th->getMessage())
+            ->getResponse();
 
     }}
 }

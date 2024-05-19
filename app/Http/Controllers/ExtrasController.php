@@ -22,23 +22,24 @@ class ExtrasController extends Controller
         if ($request->ajax()) {
             $data = Extras::latest()->get();
             return DataTables::of($data)
-                ->addColumn('id', function ($data) {
-                    return $data->id;
-                })
+                // ->addColumn('id', function ($data) {
+                //     return $data->id;
+                // })
                 ->addColumn('image', function ($data) {
-                    $img = '<img src="' . asset('images') . "/" . $data->attachment->name . '" alt="" class="img-fluid img-thumbnail" style="width:40%">';
+                    $img = '<img src="' . asset('images') . "/" . optional($data->attachment)->name . '" alt="" class="img-fluid img-thumbnail" style="width:40%">';
                     return $img;
                 })
-                ->addColumn('name', function ($data) {
-                    return $data->name;
-                })
-                ->addColumn('price', function ($data) {
-                    return $data->price;
-                })
+                // ->addColumn('name', function ($data) {
+                //     return $data->name;
+                // })
+                // ->addColumn('price', function ($data) {
+                //     return $data->price;
+                // })
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="' . route('extra.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+                    $actionBtn = '<a href="' . route('extra.edit', $data->getKey()) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->getKey() . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
-                })->rawColumns(['id', 'image', 'name', 'price', 'action'])
+                })
+                ->rawColumns([ 'image','action'])
                 ->make(true);
         }
 

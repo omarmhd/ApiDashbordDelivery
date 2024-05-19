@@ -15,14 +15,8 @@ class CategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'data' => [
-                'name'=>$this->name,
-
-
-            ],
-            'links' => [
-                'self' => route('categories.show',['id'=>$this->id]),
-            ],
+            'id' => $this->getKey(),
+            'name' => $this->name,
         ];
     }
 }

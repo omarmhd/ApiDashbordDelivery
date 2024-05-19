@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->enum('rate', [1, 2, 3, 4, 5])->default(5);
             // $table->foreignId('driver_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

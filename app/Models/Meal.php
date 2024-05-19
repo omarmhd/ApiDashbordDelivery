@@ -2,25 +2,24 @@
 
 namespace App\Models;
 
+use App\Traits\Resoureces;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Meal extends Model
+class Meal extends BaseModel
 {
     use HasFactory;
-    public $guarded = ['_token'];
+    use Resoureces;
 
     public  function extrasReL()
     {
         return $this->hasMany(Extras::class, 'meals_id');
     }
 
-    public function attachments()
-    {
-        return $this->morphMany(Attachment::class, 'attachmentable');
-    }
-
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function restaurant(){
+        return $this->belongsTo(Restaurant::class);
     }
 }

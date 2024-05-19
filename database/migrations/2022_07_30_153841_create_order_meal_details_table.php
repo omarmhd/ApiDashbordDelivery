@@ -25,6 +25,7 @@ class CreateOrderMealDetailsTable extends Migration
             // $table->json('categories')->nullable();// category_id, category_ammount
             $table->double('total_price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

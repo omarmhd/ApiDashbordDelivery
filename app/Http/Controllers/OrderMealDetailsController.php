@@ -43,7 +43,17 @@ class OrderMealDetailsController extends Controller
                 ->addColumn('number_of_meals', function ($data) {
                     return $data->number_of_meals;
                 })
+                ->addColumn('meal_extras', function ($data) {
+                    return json_decode($data->meal_extras);
+                })
                 ->addColumn('extras', function ($data) {
+                    if ($data->extras) {
+                        $extra_decode = "";
+                        foreach (json_decode($data->extras) as $key => $extra) {
+                            $extra_decode .= "(".$extra->name . " عدد " . $extra->count.") " ;
+                        }
+                        return $extra_decode;
+                    }
                     return $data->extras;
                 })
                 ->addColumn('total_price', function ($data) {

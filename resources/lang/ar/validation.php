@@ -39,7 +39,7 @@ return [
     'dimensions' => 'الـ :attribute يحتوي على أبعاد صورة غير صالحة.',
     'distinct' => 'للحقل :attribute قيمة مُكرّرة.',
     'email' => 'يجب أن يكون :attribute عنوان بريد إلكتروني صحيح البُنية',
-    'exists' => 'الحقل :attribute لاغٍ',
+    'exists' => ':attribute غير موجود',
     'file' => 'الـ :attribute يجب أن يكون من ملفا.',
     'filled' => 'الحقل :attribute إجباري',
     'image' => 'يجب أن يكون الحقل :attribute صورةً',
@@ -206,6 +206,7 @@ return [
         'code'                  => 'القسيمة الشرائية',
         'name_en'               => 'الاسم بالانجليزية',
         'terms'                 => 'الشروط',
+        'key'                   => 'المفتاح',
         'conditions'            => 'الأحكام',
         'delivary_price'        => 'تسعيرة الديليفاري',
 

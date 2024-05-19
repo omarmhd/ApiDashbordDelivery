@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Order, User};
+use App\Models\{Notification, Order, User};
 use App\Http\Requests\{StoreOrderRequest, UpdateOrderRequest};
+use FCM;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -159,8 +160,9 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         $order->update($request->validated());
-
-        session()->flash('success', 'تم إنشاء مطعم جديد بنجاح');
+        $fcm = new FCM();
+        $fcm->send($order->user_id,$order->status,$order);
+        session()->flash('success', 'تم تحديث الطلب جديد بنجاح');
         return redirect()->route('order.index');
     }
 

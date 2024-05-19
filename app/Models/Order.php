@@ -31,4 +31,14 @@ class Order extends Model
     {
         return $this->hasOne(User::class, 'id', 'driver_id');
     }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderMealDetails::class, 'order_id');
+    }
+
+    public function driverOrderRequests()
+    {
+        return $this->hasMany(DriverOrderRequest::class, 'id','order_id');
+    }
 }

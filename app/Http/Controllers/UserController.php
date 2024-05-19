@@ -11,8 +11,7 @@ use App\Service\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
-
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -28,7 +27,7 @@ class UserController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('role', function ($data) {
-                    return '<span class="bg-green">' . $data->role. '</span>';
+//                    return '<span class="bg-green">' . $data->arRoleName() . '</span>';
                 })
                 ->addColumn('full_name', function ($data) {
                     return $data->fullName();
@@ -37,7 +36,7 @@ class UserController extends Controller
                     $actionBtn = '<a href="' . route('user.edit', $data) . '" class="edit btn btn-success btn-sm"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0)" data-id="' . $data->id . '"   class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['role', 'action'])
+                ->rawColumns(['role','full_name', 'action'])
                 ->make(true);
         }
 
@@ -74,7 +73,7 @@ class UserController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                $actionBtn = '<a href="' . route('index.user') . '" class="edit btn btn-success btn-sm">تعديل</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">حذف</a>';
+                $actionBtn = '<a href="' . route('index.user') . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -155,10 +154,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user, UploadService $service)
     {
+
         $data = $request->except(['password', 'image']);
 
-        if ($request->getPassword()) {
-            $data['password'] = bcrypt($request->getPassword());
+        if ($request->password) {
+
+                $data['password'] =  Hash::make($request->password);
         } else {
             unset($data['password']);
         }

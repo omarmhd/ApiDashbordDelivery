@@ -23,6 +23,7 @@ class CreateCouponsTable extends Migration
             $table->dateTime('start_avilable_at');
             $table->dateTime('end_avilable_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

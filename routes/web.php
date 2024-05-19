@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConstantController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\UserController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DriverOrderRequestController;
 use App\Http\Controllers\OrderMealDetailsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SliderController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -53,12 +55,20 @@ Route::group(['middleware' => "auth"], function () {
     Route::resource('/meal', \App\Http\Controllers\MealController::class);
     Route::resource('/extra', \App\Http\Controllers\ExtrasController::class);
     Route::resource('/order', OrderController::class);
-
     Route::resource('/category', \App\Http\Controllers\CategoryController::class);
-
-    // Route::resource('/order/meal-details', OrderMealDetails::class);
     Route::resource('/coupon', CouponController::class);
     Route::resource('/message', \App\Http\Controllers\MessageController::class);
+    Route::resource('/slider', SliderController::class);
+
+
+    Route::get('/constants/{key}', [ConstantController::class,'index'])->name('constants.index');
+    Route::get('/constants/{key}/datatable', [ConstantController::class,'datatable'])->name('constants.datatable');
+    Route::get('/constants/{key}/create', [ConstantController::class,'create'])->name('constants.create');
+    Route::post('/constants/{key}/store', [ConstantController::class,'store'])->name('constants.store');
+    Route::get('/constants/{key}/{constant}/edit', [ConstantController::class,'edit'])->name('constants.edit');
+    Route::put('/constants/{key}/{constant}/update', [ConstantController::class,'update'])->name('constants.update');
+    Route::delete('/constants/{key}/{constant}/delete', [ConstantController::class,'destroy'])->name('constants.destroy');
+    // Route::resource('/constants', ConstantController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');

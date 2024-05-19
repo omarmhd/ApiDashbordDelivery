@@ -20,6 +20,7 @@ class CreateExtrasTable extends Migration
             $table->enum('type', ['bread', 'sweet', 'suggested'])->default('suggested');
             $table->float('price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

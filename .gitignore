@@ -1,5 +1,7 @@
 /node_modules
 /public/hot
+/public/contacts
+/public/iamges
 /public/storage
 /storage/*.key
 /vendor
