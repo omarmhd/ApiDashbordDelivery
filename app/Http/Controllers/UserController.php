@@ -11,7 +11,8 @@ use App\Service\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Yajra\DataTables\Facades\DataTables;
+
+
 
 class UserController extends Controller
 {
@@ -27,7 +28,7 @@ class UserController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('role', function ($data) {
-                    return '<span class="bg-green">' . $data->arRoleName() . '</span>';
+                    return '<span class="bg-green">' . $data->role. '</span>';
                 })
                 ->addColumn('full_name', function ($data) {
                     return $data->fullName();
@@ -73,7 +74,7 @@ class UserController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                $actionBtn = '<a href="' . route('index.user') . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                $actionBtn = '<a href="' . route('index.user') . '" class="edit btn btn-success btn-sm">تعديل</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">حذف</a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])

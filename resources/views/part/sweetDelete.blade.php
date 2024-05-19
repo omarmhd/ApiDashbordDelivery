@@ -12,9 +12,11 @@
             text: "أنت ستقوم بحذف هذا الصف !",
             icon: 'warning',
             showCancelButton: true,
+
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'نعم, أريد الحذف!'
+            confirmButtonText: 'نعم, أريد الحذف!',
+            cancelButtonText: "No, cancel it!",
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajaxSetup({

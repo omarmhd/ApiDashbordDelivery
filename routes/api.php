@@ -29,8 +29,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //category
     Route::get('/categories', [App\Http\Controllers\Api\CategoryController::class, 'index']);
     Route::get('/categories/{id}',[App\Http\Controllers\Api\CategoryController::class, 'show'])->name('categories.show');
+    //Offers
+
+    //cart
+
+
 
     //orders
+
+
 
 
 });
